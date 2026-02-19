@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AG Leatherworks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #f5f0e8;
+      --paper:   #ede7d9;
+      --tan:     #c49a6c;
+      --brown:   #5c3d2e;
+      --dark:    #2b1f16;
+      --mid:     #7a6352;
+      --light:   #d6c9b5;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--light);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--dark); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, transparent 40%, rgba(43, 31, 22, 0.55) 100%),
+        url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1600&q=80') center/cover no-repeat;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #f5f0e8;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(245, 240, 232, 0.8);
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--tan);
+      color: var(--cream);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn:hover {
+      background: var(--tan);
+      color: var(--dark);
+    }
+
+    .btn-dark {
+      border-color: var(--brown);
+      color: var(--dark);
+    }
+
+    .btn-dark:hover {
+      background: var(--brown);
+      color: var(--cream);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 3rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--cream);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-text p {
+      color: var(--mid);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .pillar {
+      padding: 1.8rem 2rem;
+      background: var(--paper);
+      border-left: 2px solid var(--tan);
+    }
+
+    .pillar h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ── PRODUCTS ── */
+    #work {
+      background: var(--paper);
+    }
+
+    .work-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--cream);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover { transform: translateY(-4px); }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: var(--light);
+    }
+
+    .product-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.3;
+    }
+
+    .product-info {
+      padding: 1.4rem 1.5rem 1.8rem;
+    }
+
+    .product-year {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 0.4rem;
+    }
+
+    .product-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--dark);
+    }
+
+    /* ── PROCESS ── */
+    #process {
+      background: var(--cream);
+    }
+
+    .process-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .process-inner .section-label,
+    .process-inner .section-title { text-align: center; }
+
+    .process-note {
+      font-size: 0.95rem;
+      color: var(--mid);
+      max-width: 580px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .step {
+      padding: 2.5rem 2rem;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--light);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--brown);
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ── ABOUT MAKER ── */
+    #maker {
+      background: var(--dark);
+      padding: 7rem 3rem;
+    }
+
+    .maker-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .maker-portrait {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--tan);
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .maker-portrait-placeholder {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 2px solid var(--tan);
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--tan);
+    }
+
+    .maker-text .section-label { color: var(--tan); }
+
+    .maker-text .section-title {
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .maker-text p {
+      color: rgba(245, 240, 232, 0.65);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .maker-meta {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-top: 1.5rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--paper);
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-label,
+    .contact-inner .section-title { text-align: center; }
+
+    .contact-inner .section-title { margin-bottom: 1rem; }
+
+    .contact-sub {
+      color: var(--mid);
+      font-size: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .contact-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 1.8rem 2.5rem;
+      background: var(--cream);
+      border: 1px solid var(--light);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      min-width: 200px;
+    }
+
+    .contact-link:hover {
+      border-color: var(--tan);
+      transform: translateY(-2px);
+    }
+
+    .contact-link-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tan);
+    }
+
+    .contact-link-value {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+
+    .response-note {
+      font-size: 0.82rem;
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--mid);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--tan);
+      margin-bottom: 2rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 0 1.5rem 4rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .maker-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .maker-portrait-placeholder { margin: 0 auto; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .work-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">AG Leatherworks</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#maker">The Maker</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Arlington, VA &nbsp;·&nbsp; Made to Order</p>
+      <h1 class="hero-title">AG<br>Leatherworks</h1>
+      <p class="hero-tagline">Minimalist Utility. Honest Craft.</p>
+      <a href="#work" class="btn">View the Work</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">The Ethos</p>
+        <h2 class="section-title">Built for the Pocket,<br>Not the Logo</h2>
+        <div class="divider"></div>
+        <p>AG Leatherworks was born from a simple observation: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel.</p>
+        <p>I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
+        <br>
+        <a href="#contact" class="btn btn-dark">Start an Inquiry</a>
+      </div>
+      <div class="about-pillars">
+        <div class="pillar">
+          <h3>Heritage Materials</h3>
+          <p>Full-grain, vegetable-tanned leathers sourced exclusively from world-renowned Italian tanneries.</p>
+        </div>
+        <div class="pillar">
+          <h3>The Natural Edge</h3>
+          <p>Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers.</p>
+        </div>
+        <div class="pillar">
+          <h3>Intentional Design</h3>
+          <p>No unnecessary bulk. No loud branding. Just the highest quality materials allowed to speak for themselves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="work-inner">
+      <div class="work-header">
+        <div>
+          <p class="section-label">The Collection</p>
+          <h2 class="section-title">Current Work</h2>
+        </div>
+        <a href="#contact" class="btn btn-dark">Commission a Piece</a>
+      </div>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
+              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <p class="product-year">2024</p>
+            <p class="product-name">The Standard</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
+              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <p class="product-year">2023 – 2024</p>
+            <p class="product-name">The Slider</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
+              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <p class="product-year">Design</p>
+            <p class="product-name">The Extender</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
+              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <p class="product-year">Design</p>
+            <p class="product-name">The Familiar</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
+              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <p class="product-year">Design</p>
+            <p class="product-name">The Flapper</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
+              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <p class="product-year">Design</p>
+            <p class="product-name">The Traveller</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="process-inner">
+      <p class="section-label">Commissions</p>
+      <h2 class="section-title">Work With Me</h2>
+      <p class="process-note">I am currently accepting commissions for pieces based on my established design menu. Each item is made-to-order — your specific leather and thread combination, stitched specifically for you.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Select Your Design</h3>
+          <p>Choose a template from my current menu that fits your lifestyle and daily carry needs.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Submit an Inquiry</h3>
+          <p>Reach out via email or phone specifying which design you are interested in.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Finalize Details</h3>
+          <p>We confirm your leather preferences and current lead times before I begin the build.</p>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-dark">Start an Inquiry</a>
+    </div>
+  </section>
+
+  <!-- THE MAKER -->
+  <section id="maker">
+    <div class="maker-inner">
+      <div class="maker-portrait-placeholder">AG</div>
+      <div class="maker-text">
+        <p class="section-label">The Hand Behind the Stitch</p>
+        <h2 class="section-title">Ashwani Gupta</h2>
+        <p>I have always had the drive to "make," though for a long time, the right circumstances and resources were out of reach. Five years ago, those doors finally opened, and I haven't put my tools down since.</p>
+        <p>What began as a personal quest to build a better, slimmer wallet for myself has evolved into a deep respect for traditional craft. For me, leatherworking is just the beginning — as I continue to grow AG Leatherworks, I am also expanding my skills into woodworking and other disciplines, always chasing the goal of creating honest, handmade goods that stand the test of time.</p>
+        <p class="maker-meta">Arlington, VA &nbsp;·&nbsp; USA</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Start an Inquiry</h2>
+      <p class="contact-sub">Ready to commission a piece? I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a href="mailto:agupta96@gmail.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">agupta96@gmail.com</span>
+        </a>
+        <a href="tel:+15716454445" class="contact-link">
+          <span class="contact-link-label">Phone</span>
+          <span class="contact-link-value">(571) 645-4445</span>
+        </a>
+      </div>
+      <p class="response-note">Expect a response within 24 hours or less.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">AG Leatherworks</span>
+    <span class="footer-copy">© 2024 &nbsp;·&nbsp; Arlington, VA &nbsp;·&nbsp; Handmade to Order</span>
+  </footer>
+
+</body>
+</html>
