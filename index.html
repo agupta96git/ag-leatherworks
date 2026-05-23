@@ -1,759 +1,906 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AG Leatherworks</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --cream:   #f5f0e8;
-      --paper:   #ede7d9;
-      --tan:     #c49a6c;
-      --brown:   #5c3d2e;
-      --dark:    #2b1f16;
-      --mid:     #7a6352;
-      --light:   #d6c9b5;
-      --serif:   'Cormorant Garamond', Georgia, serif;
-      --sans:    'Inter', system-ui, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--cream);
-      color: var(--dark);
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(245, 240, 232, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--light);
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--dark);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--dark); }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 3rem 5rem;
-      position: relative;
-      overflow: hidden;
-      background: var(--paper);
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, transparent 40%, rgba(43, 31, 22, 0.55) 100%),
-        url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1600&q=80') center/cover no-repeat;
-    }
-
-    .hero-content {
-      position: relative;
-      max-width: 700px;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--tan);
-      margin-bottom: 1rem;
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      color: #f5f0e8;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-tagline {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(245, 240, 232, 0.8);
-      margin-bottom: 2.5rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.85rem 2.2rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid var(--tan);
-      color: var(--cream);
-      background: transparent;
-      cursor: pointer;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    .btn:hover {
-      background: var(--tan);
-      color: var(--dark);
-    }
-
-    .btn-dark {
-      border-color: var(--brown);
-      color: var(--dark);
-    }
-
-    .btn-dark:hover {
-      background: var(--brown);
-      color: var(--cream);
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 6rem 3rem; }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--tan);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 300;
-      line-height: 1.15;
-      color: var(--dark);
-      margin-bottom: 2rem;
-    }
-
-    /* ── ABOUT ── */
-    #about {
-      background: var(--cream);
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .about-text p {
-      color: var(--mid);
-      font-size: 1.05rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .about-pillars {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .pillar {
-      padding: 1.8rem 2rem;
-      background: var(--paper);
-      border-left: 2px solid var(--tan);
-    }
-
-    .pillar h3 {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--brown);
-      margin-bottom: 0.5rem;
-    }
-
-    .pillar p {
-      font-size: 0.9rem;
-      color: var(--mid);
-      line-height: 1.65;
-    }
-
-    /* ── PRODUCTS ── */
-    #work {
-      background: var(--paper);
-    }
-
-    .work-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .work-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3.5rem;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .product-card {
-      background: var(--cream);
-      overflow: hidden;
-      transition: transform 0.3s;
-    }
-
-    .product-card:hover { transform: translateY(-4px); }
-
-    .product-img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      background: var(--light);
-    }
-
-    .product-img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: var(--light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .product-img-placeholder svg {
-      width: 48px;
-      height: 48px;
-      opacity: 0.3;
-    }
-
-    .product-info {
-      padding: 1.4rem 1.5rem 1.8rem;
-    }
-
-    .product-year {
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--tan);
-      margin-bottom: 0.4rem;
-    }
-
-    .product-name {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--dark);
-    }
-
-    /* ── PROCESS ── */
-    #process {
-      background: var(--cream);
-    }
-
-    .process-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .process-inner .section-label,
-    .process-inner .section-title { text-align: center; }
-
-    .process-note {
-      font-size: 0.95rem;
-      color: var(--mid);
-      max-width: 580px;
-      margin: 0 auto 3.5rem;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .step {
-      padding: 2.5rem 2rem;
-      background: var(--paper);
-      position: relative;
-    }
-
-    .step-num {
-      font-family: var(--serif);
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--light);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .step h3 {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--brown);
-      margin-bottom: 0.75rem;
-    }
-
-    .step p {
-      font-size: 0.88rem;
-      color: var(--mid);
-      line-height: 1.65;
-    }
-
-    /* ── ABOUT MAKER ── */
-    #maker {
-      background: var(--dark);
-      padding: 7rem 3rem;
-    }
-
-    .maker-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .maker-portrait {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--tan);
-      background: var(--brown);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-
-    .maker-portrait-placeholder {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      border: 2px solid var(--tan);
-      background: var(--brown);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: var(--serif);
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--tan);
-    }
-
-    .maker-text .section-label { color: var(--tan); }
-
-    .maker-text .section-title {
-      color: var(--cream);
-      margin-bottom: 1.5rem;
-    }
-
-    .maker-text p {
-      color: rgba(245, 240, 232, 0.65);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .maker-meta {
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--tan);
-      margin-top: 1.5rem;
-    }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--paper);
-    }
-
-    .contact-inner {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .contact-inner .section-label,
-    .contact-inner .section-title { text-align: center; }
-
-    .contact-inner .section-title { margin-bottom: 1rem; }
-
-    .contact-sub {
-      color: var(--mid);
-      font-size: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-
-    .contact-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 1.8rem 2.5rem;
-      background: var(--cream);
-      border: 1px solid var(--light);
-      text-decoration: none;
-      transition: border-color 0.2s, transform 0.2s;
-      min-width: 200px;
-    }
-
-    .contact-link:hover {
-      border-color: var(--tan);
-      transform: translateY(-2px);
-    }
-
-    .contact-link-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--tan);
-    }
-
-    .contact-link-value {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      color: var(--dark);
-    }
-
-    .response-note {
-      font-size: 0.82rem;
-      color: var(--mid);
-      font-style: italic;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--dark);
-      padding: 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-logo {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--cream);
-      letter-spacing: 0.05em;
-    }
-
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--mid);
-      letter-spacing: 0.05em;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: var(--tan);
-      margin-bottom: 2rem;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      section { padding: 4rem 1.5rem; }
-      #hero { padding: 0 1.5rem 4rem; }
-
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps { grid-template-columns: 1fr; }
-      .maker-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
-      .maker-portrait-placeholder { margin: 0 auto; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
-    }
-
-    @media (max-width: 560px) {
-      .nav-links { display: none; }
-      .products-grid { grid-template-columns: 1fr; }
-      .work-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AG Leatherworks · Arlington, VA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --leather: #8B5E3C;
+    --leather-dark: #5C3D21;
+    --leather-light: #C4956A;
+    --charcoal: #2A2520;
+    --mid: #6B6058;
+    --border: #D9D0C4;
+    --accent: #A0522D;
+    --gold: #C9A96E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--leather); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--leather-dark);
+    text-decoration: none;
+    border: 0.5px solid var(--leather);
+    padding: 0.5rem 1.1rem;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--leather); color: var(--cream); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--leather-light);
+    margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--leather);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--mid);
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--charcoal); color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; padding: 0.9rem 2rem;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--leather-dark); }
+  .btn-ghost {
+    color: var(--mid);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; padding: 0.9rem 1.5rem;
+    border: 0.5px solid var(--border);
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--leather); color: var(--leather); }
+  .hero-right {
+    background: var(--leather-dark);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-right-texture {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.015) 2px,
+        rgba(255,255,255,0.015) 4px
+      );
+  }
+  .hero-monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.06);
+    letter-spacing: -0.05em;
+    user-select: none;
+    position: absolute;
+  }
+  .hero-quote {
+    position: relative; z-index: 2;
+    text-align: center; padding: 3rem;
+  }
+  .hero-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+  .hero-quote cite {
+    display: block; margin-top: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* STRIP */
+  .strip {
+    background: var(--charcoal);
+    padding: 1rem 3rem;
+    display: flex; gap: 3rem; justify-content: center; align-items: center;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .strip-dot { color: var(--leather); opacity: 0.5; }
+
+  /* SECTIONS */
+  section { padding: 6rem 5rem; }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--leather-light);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  /* PRODUCTS */
+  #work { background: var(--warm-white); }
+  .products-header { max-width: 560px; margin-bottom: 3.5rem; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+  .product-card {
+    background: var(--warm-white);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .product-card:hover { background: var(--cream); }
+  .product-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--leather-light);
+    margin-bottom: 1.5rem;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--charcoal);
+  }
+  .product-desc {
+    font-size: 0.875rem;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .product-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--leather-dark);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .product-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: var(--leather-dark);
+    color: var(--cream);
+  }
+  .badge-design {
+    background: transparent;
+    color: var(--leather-light);
+    border: 0.5px solid var(--border);
+  }
+
+  /* ETHOS */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    background: var(--cream);
+  }
+  .ethos-left {}
+  .ethos-pillars { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .ethos-pillar { padding-left: 1.5rem; border-left: 1.5px solid var(--leather-light); }
+  .ethos-pillar h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .ethos-pillar p { font-size: 0.875rem; color: var(--mid); }
+  .ethos-right {
+    background: var(--leather-dark);
+    padding: 4rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .ethos-right::before {
+    content: '"';
+    position: absolute; top: -1rem; left: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+  .ethos-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+  .ethos-quote-attr {
+    margin-top: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* PROCESS */
+  #process { background: var(--charcoal); }
+  #process .section-eyebrow { color: var(--gold); }
+  #process .section-title { color: rgba(255,255,255,0.9); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    margin-top: 3rem;
+    border: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .process-step {
+    padding: 2.5rem 2rem;
+    border-right: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .process-step:last-child { border-right: none; }
+  .process-step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .process-step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.75rem;
+  }
+  .process-step p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+  /* PRICING */
+  #pricing { background: var(--warm-white); }
+  .pricing-intro { max-width: 500px; margin-bottom: 3rem; }
+  .pricing-intro p { color: var(--mid); margin-top: 0.75rem; font-size: 0.9rem; }
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .pricing-table thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 0 1.5rem 1rem 0;
+    text-align: left;
+    font-weight: 400;
+  }
+  .pricing-table td {
+    padding: 1.25rem 1.5rem 1.25rem 0;
+    border-bottom: 0.5px solid var(--border);
+    vertical-align: top;
+  }
+  .pricing-table td:first-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+  }
+  .pricing-table td.price {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--leather-dark);
+  }
+  .pricing-table td.time { color: var(--mid); font-size: 0.8rem; }
+  .pricing-note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--mid);
+    font-style: italic;
+  }
+
+  /* MAKER */
+  #maker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--cream);
+    padding: 0;
+  }
+  .maker-text {
+    padding: 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .maker-bg {
+    background: var(--leather);
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: flex-end;
+    padding: 3rem;
+  }
+  .maker-bg-mono {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18rem;
+    font-weight: 300;
+    color: rgba(0,0,0,0.1);
+    letter-spacing: -0.05em;
+    user-select: none;
+  }
+  .maker-location {
+    position: relative; z-index: 2;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .maker-body { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-top: 1rem; }
+
+  /* LOCAL SECTION */
+  #local { background: var(--charcoal); padding: 5rem; }
+  #local .section-eyebrow { color: var(--gold); }
+  #local .section-title { color: rgba(255,255,255,0.9); max-width: 560px; margin-bottom: 1rem; }
+  .local-body { color: rgba(255,255,255,0.55); font-size: 0.9rem; max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .local-perks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 2.5rem;
+  }
+  .local-perk {
+    background: var(--charcoal);
+    padding: 1.5rem;
+  }
+  .local-perk h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .local-perk p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* CONTACT */
+  #contact { background: var(--warm-white); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 2.5rem;
+  }
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+  .contact-info p { color: var(--mid); font-size: 0.875rem; line-height: 1.8; margin-bottom: 1.5rem; }
+  .contact-link {
+    display: block; margin-bottom: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--leather-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--leather); }
+  .email-capture { }
+  .email-capture h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .email-capture p { color: var(--mid); font-size: 0.875rem; margin-bottom: 1.5rem; }
+  .email-form { display: flex; gap: 0; }
+  .email-form input {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    background: var(--cream);
+    border: 0.5px solid var(--border);
+    border-right: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    outline: none;
+  }
+  .email-form input::placeholder { color: var(--mid); }
+  .email-form input:focus { border-color: var(--leather-light); }
+  .email-form button {
+    background: var(--charcoal); color: var(--cream);
+    border: none; cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0 1.5rem;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .email-form button:hover { background: var(--leather-dark); }
+  .email-note { font-size: 0.75rem; color: var(--mid); margin-top: 0.75rem; font-style: italic; }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+  }
+  footer .f-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.6);
+  }
+  footer .f-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  footer .f-links { display: flex; gap: 2rem; }
+  footer .f-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer .f-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: fadeUp 0.6s ease both; }
+  .hero-title { animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.7s 0.3s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 280px; }
+    .hero-left { padding: 3rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    #about, #maker { grid-template-columns: 1fr; }
+    .maker-bg { min-height: 240px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 2rem 1.5rem; }
+    #local { padding: 4rem 1.5rem; }
+    .maker-text { padding: 4rem 1.5rem; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#hero">AG Leatherworks</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#maker">The Maker</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<nav>
+  <a href="#hero" class="nav-logo">AG Leatherworks</a>
+  <ul class="nav-links">
+    <li><a href="#work">Collection</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">Ethos</a></li>
+    <li><a href="#maker">The Maker</a></li>
+    <li><a href="#local">Local</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Commission a Piece</a>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Arlington, VA &nbsp;·&nbsp; Made to Order</p>
-      <h1 class="hero-title">AG<br>Leatherworks</h1>
-      <p class="hero-tagline">Minimalist Utility. Honest Craft.</p>
-      <a href="#work" class="btn">View the Work</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-text">
-        <p class="section-label">The Ethos</p>
-        <h2 class="section-title">Built for the Pocket,<br>Not the Logo</h2>
-        <div class="divider"></div>
-        <p>AG Leatherworks was born from a simple observation: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel.</p>
-        <p>I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
-        <br>
-        <a href="#contact" class="btn btn-dark">Start an Inquiry</a>
-      </div>
-      <div class="about-pillars">
-        <div class="pillar">
-          <h3>Heritage Materials</h3>
-          <p>Full-grain, vegetable-tanned leathers sourced exclusively from world-renowned Italian tanneries.</p>
-        </div>
-        <div class="pillar">
-          <h3>The Natural Edge</h3>
-          <p>Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers.</p>
-        </div>
-        <div class="pillar">
-          <h3>Intentional Design</h3>
-          <p>No unnecessary bulk. No loud branding. Just the highest quality materials allowed to speak for themselves.</p>
-        </div>
+<section id="hero" style="padding:0;">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Arlington, VA &nbsp;·&nbsp; Handmade to Order</div>
+      <h1 class="hero-title">Honest<br>craft.<br><em>Nothing more.</em></h1>
+      <p class="hero-sub">Full-grain leather goods made by hand in Arlington, VA. Vegetable-tanned, edge-burnished, built to last a lifetime and improve with every year of use.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">View the Collection</a>
+        <a href="#contact" class="btn-ghost">Commission a Piece</a>
       </div>
     </div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <div class="work-inner">
-      <div class="work-header">
-        <div>
-          <p class="section-label">The Collection</p>
-          <h2 class="section-title">Current Work</h2>
-        </div>
-        <a href="#contact" class="btn btn-dark">Commission a Piece</a>
-      </div>
-      <div class="products-grid">
-
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
-              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="product-info">
-            <p class="product-year">2024</p>
-            <p class="product-name">The Standard</p>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
-              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="product-info">
-            <p class="product-year">2023 – 2024</p>
-            <p class="product-name">The Slider</p>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
-              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="product-info">
-            <p class="product-year">Design</p>
-            <p class="product-name">The Extender</p>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
-              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="product-info">
-            <p class="product-year">Design</p>
-            <p class="product-name">The Familiar</p>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
-              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="product-info">
-            <p class="product-year">Design</p>
-            <p class="product-name">The Flapper</p>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="14" width="36" height="24" rx="2" stroke="#5c3d2e" stroke-width="1.5"/>
-              <path d="M6 22h36" stroke="#5c3d2e" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="product-info">
-            <p class="product-year">Design</p>
-            <p class="product-name">The Traveller</p>
-          </div>
-        </div>
-
+    <div class="hero-right">
+      <div class="hero-right-texture"></div>
+      <div class="hero-monogram">AG</div>
+      <div class="hero-quote">
+        <blockquote>Your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</blockquote>
+        <cite>— Ashwani Gupta, Maker</cite>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROCESS -->
-  <section id="process">
-    <div class="process-inner">
-      <p class="section-label">Commissions</p>
-      <h2 class="section-title">Work With Me</h2>
-      <p class="process-note">I am currently accepting commissions for pieces based on my established design menu. Each item is made-to-order — your specific leather and thread combination, stitched specifically for you.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h3>Select Your Design</h3>
-          <p>Choose a template from my current menu that fits your lifestyle and daily carry needs.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h3>Submit an Inquiry</h3>
-          <p>Reach out via email or phone specifying which design you are interested in.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h3>Finalize Details</h3>
-          <p>We confirm your leather preferences and current lead times before I begin the build.</p>
-        </div>
-      </div>
-      <a href="#contact" class="btn btn-dark">Start an Inquiry</a>
-    </div>
-  </section>
+<div class="strip">
+  <span class="strip-item">Full-grain Italian leather</span>
+  <span class="strip-dot">·</span>
+  <span class="strip-item">Vegetable-tanned only</span>
+  <span class="strip-dot">·</span>
+  <span class="strip-item">Hand-burnished edges</span>
+  <span class="strip-dot">·</span>
+  <span class="strip-item">Made to order in Arlington, VA</span>
+  <span class="strip-dot">·</span>
+  <span class="strip-item">5+ years of craft</span>
+</div>
 
-  <!-- THE MAKER -->
-  <section id="maker">
-    <div class="maker-inner">
-      <div class="maker-portrait-placeholder">AG</div>
-      <div class="maker-text">
-        <p class="section-label">The Hand Behind the Stitch</p>
-        <h2 class="section-title">Ashwani Gupta</h2>
-        <p>I have always had the drive to "make," though for a long time, the right circumstances and resources were out of reach. Five years ago, those doors finally opened, and I haven't put my tools down since.</p>
-        <p>What began as a personal quest to build a better, slimmer wallet for myself has evolved into a deep respect for traditional craft. For me, leatherworking is just the beginning — as I continue to grow AG Leatherworks, I am also expanding my skills into woodworking and other disciplines, always chasing the goal of creating honest, handmade goods that stand the test of time.</p>
-        <p class="maker-meta">Arlington, VA &nbsp;·&nbsp; USA</p>
+<!-- COLLECTION -->
+<section id="work">
+  <div class="products-header">
+    <div class="section-eyebrow">The Collection</div>
+    <h2 class="section-title">Current Work</h2>
+    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;">Each piece is made to order in your chosen leather and thread combination. Lead time is typically 2–3 weeks from confirmation.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-num">01 · Available</div>
+      <div class="product-name">The Standard</div>
+      <p class="product-desc">The essential bifold, stripped to its core. Two card slots, a bill compartment, and nothing else. The one that started it all.</p>
+      <div class="product-price">
+        <span>From $75</span>
+        <span class="product-badge">In Stock</span>
       </div>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <p class="section-label">Get in Touch</p>
-      <h2 class="section-title">Start an Inquiry</h2>
-      <p class="contact-sub">Ready to commission a piece? I'd love to hear from you.</p>
-      <div class="contact-links">
-        <a href="mailto:agupta96@gmail.com" class="contact-link">
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">agupta96@gmail.com</span>
-        </a>
-        <a href="tel:+15716454445" class="contact-link">
-          <span class="contact-link-label">Phone</span>
-          <span class="contact-link-value">(571) 645-4445</span>
-        </a>
+    <div class="product-card">
+      <div class="product-num">02 · Available</div>
+      <div class="product-name">The Slider</div>
+      <p class="product-desc">A pull-tab cardholder that fans your most-used cards with a single gesture. Slim enough to forget it's there.</p>
+      <div class="product-price">
+        <span>From $65</span>
+        <span class="product-badge">In Stock</span>
       </div>
-      <p class="response-note">Expect a response within 24 hours or less.</p>
     </div>
-  </section>
+    <div class="product-card">
+      <div class="product-num">03 · Design Phase</div>
+      <div class="product-name">The Extender</div>
+      <p class="product-desc">A long wallet designed for those who carry more — receipts, folded documents, a little extra life on the road.</p>
+      <div class="product-price">
+        <span>From $110</span>
+        <span class="product-badge badge-design">Coming Soon</span>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-num">04 · Design Phase</div>
+      <div class="product-name">The Familiar</div>
+      <p class="product-desc">A compact key fob and organizer. Tuck away your everyday keys without the jangle.</p>
+      <div class="product-price">
+        <span>From $45</span>
+        <span class="product-badge badge-design">Coming Soon</span>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-num">05 · Design Phase</div>
+      <div class="product-name">The Flapper</div>
+      <p class="product-desc">A flap-closure cardholder with a magnetic snap. Structured and satisfying in the hand.</p>
+      <div class="product-price">
+        <span>From $85</span>
+        <span class="product-badge badge-design">Coming Soon</span>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-num">06 · Commissions</div>
+      <div class="product-name">The Traveller</div>
+      <p class="product-desc">A passport wallet and travel organizer for those who move. Multiple slots, boarding pass pocket, pen loop.</p>
+      <div class="product-price">
+        <span>From $140</span>
+        <span class="product-badge">Commission</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">AG Leatherworks</span>
-    <span class="footer-copy">© 2024 &nbsp;·&nbsp; Arlington, VA &nbsp;·&nbsp; Handmade to Order</span>
-  </footer>
+<!-- PRICING -->
+<section id="pricing" style="background:var(--cream);">
+  <div class="pricing-intro">
+    <div class="section-eyebrow">Transparent Pricing</div>
+    <h2 class="section-title">What things cost</h2>
+    <p>Every piece is priced to reflect the time, material quality, and craft involved. No surprise markups at checkout.</p>
+  </div>
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th>Piece</th>
+        <th>Price</th>
+        <th>Lead Time</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>The Slider (cardholder)</td>
+        <td class="price">$65 – $85</td>
+        <td class="time">1–2 weeks</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Choice of leather color and thread</td>
+      </tr>
+      <tr>
+        <td>The Standard (bifold)</td>
+        <td class="price">$75 – $100</td>
+        <td class="time">1–2 weeks</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Natural or dyed edge</td>
+      </tr>
+      <tr>
+        <td>The Flapper (flap wallet)</td>
+        <td class="price">$85 – $115</td>
+        <td class="time">2 weeks</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Magnetic snap closure</td>
+      </tr>
+      <tr>
+        <td>The Familiar (key fob)</td>
+        <td class="price">$45 – $60</td>
+        <td class="time">1 week</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Great paired with any wallet</td>
+      </tr>
+      <tr>
+        <td>The Extender (long wallet)</td>
+        <td class="price">$110 – $145</td>
+        <td class="time">2–3 weeks</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Document-length bill slot</td>
+      </tr>
+      <tr>
+        <td>The Traveller (passport wallet)</td>
+        <td class="price">$140 – $185</td>
+        <td class="time">2–3 weeks</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Full commission, discuss details first</td>
+      </tr>
+      <tr>
+        <td>Monogram / personalization</td>
+        <td class="price">+$25 – $40</td>
+        <td class="time">+3–5 days</td>
+        <td style="font-size:0.8rem;color:var(--mid);">Initials, name, or short message</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pricing-note">All pieces include free local pickup in Arlington, VA. Shipping available at cost. Custom requests and corporate gifting orders welcome — reach out to discuss.</p>
+</section>
+
+<!-- ETHOS -->
+<section id="about" style="padding:0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+    <div style="padding:6rem 5rem;">
+      <div class="section-eyebrow">The Ethos</div>
+      <h2 class="section-title">Built for the pocket,<br>not the logo.</h2>
+      <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;margin-bottom:2rem;">AG Leatherworks was born from a simple frustration: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel. Every piece I make is a rejection of that.</p>
+      <div class="ethos-pillars">
+        <div class="ethos-pillar">
+          <h4>Heritage materials</h4>
+          <p>Full-grain, vegetable-tanned leather sourced from Italian tanneries. The kind that develops a patina over years, not months.</p>
+        </div>
+        <div class="ethos-pillar">
+          <h4>The natural edge</h4>
+          <p>Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers as they were cut.</p>
+        </div>
+        <div class="ethos-pillar">
+          <h4>Intentional design</h4>
+          <p>No unnecessary bulk. No loud branding. Just the highest quality materials, allowed to speak entirely for themselves.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ethos-right" style="display:flex;flex-direction:column;justify-content:center;">
+      <p class="ethos-quote">I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
+      <p class="ethos-quote-attr">— Ashwani Gupta · Arlington, VA</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="padding:5rem;">
+  <div class="section-eyebrow">How it works</div>
+  <h2 class="section-title" style="color:rgba(255,255,255,0.9);max-width:440px;">Simple process, serious craft.</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="process-step-num">01</div>
+      <h3>Pick your design</h3>
+      <p>Choose from the collection menu. Each template has been refined through multiple iterations for fit, feel, and function.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">02</div>
+      <h3>Reach out</h3>
+      <p>Email or call. Tell me which piece, your preferred leather, thread color, and whether you'd like personalization.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">03</div>
+      <h3>Confirm details</h3>
+      <p>I'll confirm materials, lead time, and final price. 50% deposit to start; balance on completion.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">04</div>
+      <h3>Pick up or ship</h3>
+      <p>Arlington locals welcome to pick up in person. Shipping available. Every piece leaves with a care card.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE MAKER -->
+<section id="maker" style="padding:0;">
+  <div class="maker-bg">
+    <div class="maker-bg-mono">AG</div>
+    <div class="maker-location">Arlington, VA · USA</div>
+  </div>
+  <div class="maker-text">
+    <div class="section-eyebrow">The Hand Behind the Stitch</div>
+    <h2 class="section-title">Ashwani Gupta</h2>
+    <p class="maker-body">I have always had the drive to make things. For a long time, the right circumstances were out of reach. Five years ago, those doors opened, and I haven't put my tools down since.</p>
+    <p class="maker-body" style="margin-top:1rem;">What started as a personal quest to build a better, slimmer wallet has evolved into a deep respect for traditional craft. Every piece I make is an honest object — built to outlast trends, improve with age, and mean something to the person who carries it.</p>
+    <p class="maker-body" style="margin-top:1rem;">Based in Arlington, VA. Happy to meet local customers in person.</p>
+    <a href="#contact" class="btn-primary" style="margin-top:2rem;display:inline-block;text-align:center;">Start a Conversation</a>
+  </div>
+</section>
+
+<!-- LOCAL -->
+<section id="local">
+  <div class="section-eyebrow">Arlington, VA</div>
+  <h2 class="section-title">Your neighbor makes these.</h2>
+  <p class="local-body">Every piece is made right here in Arlington. If you're local, you can skip the shipping, meet the maker, and see the leather options in person before you commit. This is as close to farm-to-table as leather goods get.</p>
+  <div class="local-perks">
+    <div class="local-perk">
+      <h4>Free local pickup</h4>
+      <p>No shipping fees for Arlington and nearby Northern Virginia customers. Meet in person at your convenience.</p>
+    </div>
+    <div class="local-perk">
+      <h4>See before you buy</h4>
+      <p>Come see the leather swatches and finished samples in person. Touch matters when you're buying leather.</p>
+    </div>
+    <div class="local-perk">
+      <h4>Perfect for gifting</h4>
+      <p>Need a thoughtful gift for someone in the area? I can have a piece ready with personalization in 1–2 weeks.</p>
+    </div>
+    <div class="local-perk">
+      <h4>Corporate orders</h4>
+      <p>Personalized leather gifts for your team, client events, or executive recognition. Bulk pricing available.</p>
+    </div>
+  </div>
+  <a href="#contact" class="btn-primary">Get in Touch</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Get in Touch</div>
+  <h2 class="section-title">Start an inquiry</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Ready to commission a piece?<br>I'd love to hear from you.</h3>
+      <p>Reach out via email or phone. Tell me which design you're interested in, your leather preferences, and any personalization. I respond within 24 hours.</p>
+      <a href="mailto:agupta96@gmail.com" class="contact-link">✉ agupta96@gmail.com</a>
+      <a href="tel:+15716454445" class="contact-link">☏ (571) 645-4445</a>
+      <p style="margin-top:1.5rem;font-size:0.8rem;font-style:italic;">Arlington, VA · Local pickup available · Shipping at cost</p>
+    </div>
+    <div class="email-capture">
+      <h3>Stay in the loop</h3>
+      <p>New designs, restocks, and occasional behind-the-scenes process notes. No spam — just leather.</p>
+      <div class="email-form">
+        <input type="email" placeholder="your@email.com" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </div>
+      <p class="email-note">Infrequent. Unsubscribe anytime. I actually write these myself.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">AG Leatherworks</div>
+  <div class="f-links">
+    <a href="#work">Collection</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#maker">The Maker</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="f-copy">© 2025 · Arlington, VA · Handmade to Order</div>
+</footer>
 
 </body>
 </html>
