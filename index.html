@@ -16,585 +16,197 @@
     --charcoal: #2A2520;
     --mid: #6B6058;
     --border: #D9D0C4;
-    --accent: #A0522D;
     --gold: #C9A96E;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--cream);
-    color: var(--charcoal);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+  body { background: var(--cream); color: var(--charcoal); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.25rem 3rem;
-    background: rgba(245,240,232,0.92);
+    padding: 1rem 3rem;
+    background: rgba(245,240,232,0.94);
     backdrop-filter: blur(8px);
     border-bottom: 0.5px solid var(--border);
   }
-  .nav-logo {
+  .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .nav-logo img { height: 40px; width: auto; }
+  .nav-logo-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--charcoal);
-    text-decoration: none;
+    font-size: 1.1rem; font-weight: 500;
+    letter-spacing: 0.1em; color: var(--charcoal);
   }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mid);
-    text-decoration: none;
-    transition: color 0.2s;
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--leather); }
   .nav-cta {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--leather-dark);
-    text-decoration: none;
-    border: 0.5px solid var(--leather);
-    padding: 0.5rem 1.1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--leather-dark); text-decoration: none;
+    border: 0.5px solid var(--leather); padding: 0.5rem 1.1rem;
     transition: all 0.2s;
   }
   .nav-cta:hover { background: var(--leather); color: var(--cream); }
 
   /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 5rem;
-  }
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 5rem 4rem 5rem 5rem;
-  }
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--leather-light);
-    margin-bottom: 2rem;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 6vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--charcoal);
-    margin-bottom: 1rem;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--leather);
-  }
-  .hero-sub {
-    font-size: 1rem;
-    color: var(--mid);
-    max-width: 380px;
-    margin-bottom: 2.5rem;
-    line-height: 1.8;
-  }
-  .hero-actions { display: flex; gap: 1rem; align-items: center; }
-  .btn-primary {
-    background: var(--charcoal); color: var(--cream);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-    text-decoration: none; padding: 0.9rem 2rem;
-    transition: all 0.2s;
-    border: none; cursor: pointer;
-  }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 4.5rem; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem 5rem 5rem; }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--leather-light); margin-bottom: 2rem; animation: fadeUp 0.6s ease both; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--charcoal); margin-bottom: 1rem; animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-title em { font-style: italic; color: var(--leather); }
+  .hero-sub { font-size: 1rem; color: var(--mid); max-width: 380px; margin-bottom: 2.5rem; line-height: 1.8; animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; animation: fadeUp 0.7s 0.3s ease both; }
+  .btn-primary { background: var(--charcoal); color: var(--cream); font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; transition: all 0.2s; border: none; cursor: pointer; display: inline-block; }
   .btn-primary:hover { background: var(--leather-dark); }
-  .btn-ghost {
-    color: var(--mid);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-    text-decoration: none; padding: 0.9rem 1.5rem;
-    border: 0.5px solid var(--border);
-    transition: all 0.2s;
-  }
+  .btn-ghost { color: var(--mid); font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 1.5rem; border: 0.5px solid var(--border); transition: all 0.2s; }
   .btn-ghost:hover { border-color: var(--leather); color: var(--leather); }
-  .hero-right {
-    background: var(--leather-dark);
-    position: relative;
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-right-texture {
-    position: absolute; inset: 0;
-    background:
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.015) 2px,
-        rgba(255,255,255,0.015) 4px
-      );
-  }
-  .hero-monogram {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.06);
-    letter-spacing: -0.05em;
-    user-select: none;
-    position: absolute;
-  }
-  .hero-quote {
-    position: relative; z-index: 2;
-    text-align: center; padding: 3rem;
-  }
-  .hero-quote blockquote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.6;
-    max-width: 320px;
-  }
-  .hero-quote cite {
-    display: block; margin-top: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-style: normal;
-  }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-right-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(92,61,33,0.35) 0%, rgba(42,37,32,0.15) 100%); }
+  .hero-quote { position: absolute; bottom: 3rem; left: 3rem; right: 3rem; z-index: 2; }
+  .hero-quote blockquote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1.6; max-width: 340px; }
+  .hero-quote cite { display: block; margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-style: normal; }
 
   /* STRIP */
-  .strip {
-    background: var(--charcoal);
-    padding: 1rem 3rem;
-    display: flex; gap: 3rem; justify-content: center; align-items: center;
-    flex-wrap: wrap;
-  }
-  .strip-item {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
+  .strip { background: var(--charcoal); padding: 0.9rem 3rem; display: flex; gap: 2.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .strip-item { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
   .strip-dot { color: var(--leather); opacity: 0.5; }
 
   /* SECTIONS */
   section { padding: 6rem 5rem; }
-  .section-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--leather-light);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 300;
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-  }
+  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--leather-light); margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
 
-  /* PRODUCTS */
-  #work { background: var(--warm-white); }
+  /* COLLECTION */
+  #work { background: var(--warm-white); padding: 6rem 5rem; }
   .products-header { max-width: 560px; margin-bottom: 3.5rem; }
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5px;
-    background: var(--border);
-    border: 0.5px solid var(--border);
-  }
-  .product-card {
-    background: var(--warm-white);
-    padding: 2.5rem 2rem;
-    transition: background 0.2s;
-    cursor: default;
-  }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); }
+  .product-card { background: var(--warm-white); transition: background 0.2s; overflow: hidden; }
   .product-card:hover { background: var(--cream); }
-  .product-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--leather-light);
-    margin-bottom: 1.5rem;
-  }
-  .product-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    color: var(--charcoal);
-  }
-  .product-desc {
-    font-size: 0.875rem;
-    color: var(--mid);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-  .product-price {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    color: var(--leather-dark);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .product-badge {
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    background: var(--leather-dark);
-    color: var(--cream);
-  }
-  .badge-design {
-    background: transparent;
-    color: var(--leather-light);
-    border: 0.5px solid var(--border);
-  }
-
-  /* ETHOS */
-  #about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    background: var(--cream);
-  }
-  .ethos-left {}
-  .ethos-pillars { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .ethos-pillar { padding-left: 1.5rem; border-left: 1.5px solid var(--leather-light); }
-  .ethos-pillar h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-  }
-  .ethos-pillar p { font-size: 0.875rem; color: var(--mid); }
-  .ethos-right {
-    background: var(--leather-dark);
-    padding: 4rem 3.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .ethos-right::before {
-    content: '"';
-    position: absolute; top: -1rem; left: 1.5rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 12rem;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-  }
-  .ethos-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.4rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.9);
-    line-height: 1.7;
-    position: relative; z-index: 1;
-  }
-  .ethos-quote-attr {
-    margin-top: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* PROCESS */
-  #process { background: var(--charcoal); }
-  #process .section-eyebrow { color: var(--gold); }
-  #process .section-title { color: rgba(255,255,255,0.9); }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0;
-    margin-top: 3rem;
-    border: 0.5px solid rgba(255,255,255,0.08);
-  }
-  .process-step {
-    padding: 2.5rem 2rem;
-    border-right: 0.5px solid rgba(255,255,255,0.08);
-  }
-  .process-step:last-child { border-right: none; }
-  .process-step-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-  }
-  .process-step h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 0.75rem;
-  }
-  .process-step p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+  .product-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .product-card:hover .product-img { transform: scale(1.03); }
+  .product-img-wrap { overflow: hidden; }
+  .product-body { padding: 1.75rem 1.75rem 2rem; }
+  .product-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--leather-light); margin-bottom: 0.75rem; }
+  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--charcoal); }
+  .product-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; margin-bottom: 1.25rem; }
+  .product-price { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--leather-dark); display: flex; align-items: center; justify-content: space-between; }
+  .product-badge { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; background: var(--leather-dark); color: var(--cream); }
+  .badge-design { background: transparent; color: var(--leather-light); border: 0.5px solid var(--border); }
 
   /* PRICING */
-  #pricing { background: var(--warm-white); }
-  .pricing-intro { max-width: 500px; margin-bottom: 3rem; }
-  .pricing-intro p { color: var(--mid); margin-top: 0.75rem; font-size: 0.9rem; }
-  .pricing-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.875rem;
-  }
-  .pricing-table thead tr {
-    border-bottom: 1px solid var(--border);
-  }
-  .pricing-table th {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mid);
-    padding: 0 1.5rem 1rem 0;
-    text-align: left;
-    font-weight: 400;
-  }
-  .pricing-table td {
-    padding: 1.25rem 1.5rem 1.25rem 0;
-    border-bottom: 0.5px solid var(--border);
-    vertical-align: top;
-  }
-  .pricing-table td:first-child {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-  }
-  .pricing-table td.price {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    color: var(--leather-dark);
-  }
+  #pricing { background: var(--cream); }
+  .pricing-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 2rem; }
+  .pricing-table thead tr { border-bottom: 1px solid var(--border); }
+  .pricing-table th { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); padding: 0 1.5rem 1rem 0; text-align: left; font-weight: 400; }
+  .pricing-table td { padding: 1.1rem 1.5rem 1.1rem 0; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  .pricing-table td:first-child { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+  .pricing-table td.price { font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--leather-dark); }
   .pricing-table td.time { color: var(--mid); font-size: 0.8rem; }
-  .pricing-note {
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-    color: var(--mid);
-    font-style: italic;
-  }
+  .pricing-note { margin-top: 1.5rem; font-size: 0.8rem; color: var(--mid); font-style: italic; }
+
+  /* ETHOS */
+  #about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
+  .ethos-left { padding: 6rem 5rem; }
+  .ethos-pillars { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .ethos-pillar { padding-left: 1.5rem; border-left: 1.5px solid var(--leather-light); }
+  .ethos-pillar h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .ethos-pillar p { font-size: 0.875rem; color: var(--mid); }
+  .ethos-right { background: var(--leather-dark); padding: 4rem 3.5rem; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .ethos-right::before { content: '"'; position: absolute; top: -2rem; left: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 14rem; color: rgba(255,255,255,0.04); line-height: 1; }
+  .ethos-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1.7; position: relative; z-index: 1; }
+  .ethos-quote-attr { margin-top: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+  /* PROCESS */
+  #process { background: var(--charcoal); padding: 5rem; }
+  #process .section-eyebrow { color: var(--gold); }
+  #process .section-title { color: rgba(255,255,255,0.9); }
+  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 3rem; border: 0.5px solid rgba(255,255,255,0.08); }
+  .process-step { padding: 2.5rem 2rem; border-right: 0.5px solid rgba(255,255,255,0.08); }
+  .process-step:last-child { border-right: none; }
+  .process-step-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.5rem; }
+  .process-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 0.75rem; }
+  .process-step p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
 
   /* MAKER */
-  #maker {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    background: var(--cream);
-    padding: 0;
-  }
-  .maker-text {
-    padding: 6rem 5rem;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .maker-bg {
-    background: var(--leather);
-    min-height: 500px;
-    position: relative;
-    overflow: hidden;
-    display: flex; align-items: flex-end;
-    padding: 3rem;
-  }
-  .maker-bg-mono {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18rem;
-    font-weight: 300;
-    color: rgba(0,0,0,0.1);
-    letter-spacing: -0.05em;
-    user-select: none;
-  }
-  .maker-location {
-    position: relative; z-index: 2;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-  }
+  #maker { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; background: var(--cream); }
+  .maker-img-wrap { position: relative; overflow: hidden; min-height: 500px; }
+  .maker-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .maker-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(42,37,32,0.6) 0%, transparent 50%); }
+  .maker-img-location { position: absolute; bottom: 2rem; left: 2rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+  .maker-text { padding: 6rem 5rem; display: flex; flex-direction: column; justify-content: center; }
   .maker-body { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-top: 1rem; }
 
-  /* LOCAL SECTION */
+  /* LOCAL */
   #local { background: var(--charcoal); padding: 5rem; }
   #local .section-eyebrow { color: var(--gold); }
   #local .section-title { color: rgba(255,255,255,0.9); max-width: 560px; margin-bottom: 1rem; }
   .local-body { color: rgba(255,255,255,0.55); font-size: 0.9rem; max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; }
-  .local-perks {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    margin-bottom: 2.5rem;
-  }
-  .local-perk {
-    background: var(--charcoal);
-    padding: 1.5rem;
-  }
-  .local-perk h4 {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
+  .local-perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); margin-bottom: 2.5rem; }
+  .local-perk { background: var(--charcoal); padding: 1.5rem; }
+  .local-perk h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
   .local-perk p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
 
   /* CONTACT */
   #contact { background: var(--warm-white); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-    margin-top: 2.5rem;
-  }
-  .contact-info h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 1rem;
-  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 2.5rem; }
+  .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem; }
   .contact-info p { color: var(--mid); font-size: 0.875rem; line-height: 1.8; margin-bottom: 1.5rem; }
-  .contact-link {
-    display: block; margin-bottom: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--leather-dark);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .contact-link { display: block; margin-bottom: 0.75rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--leather-dark); text-decoration: none; transition: color 0.2s; }
   .contact-link:hover { color: var(--leather); }
-  .email-capture { }
-  .email-capture h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 0.5rem;
-  }
+  .email-capture h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 0.5rem; }
   .email-capture p { color: var(--mid); font-size: 0.875rem; margin-bottom: 1.5rem; }
-  .email-form { display: flex; gap: 0; }
-  .email-form input {
-    flex: 1;
-    padding: 0.9rem 1rem;
-    background: var(--cream);
-    border: 0.5px solid var(--border);
-    border-right: none;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.875rem;
-    color: var(--charcoal);
-    outline: none;
-  }
+  .email-form { display: flex; }
+  .email-form input { flex: 1; padding: 0.9rem 1rem; background: var(--cream); border: 0.5px solid var(--border); border-right: none; font-family: 'Jost', sans-serif; font-size: 0.875rem; color: var(--charcoal); outline: none; }
   .email-form input::placeholder { color: var(--mid); }
   .email-form input:focus { border-color: var(--leather-light); }
-  .email-form button {
-    background: var(--charcoal); color: var(--cream);
-    border: none; cursor: pointer;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 0 1.5rem;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
+  .email-form button { background: var(--charcoal); color: var(--cream); border: none; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0 1.5rem; transition: background 0.2s; white-space: nowrap; }
   .email-form button:hover { background: var(--leather-dark); }
   .email-note { font-size: 0.75rem; color: var(--mid); margin-top: 0.75rem; font-style: italic; }
 
   /* FOOTER */
-  footer {
-    background: var(--charcoal);
-    padding: 2rem 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    border-top: 0.5px solid rgba(255,255,255,0.08);
-  }
-  footer .f-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.6);
-  }
-  footer .f-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-  }
+  footer { background: var(--charcoal); padding: 2rem 5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 0.5px solid rgba(255,255,255,0.08); }
+  footer .f-logo { display: flex; align-items: center; gap: 0.6rem; }
+  footer .f-logo img { height: 28px; width: auto; filter: invert(1) brightness(0.7); }
+  footer .f-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); }
+  footer .f-copy { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
   footer .f-links { display: flex; gap: 2rem; }
-  footer .f-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  footer .f-links a { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
   footer .f-links a:hover { color: var(--gold); }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-tag { animation: fadeUp 0.6s ease both; }
-  .hero-title { animation: fadeUp 0.7s 0.1s ease both; }
-  .hero-sub { animation: fadeUp 0.7s 0.2s ease both; }
-  .hero-actions { animation: fadeUp 0.7s 0.3s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 280px; }
+    .hero-right { min-height: 300px; }
     .hero-left { padding: 3rem 1.5rem; }
     section { padding: 4rem 1.5rem; }
-    #about, #maker { grid-template-columns: 1fr; }
-    .maker-bg { min-height: 240px; }
+    #about { grid-template-columns: 1fr; }
+    .ethos-left { padding: 4rem 1.5rem; }
+    #maker { grid-template-columns: 1fr; }
+    .maker-img-wrap { min-height: 300px; }
+    .maker-text { padding: 4rem 1.5rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     footer { padding: 2rem 1.5rem; }
-    #local { padding: 4rem 1.5rem; }
-    .maker-text { padding: 4rem 1.5rem; }
+    #local, #process { padding: 4rem 1.5rem; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#hero" class="nav-logo">AG Leatherworks</a>
+  <a href="#hero" class="nav-logo">
+    <img src="logo.jpeg" alt="AG Leatherworks logo">
+    <span class="nav-logo-text">AG Leatherworks</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#work">Collection</a></li>
     <li><a href="#pricing">Pricing</a></li>
@@ -617,8 +229,8 @@
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-right-texture"></div>
-      <div class="hero-monogram">AG</div>
+      <img src="flapper.jpg" alt="AG Leatherworks — handcrafted leather goods, Arlington VA">
+      <div class="hero-right-overlay"></div>
       <div class="hero-quote">
         <blockquote>Your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</blockquote>
         <cite>— Ashwani Gupta, Maker</cite>
@@ -634,7 +246,7 @@
   <span class="strip-dot">·</span>
   <span class="strip-item">Hand-burnished edges</span>
   <span class="strip-dot">·</span>
-  <span class="strip-item">Made to order in Arlington, VA</span>
+  <span class="strip-item">Made to order · Arlington, VA</span>
   <span class="strip-dot">·</span>
   <span class="strip-item">5+ years of craft</span>
 </div>
@@ -644,163 +256,141 @@
   <div class="products-header">
     <div class="section-eyebrow">The Collection</div>
     <h2 class="section-title">Current Work</h2>
-    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;">Each piece is made to order in your chosen leather and thread combination. Lead time is typically 2–3 weeks from confirmation.</p>
+    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;">Each piece is made to order in your chosen leather and thread combination. Lead time is typically 1–2 weeks from confirmation.</p>
   </div>
   <div class="products-grid">
+
     <div class="product-card">
-      <div class="product-num">01 · Available</div>
-      <div class="product-name">The Standard</div>
-      <p class="product-desc">The essential bifold, stripped to its core. Two card slots, a bill compartment, and nothing else. The one that started it all.</p>
-      <div class="product-price">
-        <span>From $75</span>
-        <span class="product-badge">In Stock</span>
+      <div class="product-img-wrap">
+        <img src="standard.jpg" alt="The Standard bifold wallet" class="product-img">
+      </div>
+      <div class="product-body">
+        <div class="product-num">01 · Commission</div>
+        <div class="product-name">The Standard</div>
+        <p class="product-desc">The essential bifold, stripped to its core. Two card slots, a bill compartment, and nothing else. The one that started it all.</p>
+        <div class="product-price"><span>$99</span><span class="product-badge">Commission</span></div>
       </div>
     </div>
+
     <div class="product-card">
-      <div class="product-num">02 · Available</div>
-      <div class="product-name">The Slider</div>
-      <p class="product-desc">A pull-tab cardholder that fans your most-used cards with a single gesture. Slim enough to forget it's there.</p>
-      <div class="product-price">
-        <span>From $65</span>
-        <span class="product-badge">In Stock</span>
+      <div class="product-img-wrap">
+        <img src="Slider.jpg" alt="The Slider cardholder" class="product-img">
+      </div>
+      <div class="product-body">
+        <div class="product-num">02 · Commission</div>
+        <div class="product-name">The Slider</div>
+        <p class="product-desc">A pull-tab cardholder that fans your most-used cards with a single gesture. Slim enough to forget it's there.</p>
+        <div class="product-price"><span>$59</span><span class="product-badge">Commission</span></div>
       </div>
     </div>
+
     <div class="product-card">
-      <div class="product-num">03 · Design Phase</div>
-      <div class="product-name">The Extender</div>
-      <p class="product-desc">A long wallet designed for those who carry more — receipts, folded documents, a little extra life on the road.</p>
-      <div class="product-price">
-        <span>From $110</span>
-        <span class="product-badge badge-design">Coming Soon</span>
+      <div class="product-img-wrap">
+        <img src="extender.jpg" alt="The Extender long wallet" class="product-img">
+      </div>
+      <div class="product-body">
+        <div class="product-num">03 · Commission</div>
+        <div class="product-name">The Extender</div>
+        <p class="product-desc">A long wallet designed for those who carry more — receipts, folded documents, a little extra life on the road.</p>
+        <div class="product-price"><span>$199</span><span class="product-badge">Commission</span></div>
       </div>
     </div>
+
     <div class="product-card">
-      <div class="product-num">04 · Design Phase</div>
-      <div class="product-name">The Familiar</div>
-      <p class="product-desc">A compact key fob and organizer. Tuck away your everyday keys without the jangle.</p>
-      <div class="product-price">
-        <span>From $45</span>
-        <span class="product-badge badge-design">Coming Soon</span>
+      <div class="product-img-wrap">
+        <img src="familiar.jpg" alt="The Familiar key organizer" class="product-img">
+      </div>
+      <div class="product-body">
+        <div class="product-num">04 · Commission</div>
+        <div class="product-name">The Familiar</div>
+        <p class="product-desc">A compact cardholder with magnetic snap closures. Structured, satisfying in the hand, and deceptively capable.</p>
+        <div class="product-price"><span>$129</span><span class="product-badge">Commission</span></div>
       </div>
     </div>
+
     <div class="product-card">
-      <div class="product-num">05 · Design Phase</div>
-      <div class="product-name">The Flapper</div>
-      <p class="product-desc">A flap-closure cardholder with a magnetic snap. Structured and satisfying in the hand.</p>
-      <div class="product-price">
-        <span>From $85</span>
-        <span class="product-badge badge-design">Coming Soon</span>
+      <div class="product-img-wrap">
+        <img src="flapper.jpg" alt="The Flapper flap wallet" class="product-img">
+      </div>
+      <div class="product-body">
+        <div class="product-num">05 · Commission</div>
+        <div class="product-name">The Flapper</div>
+        <p class="product-desc">A flap-closure wallet with card slots and a bill pocket. The perfect balance of slim and substantial.</p>
+        <div class="product-price"><span>$169</span><span class="product-badge">Commission</span></div>
       </div>
     </div>
+
     <div class="product-card">
-      <div class="product-num">06 · Commissions</div>
-      <div class="product-name">The Traveller</div>
-      <p class="product-desc">A passport wallet and travel organizer for those who move. Multiple slots, boarding pass pocket, pen loop.</p>
-      <div class="product-price">
-        <span>From $140</span>
-        <span class="product-badge">Commission</span>
+      <div class="product-img-wrap">
+        <img src="Traveller_2.jpg" alt="The Traveller passport wallet" class="product-img">
+      </div>
+      <div class="product-body">
+        <div class="product-num">06 · Commission</div>
+        <div class="product-name">The Traveller</div>
+        <p class="product-desc">A passport wallet and travel organizer. Multiple card slots, boarding pass pocket, full-grain construction built to cross every border.</p>
+        <div class="product-price"><span>$249</span><span class="product-badge">Commission</span></div>
       </div>
     </div>
+
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="pricing" style="background:var(--cream);">
-  <div class="pricing-intro">
+<section id="pricing">
+  <div style="max-width:500px;">
     <div class="section-eyebrow">Transparent Pricing</div>
     <h2 class="section-title">What things cost</h2>
-    <p>Every piece is priced to reflect the time, material quality, and craft involved. No surprise markups at checkout.</p>
+    <p style="color:var(--mid);font-size:0.9rem;">Every piece is priced to reflect the time, material quality, and craft involved. No surprise markups at checkout.</p>
   </div>
   <table class="pricing-table">
     <thead>
       <tr>
-        <th>Piece</th>
-        <th>Price</th>
-        <th>Lead Time</th>
-        <th>Notes</th>
+        <th>Piece</th><th>Price</th><th>Lead Time</th><th>Notes</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>The Slider (cardholder)</td>
-        <td class="price">$65 – $85</td>
-        <td class="time">1–2 weeks</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Choice of leather color and thread</td>
-      </tr>
-      <tr>
-        <td>The Standard (bifold)</td>
-        <td class="price">$75 – $100</td>
-        <td class="time">1–2 weeks</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Natural or dyed edge</td>
-      </tr>
-      <tr>
-        <td>The Flapper (flap wallet)</td>
-        <td class="price">$85 – $115</td>
-        <td class="time">2 weeks</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Magnetic snap closure</td>
-      </tr>
-      <tr>
-        <td>The Familiar (key fob)</td>
-        <td class="price">$45 – $60</td>
-        <td class="time">1 week</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Great paired with any wallet</td>
-      </tr>
-      <tr>
-        <td>The Extender (long wallet)</td>
-        <td class="price">$110 – $145</td>
-        <td class="time">2–3 weeks</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Document-length bill slot</td>
-      </tr>
-      <tr>
-        <td>The Traveller (passport wallet)</td>
-        <td class="price">$140 – $185</td>
-        <td class="time">2–3 weeks</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Full commission, discuss details first</td>
-      </tr>
-      <tr>
-        <td>Monogram / personalization</td>
-        <td class="price">+$25 – $40</td>
-        <td class="time">+3–5 days</td>
-        <td style="font-size:0.8rem;color:var(--mid);">Initials, name, or short message</td>
-      </tr>
+      <tr><td>The Slider (cardholder)</td><td class="price">$59</td><td class="time">1–2 weeks</td><td style="font-size:0.8rem;color:var(--mid);">Choice of leather and thread</td></tr>
+      <tr><td>The Standard (bifold)</td><td class="price">$99</td><td class="time">1–2 weeks</td><td style="font-size:0.8rem;color:var(--mid);">Natural or dyed edge</td></tr>
+      <tr><td>The Familiar (wallet)</td><td class="price">$129</td><td class="time">1 week</td><td style="font-size:0.8rem;color:var(--mid);">Magnetic snap closure</td></tr>
+      <tr><td>The Flapper (flap wallet)</td><td class="price">$169</td><td class="time">2 weeks</td><td style="font-size:0.8rem;color:var(--mid);">Structured flap closure</td></tr>
+      <tr><td>The Extender (long wallet)</td><td class="price">$199</td><td class="time">2–3 weeks</td><td style="font-size:0.8rem;color:var(--mid);">Document-length bill slot</td></tr>
+      <tr><td>The Traveller (passport wallet)</td><td class="price">$249</td><td class="time">2–3 weeks</td><td style="font-size:0.8rem;color:var(--mid);">Full commission, discuss details first</td></tr>
     </tbody>
   </table>
-  <p class="pricing-note">All pieces include free local pickup in Arlington, VA. Shipping available at cost. Custom requests and corporate gifting orders welcome — reach out to discuss.</p>
+  <p class="pricing-note">Free local pickup in Arlington, VA. Shipping available at cost. Corporate gifting orders welcome — reach out to discuss.</p>
 </section>
 
 <!-- ETHOS -->
 <section id="about" style="padding:0;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
-    <div style="padding:6rem 5rem;">
-      <div class="section-eyebrow">The Ethos</div>
-      <h2 class="section-title">Built for the pocket,<br>not the logo.</h2>
-      <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;margin-bottom:2rem;">AG Leatherworks was born from a simple frustration: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel. Every piece I make is a rejection of that.</p>
-      <div class="ethos-pillars">
-        <div class="ethos-pillar">
-          <h4>Heritage materials</h4>
-          <p>Full-grain, vegetable-tanned leather sourced from Italian tanneries. The kind that develops a patina over years, not months.</p>
-        </div>
-        <div class="ethos-pillar">
-          <h4>The natural edge</h4>
-          <p>Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers as they were cut.</p>
-        </div>
-        <div class="ethos-pillar">
-          <h4>Intentional design</h4>
-          <p>No unnecessary bulk. No loud branding. Just the highest quality materials, allowed to speak entirely for themselves.</p>
-        </div>
+  <div class="ethos-left">
+    <div class="section-eyebrow">The Ethos</div>
+    <h2 class="section-title">Built for the pocket,<br>not the logo.</h2>
+    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;margin-bottom:2rem;">AG Leatherworks was born from a simple frustration: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel. Every piece I make is a rejection of that.</p>
+    <div class="ethos-pillars">
+      <div class="ethos-pillar">
+        <h4>Heritage materials</h4>
+        <p>Full-grain, vegetable-tanned leather sourced from Italian tanneries — the kind that develops a patina over years, not months.</p>
+      </div>
+      <div class="ethos-pillar">
+        <h4>The natural edge</h4>
+        <p>Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers as they were cut.</p>
+      </div>
+      <div class="ethos-pillar">
+        <h4>Intentional design</h4>
+        <p>No unnecessary bulk. No loud branding. Just the highest quality materials, allowed to speak entirely for themselves.</p>
       </div>
     </div>
-    <div class="ethos-right" style="display:flex;flex-direction:column;justify-content:center;">
-      <p class="ethos-quote">I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
-      <p class="ethos-quote-attr">— Ashwani Gupta · Arlington, VA</p>
-    </div>
+  </div>
+  <div class="ethos-right">
+    <p class="ethos-quote">I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
+    <p class="ethos-quote-attr">— Ashwani Gupta · Arlington, VA</p>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section id="process" style="padding:5rem;">
+<section id="process">
   <div class="section-eyebrow">How it works</div>
-  <h2 class="section-title" style="color:rgba(255,255,255,0.9);max-width:440px;">Simple process, serious craft.</h2>
+  <h2 class="section-title" style="color:rgba(255,255,255,0.9);max-width:440px;">Simple process,<br>serious craft.</h2>
   <div class="process-steps">
     <div class="process-step">
       <div class="process-step-num">01</div>
@@ -820,23 +410,24 @@
     <div class="process-step">
       <div class="process-step-num">04</div>
       <h3>Pick up or ship</h3>
-      <p>Arlington locals welcome to pick up in person. Shipping available. Every piece leaves with a care card.</p>
+      <p>Arlington locals welcome to pick up in person. Shipping available nationwide.</p>
     </div>
   </div>
 </section>
 
 <!-- THE MAKER -->
 <section id="maker" style="padding:0;">
-  <div class="maker-bg">
-    <div class="maker-bg-mono">AG</div>
-    <div class="maker-location">Arlington, VA · USA</div>
+  <div class="maker-img-wrap">
+    <img src="standard.jpg" alt="AG Leatherworks — handcrafted in Arlington VA">
+    <div class="maker-img-overlay"></div>
+    <div class="maker-img-location">Arlington, VA · USA</div>
   </div>
   <div class="maker-text">
     <div class="section-eyebrow">The Hand Behind the Stitch</div>
     <h2 class="section-title">Ashwani Gupta</h2>
     <p class="maker-body">I have always had the drive to make things. For a long time, the right circumstances were out of reach. Five years ago, those doors opened, and I haven't put my tools down since.</p>
-    <p class="maker-body" style="margin-top:1rem;">What started as a personal quest to build a better, slimmer wallet has evolved into a deep respect for traditional craft. Every piece I make is an honest object — built to outlast trends, improve with age, and mean something to the person who carries it.</p>
-    <p class="maker-body" style="margin-top:1rem;">Based in Arlington, VA. Happy to meet local customers in person.</p>
+    <p class="maker-body">What started as a personal quest to build a better, slimmer wallet has evolved into a deep respect for traditional craft. Every piece I make is an honest object — built to outlast trends, improve with age, and mean something to the person who carries it.</p>
+    <p class="maker-body">Based in Arlington, VA. Happy to meet local customers in person.</p>
     <a href="#contact" class="btn-primary" style="margin-top:2rem;display:inline-block;text-align:center;">Start a Conversation</a>
   </div>
 </section>
@@ -845,7 +436,7 @@
 <section id="local">
   <div class="section-eyebrow">Arlington, VA</div>
   <h2 class="section-title">Your neighbor makes these.</h2>
-  <p class="local-body">Every piece is made right here in Arlington. If you're local, you can skip the shipping, meet the maker, and see the leather options in person before you commit. This is as close to farm-to-table as leather goods get.</p>
+  <p class="local-body">Every piece is made right here in Arlington. If you're local, skip the shipping, meet the maker, and see the leather options in person before you commit. This is as close to farm-to-table as leather goods get.</p>
   <div class="local-perks">
     <div class="local-perk">
       <h4>Free local pickup</h4>
@@ -853,15 +444,15 @@
     </div>
     <div class="local-perk">
       <h4>See before you buy</h4>
-      <p>Come see the leather swatches and finished samples in person. Touch matters when you're buying leather.</p>
+      <p>Come see leather swatches and finished samples in person. Touch matters when you're buying leather.</p>
     </div>
     <div class="local-perk">
       <h4>Perfect for gifting</h4>
-      <p>Need a thoughtful gift for someone in the area? I can have a piece ready with personalization in 1–2 weeks.</p>
+      <p>A thoughtful gift for someone in the area. Personalized pieces ready in 1–2 weeks. Father's Day is June 15.</p>
     </div>
     <div class="local-perk">
       <h4>Corporate orders</h4>
-      <p>Personalized leather gifts for your team, client events, or executive recognition. Bulk pricing available.</p>
+      <p>Branded leather gifts for your team, client events, or executive recognition. Bulk pricing available.</p>
     </div>
   </div>
   <a href="#contact" class="btn-primary">Get in Touch</a>
@@ -874,17 +465,22 @@
   <div class="contact-grid">
     <div class="contact-info">
       <h3>Ready to commission a piece?<br>I'd love to hear from you.</h3>
-      <p>Reach out via email or phone. Tell me which design you're interested in, your leather preferences, and any personalization. I respond within 24 hours.</p>
+      <p>Reach out via email or phone. Tell me which design, your leather preferences, and any personalization. I respond within 24 hours.</p>
       <a href="mailto:agupta96@gmail.com" class="contact-link">✉ agupta96@gmail.com</a>
       <a href="tel:+15716454445" class="contact-link">☏ (571) 645-4445</a>
-      <p style="margin-top:1.5rem;font-size:0.8rem;font-style:italic;">Arlington, VA · Local pickup available · Shipping at cost</p>
+      <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--mid);line-height:1.9;">
+        <span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal);">Payment accepted</span><br>
+        Venmo &nbsp;·&nbsp; PayPal &nbsp;·&nbsp; Zelle<br>
+        50% deposit to start · balance on completion
+      </p>
+      <p style="margin-top:0.75rem;font-size:0.8rem;font-style:italic;color:var(--mid);">Arlington, VA · Local pickup available · Shipping at cost</p>
     </div>
     <div class="email-capture">
       <h3>Stay in the loop</h3>
       <p>New designs, restocks, and occasional behind-the-scenes process notes. No spam — just leather.</p>
       <div class="email-form">
         <input type="email" placeholder="your@email.com" aria-label="Email address">
-        <button type="submit">Subscribe</button>
+        <button type="button">Subscribe</button>
       </div>
       <p class="email-note">Infrequent. Unsubscribe anytime. I actually write these myself.</p>
     </div>
@@ -892,7 +488,10 @@
 </section>
 
 <footer>
-  <div class="f-logo">AG Leatherworks</div>
+  <div class="f-logo">
+    <img src="logo.jpeg" alt="AG Leatherworks">
+    <span class="f-logo-text">AG Leatherworks</span>
+  </div>
   <div class="f-links">
     <a href="#work">Collection</a>
     <a href="#pricing">Pricing</a>
