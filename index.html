@@ -1,768 +1,1432 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AG Leatherworks · Arlington, VA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #F5F0E8;
-    --warm-white: #FAF7F2;
-    --leather: #8B5E3C;
-    --leather-dark: #5C3D21;
-    --leather-light: #C4956A;
-    --charcoal: #2A2520;
-    --mid: #6B6058;
-    --border: #D9D0C4;
-    --gold: #C9A96E;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--charcoal); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AG Leatherworks · Handmade leather goods, Arlington, VA</title>
+<meta name="description" content="Handmade, made-to-order leather wallets and cardholders from Arlington, VA. Design your own Slider cardholder or commission a piece.">
+<link rel="icon" href="logo.jpeg">
 
-  /* NAV — floats over hero */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 3rem;
-    transition: background 0.3s, padding 0.3s, border-color 0.3s;
-  }
-  nav.scrolled {
-    background: rgba(245,240,232,0.94);
-    backdrop-filter: blur(8px);
-    padding: 1rem 3rem;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-  .nav-logo img { height: 38px; width: auto; transition: filter 0.3s; }
-  .hero-active .nav-logo img { filter: brightness(0) invert(1); }
-  .nav-logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; font-weight: 500;
-    letter-spacing: 0.1em; color: var(--charcoal); transition: color 0.3s;
-  }
-  .hero-active .nav-logo-text { color: #fff; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: 'DM Mono', monospace; font-size: 0.68rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--mid); text-decoration: none; transition: color 0.3s;
-  }
-  .hero-active .nav-links a { color: rgba(255,255,255,0.85); }
-  .nav-links a:hover { color: var(--leather); }
-  .hero-active .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--leather-dark); text-decoration: none;
-    border: 0.5px solid var(--leather); padding: 0.55rem 1.2rem;
-    transition: all 0.3s;
-  }
-  .hero-active .nav-cta { color: #fff; border-color: rgba(255,255,255,0.6); }
-  .nav-cta:hover { background: var(--leather); color: var(--cream); }
-  .hero-active .nav-cta:hover { background: #fff; color: var(--charcoal); }
 
-  /* FULL BLEED HERO — photography-site style */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-  }
-  .hero img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
-    animation: heroZoom 20s ease-out forwards;
-  }
-  @keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
-  .hero-scrim {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(42,37,32,0.25) 0%, rgba(42,37,32,0.15) 40%, rgba(42,37,32,0.75) 100%);
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    width: 100%;
-    padding: 0 3rem 4.5rem;
-    display: flex; justify-content: space-between; align-items: flex-end;
-    gap: 2rem;
-  }
-  .hero-tagline {
-    max-width: 480px;
-    animation: fadeUp 1s 0.3s ease both;
-  }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1rem;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.6rem, 5vw, 4.2rem);
-    font-weight: 300; line-height: 1.05;
-    color: #fff; margin-bottom: 1rem;
-  }
-  .hero-title em { font-style: italic; color: var(--gold); }
-  .hero-sub {
-    font-size: 0.95rem; color: rgba(255,255,255,0.75);
-    line-height: 1.8; max-width: 380px;
-  }
-  .hero-actions {
-    display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;
-    animation: fadeUp 1s 0.5s ease both;
-  }
-  .btn-primary {
-    background: #fff; color: var(--charcoal);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-    text-decoration: none; padding: 0.9rem 2rem;
-    transition: all 0.2s; border: none; cursor: pointer;
-    display: inline-block; text-align: center; white-space: nowrap;
-  }
-  .btn-primary:hover { background: var(--gold); }
-  .btn-ghost-light {
-    color: rgba(255,255,255,0.85);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-    text-decoration: none; padding: 0.6rem 0;
-    border-bottom: 0.5px solid rgba(255,255,255,0.4);
-    transition: all 0.2s;
-  }
-  .btn-ghost-light:hover { color: var(--gold); border-color: var(--gold); }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* STRIP */
-  .strip { background: var(--charcoal); padding: 0.9rem 3rem; display: flex; gap: 2.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
-  .strip-item { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
-  .strip-dot { color: var(--leather); opacity: 0.5; }
 
-  /* SECTIONS */
-  section { padding: 6rem 3rem; }
-  .section-inner { max-width: 1180px; margin: 0 auto; }
-  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--leather-light); margin-bottom: 1rem; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
 
-  /* COLLECTION */
-  #work { background: var(--warm-white); }
-  .products-header { max-width: 560px; margin: 0 auto 3.5rem; text-align: center; }
-  .products-header .section-eyebrow, .products-header .section-title { text-align: center; }
-  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); max-width: 1180px; margin: 0 auto; }
-  .product-card { background: var(--warm-white); transition: background 0.2s; overflow: hidden; cursor: pointer; }
-  .product-card:hover { background: var(--cream); }
-  .product-img-wrap { overflow: hidden; }
-  .product-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.4s ease; }
-  .product-card:hover .product-img { transform: scale(1.03); }
-  .product-body { padding: 1.75rem 1.75rem 2rem; }
-  .product-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--leather-light); margin-bottom: 0.75rem; }
-  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--charcoal); }
-  .product-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; margin-bottom: 1.25rem; }
-  .product-price { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--leather-dark); display: flex; align-items: center; justify-content: space-between; }
-  .product-badge { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; background: var(--leather-dark); color: var(--cream); }
 
-  /* ETHOS */
-  #about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
-  .ethos-left { padding: 6rem 3rem; max-width: 560px; margin-left: auto; }
-  .ethos-pillars { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .ethos-pillar { padding-left: 1.5rem; border-left: 1.5px solid var(--leather-light); }
-  .ethos-pillar h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; margin-bottom: 0.25rem; }
-  .ethos-pillar p { font-size: 0.875rem; color: var(--mid); }
-  .ethos-right { background: var(--leather-dark); padding: 4rem 3.5rem; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
-  .ethos-right::before { content: '"'; position: absolute; top: -2rem; left: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 14rem; color: rgba(255,255,255,0.04); line-height: 1; }
-  .ethos-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1.7; position: relative; z-index: 1; max-width: 420px; }
-  .ethos-quote-attr { margin-top: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
 
-  /* PROCESS */
-  #process { background: var(--charcoal); }
-  #process .section-eyebrow { color: var(--gold); text-align: center; }
-  #process .section-title { color: rgba(255,255,255,0.9); text-align: center; margin: 0 auto 1.5rem; }
-  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 3rem; border: 0.5px solid rgba(255,255,255,0.08); max-width: 1180px; margin-left: auto; margin-right: auto; }
-  .process-step { padding: 2.5rem 2rem; border-right: 0.5px solid rgba(255,255,255,0.08); }
-  .process-step:last-child { border-right: none; }
-  .process-step-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.5rem; }
-  .process-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 0.75rem; }
-  .process-step p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
 
-  /* ============ COMMISSION FLOW ============ */
-  #commission { background: var(--warm-white); }
-  .commission-header { max-width: 620px; margin: 0 auto 3rem; text-align: center; }
-  .commission-header .section-eyebrow, .commission-header .section-title { text-align: center; }
-  .commission-header p { color: var(--mid); font-size: 0.9rem; }
-  .commission-box {
-    max-width: 780px; margin: 0 auto;
-    background: var(--cream); border: 0.5px solid var(--border);
-  }
-  .comm-step { padding: 2.5rem; border-bottom: 0.5px solid var(--border); }
-  .comm-step:last-child { border-bottom: none; }
-  .comm-step-label {
-    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;
-  }
-  .comm-step-num {
-    font-family: 'DM Mono', monospace; font-size: 0.7rem;
-    width: 26px; height: 26px; border-radius: 50%;
-    border: 1px solid var(--leather); color: var(--leather-dark);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .comm-step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--charcoal); }
 
-  .piece-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
-  .piece-option {
-    border: 1px solid var(--border); background: var(--warm-white);
-    padding: 0.9rem; cursor: pointer; transition: all 0.15s;
-    text-align: left;
-  }
-  .piece-option:hover { border-color: var(--leather-light); }
-  .piece-option.selected { border-color: var(--leather); background: #fff; box-shadow: 0 0 0 1px var(--leather); }
-  .piece-option-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--charcoal); margin-bottom: 0.2rem; }
-  .piece-option-price { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--leather-dark); }
 
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-field.full { grid-column: 1 / -1; }
-  .form-field label {
-    font-family: 'DM Mono', monospace; font-size: 0.62rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
-  }
-  .form-field input, .form-field textarea, .form-field select {
-    font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--charcoal);
-    background: #fff; border: 0.5px solid var(--border);
-    padding: 0.7rem 0.8rem; outline: none; transition: border-color 0.2s;
-  }
-  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--leather-light); }
-  .form-field textarea { resize: vertical; min-height: 70px; font-family: 'Jost', sans-serif; }
 
-  .deposit-summary {
-    background: #fff; border: 0.5px solid var(--border);
-    padding: 1.25rem 1.5rem; margin-top: 1.5rem;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
-  }
-  .deposit-summary-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
-  .deposit-summary-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--leather-dark); }
-  .deposit-summary-note { font-size: 0.72rem; color: var(--mid); width: 100%; margin-top: 0.25rem; }
 
-  .comm-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .btn-dark {
-    background: var(--charcoal); color: var(--cream);
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    padding: 0.9rem 1.75rem; border: none; cursor: pointer; transition: background 0.2s;
-    flex: 1; min-width: 200px; text-align: center; text-decoration: none;
-  }
-  .btn-dark:hover { background: var(--leather-dark); }
-  .btn-dark:disabled { background: var(--border); color: var(--mid); cursor: not-allowed; }
-  .btn-paypal {
-    background: #ffc439; color: #003087;
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.9rem 1.75rem; border: none; cursor: pointer; transition: filter 0.2s;
-    flex: 1; min-width: 200px; text-align: center; text-decoration: none;
-    font-weight: 500;
-  }
-  .btn-paypal:hover { filter: brightness(0.95); }
-  .btn-paypal:disabled { background: var(--border); color: var(--mid); cursor: not-allowed; filter: none; }
-  .comm-status {
-    margin-top: 1rem; font-size: 0.8rem; color: var(--leather-dark);
-    font-style: italic; display: none;
-  }
-  .comm-status.show { display: block; }
-  .payment-note { font-size: 0.72rem; color: var(--mid); margin-top: 0.75rem; }
-
-  /* MAKER */
-  #maker { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; background: var(--cream); }
-  .maker-img-wrap { position: relative; overflow: hidden; min-height: 500px; }
-  .maker-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .maker-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(42,37,32,0.6) 0%, transparent 50%); }
-  .maker-img-location { position: absolute; bottom: 2rem; left: 2rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
-  .maker-text { padding: 6rem 3rem; display: flex; flex-direction: column; justify-content: center; max-width: 520px; }
-  .maker-body { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-top: 1rem; }
-
-  /* LOCAL */
-  #local { background: var(--charcoal); padding: 5rem 3rem; }
-  #local .section-inner { max-width: 1180px; margin: 0 auto; }
-  #local .section-eyebrow { color: var(--gold); }
-  #local .section-title { color: rgba(255,255,255,0.9); max-width: 560px; margin-bottom: 1rem; }
-  .local-body { color: rgba(255,255,255,0.55); font-size: 0.9rem; max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; }
-  .local-perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); margin-bottom: 2.5rem; }
-  .local-perk { background: var(--charcoal); padding: 1.5rem; }
-  .local-perk h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-  .local-perk p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
-
-  /* CONTACT / FOOTER INFO */
-  #contact { background: var(--warm-white); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.5rem; max-width: 1180px; margin-left: auto; margin-right: auto; }
-  .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem; }
-  .contact-info p { color: var(--mid); font-size: 0.875rem; line-height: 1.8; margin-bottom: 1.5rem; }
-  .contact-link { display: block; margin-bottom: 0.75rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--leather-dark); text-decoration: none; transition: color 0.2s; }
-  .contact-link:hover { color: var(--leather); }
-  .payment-methods h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 0.5rem; }
-  .payment-methods p { color: var(--mid); font-size: 0.875rem; margin-bottom: 1rem; }
-
-  /* FOOTER */
-  footer { background: var(--charcoal); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 0.5px solid rgba(255,255,255,0.08); }
-  footer .f-logo { display: flex; align-items: center; gap: 0.6rem; }
-  footer .f-logo img { height: 26px; width: auto; filter: invert(1) brightness(0.7); }
-  footer .f-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); }
-  footer .f-copy { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-  footer .f-links { display: flex; gap: 2rem; }
-  footer .f-links a { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
-  footer .f-links a:hover { color: var(--gold); }
-
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 3rem; gap: 1.5rem; }
-    .hero-actions { align-items: flex-start; width: 100%; }
-    .btn-primary { width: 100%; }
-    section { padding: 4rem 1.5rem; }
-    #about { grid-template-columns: 1fr; }
-    .ethos-left { padding: 4rem 1.5rem; margin: 0; max-width: none; }
-    #maker { grid-template-columns: 1fr; }
-    .maker-img-wrap { min-height: 300px; }
-    .maker-text { padding: 4rem 1.5rem; max-width: none; }
-    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    footer { padding: 2rem 1.5rem; }
-    #local { padding: 4rem 1.5rem; }
-    .form-row { grid-template-columns: 1fr; }
-    .comm-step { padding: 1.75rem; }
-    .comm-actions { flex-direction: column; }
-  }
-</style>
+<script src="assets/7756797c-22ee-4d35-b1f6-f14e1f3c3a0a.js"></script>
 </head>
 <body>
 
-<nav id="mainNav">
-  <a href="#hero" class="nav-logo">
-    <img src="logo.jpeg" alt="AG Leatherworks logo">
-    <span class="nav-logo-text">AG Leatherworks</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#work">Collection</a></li>
-    <li><a href="#commission">Commission</a></li>
-    <li><a href="#maker">The Maker</a></li>
-    <li><a href="#local">Local</a></li>
-  </ul>
-  <a href="#commission" class="nav-cta">Commission a Piece</a>
-</nav>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/d187b12e-4ad4-4b6d-81de-ee87b0c64808.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/51e82e37-7493-49f0-9c79-160b11361e14.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/b1525457-ff58-44e6-8acf-53dacc75348f.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/f34504e6-7885-4f5d-a342-ad3b60eecf4b.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/faac137a-b9e4-41d8-9cf8-75203b524c43.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/c9fbd4c3-7a34-42bc-8b5a-127f99518991.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/c80e3ea3-8dd2-4c78-b2c1-5aaaefc9de4e.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/72783903-f240-4905-b220-58908dd0421d.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/3c5102e1-c370-47a2-954b-9d0152fa875d.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/b104bbc0-dcaf-457c-8356-668bfbeadcb0.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/c9fbd4c3-7a34-42bc-8b5a-127f99518991.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/c80e3ea3-8dd2-4c78-b2c1-5aaaefc9de4e.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/72783903-f240-4905-b220-58908dd0421d.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/3c5102e1-c370-47a2-954b-9d0152fa875d.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/b104bbc0-dcaf-457c-8356-668bfbeadcb0.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/47bbb0c3-1189-46f4-beb6-18126561f211.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/1b08dd86-4c42-4264-8313-4ddbc1703cf6.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/5697053c-63af-44d8-8235-6f1e6caf3340.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/47bbb0c3-1189-46f4-beb6-18126561f211.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/1b08dd86-4c42-4264-8313-4ddbc1703cf6.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/5697053c-63af-44d8-8235-6f1e6caf3340.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/67ae6d6e-e496-4745-8bfb-7787ed082b29.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/566ab765-4495-42a3-b318-fe27452f9c39.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/eb6c3920-ec5d-4e6f-923b-d828fe93596a.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/67ae6d6e-e496-4745-8bfb-7787ed082b29.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/566ab765-4495-42a3-b318-fe27452f9c39.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/eb6c3920-ec5d-4e6f-923b-d828fe93596a.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/67ae6d6e-e496-4745-8bfb-7787ed082b29.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/566ab765-4495-42a3-b318-fe27452f9c39.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/eb6c3920-ec5d-4e6f-923b-d828fe93596a.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#FCFAF6;-webkit-font-smoothing:antialiased}
+a{color:#5C3D21}
+a:hover{color:#8B5E3C}
+input,textarea,select,button{font:inherit}
+@media(max-width:480px){.brandtxt{font-size:16px!important;letter-spacing:0.02em!important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FCFAF6;color:#2A2520;font-family:'Newsreader',Georgia,serif;font-size:18px;line-height:1.65;">
 
-<!-- FULL BLEED HERO -->
-<section id="hero" class="hero" style="padding:0;">
-  <img src="flapper.jpg" alt="AG Leatherworks — handcrafted leather goods, Arlington VA">
-  <div class="hero-scrim"></div>
-  <div class="hero-content">
-    <div class="hero-tagline">
-      <div class="hero-eyebrow">Arlington, VA &nbsp;·&nbsp; Handmade to Order</div>
-      <h1 class="hero-title">Honest craft.<br><em>Nothing more.</em></h1>
-      <p class="hero-sub">Full-grain leather goods made by hand in Arlington, VA. Vegetable-tanned, edge-burnished, built to last a lifetime and improve with every year of use.</p>
-    </div>
-    <div class="hero-actions">
-      <a href="#commission" class="btn-primary">Commission a Piece</a>
-      <a href="#work" class="btn-ghost-light">View the Collection ↓</a>
-    </div>
+<header style="position:sticky;top:0;z-index:50;background:rgba(252,250,246,0.96);backdrop-filter:blur(8px);border-bottom:1px solid #D9D0C4;">
+  <div style="max-width:1240px;margin:0 auto;padding:12px clamp(16px,4vw,40px);display:flex;align-items:center;gap:clamp(12px,2vw,28px);">
+    <a sc-camel-on-click="{{ goHome }}" style="display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none;margin-right:auto;min-width:0;">
+      <img src="assets/9982d6f7-3ab2-4121-8f71-73a8528a9752.jpg" alt="AG Leatherworks logo" style="height:40px;width:auto;mix-blend-mode:multiply;">
+      <span class="brandtxt" style="font-family:'Newsreader',Georgia,serif;font-size:21px;font-weight:600;letter-spacing:0.06em;color:#2A2520;white-space:nowrap;">AG Leatherworks</span>
+    </a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:clamp(16px,2vw,28px);align-items:center;">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <a sc-camel-on-click="{{ n.go }}" style="font-size:17px;font-weight:500;color:{{ n.color }};cursor:pointer;text-decoration:none;padding:6px 0;border-bottom:2px solid {{ n.line }};">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+    <button sc-camel-on-click="{{ goQuote }}" style="background:#2A2520;color:#FAF7F2;border:none;padding:11px 18px;font-size:16px;font-weight:500;letter-spacing:0.02em;cursor:pointer;white-space:nowrap;border-radius:10px;" style-hover="background:#5C3D21">Get a quote</button>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button sc-camel-on-click="{{ toggleMenu }}" aria-label="Menu" style="background:transparent;border:1px solid #2A2520;color:#2A2520;padding:10px 14px;font-size:16px;font-weight:500;cursor:pointer;border-radius:10px;">{{ menuLabel }}</button>
+    </sc-if>
   </div>
-</section>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;border-top:1px solid #D9D0C4;background:#F5F0E8;">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a sc-camel-on-click="{{ n.go }}" style="padding:16px clamp(16px,4vw,40px);font-size:19px;font-weight:500;color:#2A2520;text-decoration:none;cursor:pointer;border-bottom:1px solid #E6DED2;">{{ n.label }}</a>
+      </sc-for>
+    </nav>
+  </sc-if>
+</header>
 
-<div class="strip">
-  <span class="strip-item">Full-grain Italian leather</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">Vegetable-tanned only</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">Hand-burnished edges</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">Made to order · Arlington, VA</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">5+ years of craft</span>
-</div>
+<main>
 
-<!-- COLLECTION -->
-<section id="work">
-  <div class="products-header">
-    <div class="section-eyebrow">The Collection</div>
-    <h2 class="section-title">Current Work</h2>
-    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;">Each piece is made to order in your chosen leather and thread combination. Lead time is typically 1–2 weeks from confirmation. Click a piece to commission it below.</p>
-  </div>
-  <div class="products-grid">
-
-    <div class="product-card" onclick="selectPieceAndScroll('Standard')">
-      <div class="product-img-wrap"><img src="standard.jpg" alt="The Standard bifold wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">01 · Commission</div>
-        <div class="product-name">The Standard</div>
-        <p class="product-desc">The essential bifold, stripped to its core. Two card slots, a bill compartment, and nothing else.</p>
-        <div class="product-price"><span>$99</span><span class="product-badge">Commission</span></div>
+<sc-if value="{{ isHomeA }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Home A" style="max-width:1240px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(28px,5vw,64px);align-items:center;">
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Arlington, VA · Handmade to order</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,76px);font-weight:600;line-height:1.02;margin:0;">Honest craft.<br><em style="color:#8B5E3C;">Nothing more.</em></h1>
+      <p style="font-size:20px;color:#4A423A;max-width:46ch;margin:0;text-wrap:pretty;">Full-grain leather goods made by hand in Arlington, VA. Vegetable-tanned, edge-burnished, built to last a lifetime and improve with every year of use.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;margin-top:8px;">
+        <a sc-camel-on-click="{{ goShop }}" style="display:flex;flex-direction:column;gap:8px;padding:22px;background:#2A2520;color:#FAF7F2;text-decoration:none;cursor:pointer;border-radius:14px;overflow:hidden;" style-hover="background:#5C3D21">
+          <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">01 · Shop</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;line-height:1.1;">Browse the collection</span>
+          <span style="font-size:17px;color:#E6DED2;">Four designs from $49, each made to order in 1–3 weeks.</span>
+          <span style="font-size:17px;font-weight:500;margin-top:6px;">See the pieces →</span>
+        </a>
+        <a sc-camel-on-click="{{ goQuote }}" style="display:flex;flex-direction:column;gap:8px;padding:22px;background:#F5F0E8;border:1px solid #2A2520;color:#2A2520;text-decoration:none;cursor:pointer;border-radius:14px;overflow:hidden;" style-hover="background:#FFFFFF">
+          <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">02 · Commission</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;line-height:1.1;">Request a quote</span>
+          <span style="font-size:17px;color:#4A423A;">Pick a design or describe your own. I reply within 24 hours.</span>
+          <span style="font-size:17px;font-weight:500;margin-top:6px;">Start a request →</span>
+        </a>
       </div>
     </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Slider')">
-      <div class="product-img-wrap"><img src="Slider.jpg" alt="The Slider cardholder" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">02 · Commission</div>
-        <div class="product-name">The Slider</div>
-        <p class="product-desc">A pull-tab cardholder that fans your most-used cards with a single gesture.</p>
-        <div class="product-price"><span>$59</span><span class="product-badge">Commission</span></div>
-      </div>
+    <div style="aspect-ratio:4/5;overflow:hidden;background:#E6DED2;border-radius:12px;">
+      <img src="assets/9ef1afcc-2abf-436a-894f-e5ce4e482efd.jpg" alt="The Flapper, handmade in Arlington, VA" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
+  </section>
 
-    <div class="product-card" onclick="selectPieceAndScroll('Extender')">
-      <div class="product-img-wrap"><img src="extender.jpg" alt="The Extender long wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">03 · Commission</div>
-        <div class="product-name">The Extender</div>
-        <p class="product-desc">A long wallet designed for those who carry more — receipts, folded documents, a little extra life on the road.</p>
-        <div class="product-price"><span>$199</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Familiar')">
-      <div class="product-img-wrap"><img src="familiar.jpg" alt="The Familiar cardholder" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">04 · Commission</div>
-        <div class="product-name">The Familiar</div>
-        <p class="product-desc">A compact cardholder with magnetic snap closures. Structured, satisfying in the hand.</p>
-        <div class="product-price"><span>$129</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Flapper')">
-      <div class="product-img-wrap"><img src="flapper.jpg" alt="The Flapper flap wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">05 · Commission</div>
-        <div class="product-name">The Flapper</div>
-        <p class="product-desc">A flap-closure wallet with card slots and a bill pocket. The perfect balance of slim and substantial.</p>
-        <div class="product-price"><span>$169</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Traveller')">
-      <div class="product-img-wrap"><img src="Traveller_2.jpg" alt="The Traveller passport wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">06 · Commission</div>
-        <div class="product-name">The Traveller</div>
-        <p class="product-desc">A passport wallet and travel organizer. Full-grain construction built to cross every border.</p>
-        <div class="product-price"><span>$249</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ COMMISSION FLOW ============ -->
-<section id="commission">
-  <div class="commission-header">
-    <div class="section-eyebrow">Commission a Piece</div>
-    <h2 class="section-title">Reserve Yours</h2>
-    <p>Pick your piece, share your details, and secure it with a 50% deposit. I'll confirm leather and thread options by email before I start cutting.</p>
+  <div style="background:#F5F0E8;border-top:1px solid #E6DED2;border-bottom:1px solid #E6DED2;padding:14px clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;justify-content:center;gap:10px 32px;">
+    <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Full-grain Italian leather</span>
+    <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Vegetable-tanned only</span>
+    <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Hand-burnished edges</span>
+    <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Free Arlington pickup</span>
   </div>
 
-  <div class="commission-box">
-
-    <!-- STEP 1: Piece selection -->
-    <div class="comm-step">
-      <div class="comm-step-label">
-        <div class="comm-step-num">1</div>
-        <div class="comm-step-title">Choose your piece</div>
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,40px);">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">The collection</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);font-weight:600;line-height:1.1;margin:0;">Current work</h2>
       </div>
-      <div class="piece-grid" id="pieceGrid">
-        <div class="piece-option" data-name="The Slider" data-price="59" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Slider</div>
-          <div class="piece-option-price">$59</div>
+      <a sc-camel-on-click="{{ goShop }}" style="font-size:18px;font-weight:500;cursor:pointer;">View all with details →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px;">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+        <a sc-camel-on-click="{{ p.open }}" style="display:flex;flex-direction:column;background:#F5F0E8;border:1px solid #D9D0C4;cursor:pointer;text-decoration:none;color:#2A2520;border-radius:14px;overflow:hidden;" style-hover="border-color:#8B5E3C">
+          <div style="aspect-ratio:4/3;overflow:hidden;background:#E6DED2;border-radius:0;"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="padding:18px 20px 22px;display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;">{{ p.name }}</span>
+              <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:17px;color:#5C3D21;">{{ p.priceLabel }}</span>
+            </div>
+            <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#4A423A;">{{ p.kind }}</span>
+            <p style="font-size:17px;color:#4A423A;line-height:1.6;margin:8px 0 0;text-wrap:pretty;">{{ p.desc }}</p>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:#2A2520;color:#FAF7F2;">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,72px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,56px);align-items:center;">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">Make it yours</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,50px);font-weight:600;line-height:1.08;margin:0;">Design your own.</h2>
+        <p style="font-size:19px;color:#E6DED2;margin:0;max-width:46ch;text-wrap:pretty;">Pick a Slider, a Standard or a Flapper, choose the leather for every part and your thread, and see it come together before you reserve it.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;"><button sc-camel-on-click="{{ goBuilderSlider }}" style="background:#FAF7F2;color:#2A2520;border:none;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#C9A96E">Design a Slider</button><button sc-camel-on-click="{{ goBuilderStandard }}" style="background:#EFE8DC;color:#2A2520;border:none;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#C9A96E">Design a Standard</button><button sc-camel-on-click="{{ goBuilderFlapper }}" style="background:#E6DED2;color:#2A2520;border:none;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#C9A96E">Design a Flapper</button></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-start;">
+        <sc-for list="{{ leatherList }}" as="l" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center;width:92px;">
+            <img src="{{ l.img }}" alt="{{ l.name }}" style="width:92px;height:92px;object-fit:cover;border-radius:12px;display:block;border:1px solid rgba(255,255,255,0.2);">
+            <span style="font-size:16px;color:#E6DED2;">{{ l.name }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F5F0E8;border-top:1px solid #D9D0C4;border-bottom:1px solid #D9D0C4;">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">How commissions work</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);font-weight:600;line-height:1.1;margin:0;">Simple process, serious craft.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div style="background:#FCFAF6;border:1px solid #D9D0C4;padding:24px;display:flex;flex-direction:column;gap:8px;border-radius:14px;overflow:hidden;">
+            <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:15px;color:#8B5E3C;">{{ s.num }}</span>
+            <h3 style="font-family:'Newsreader',Georgia,serif;font-size:24px;font-weight:500;margin:0;">{{ s.title }}</h3>
+            <p style="font-size:17px;color:#4A423A;margin:0;text-wrap:pretty;">{{ s.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <button sc-camel-on-click="{{ goQuote }}" style="background:#2A2520;color:#FAF7F2;border:none;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">Start a commission</button>
+        <button sc-camel-on-click="{{ goFaq }}" style="background:transparent;color:#2A2520;border:1px solid #2A2520;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#FFFFFF">Read the FAQ</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(28px,5vw,64px);align-items:center;">
+    <div style="aspect-ratio:1/1;overflow:hidden;background:#E6DED2;border-radius:12px;"><img src="standard.jpg" alt="The Standard cardholder, handmade in Arlington, VA" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">The hand behind the stitch</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);font-weight:600;line-height:1.1;margin:0;">Ashwani Gupta</h2>
+      <p style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:24px;line-height:1.5;color:#5C3D21;margin:0;text-wrap:pretty;">“I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.”</p>
+      <p style="font-size:18px;color:#4A423A;margin:0;text-wrap:pretty;">Based in Arlington, VA. Happy to meet local customers in person.</p>
+      <a sc-camel-on-click="{{ goAbout }}" style="font-size:18px;font-weight:500;cursor:pointer;">Read the story →</a>
+    </div>
+  </section>
+
+  <section style="background:#2A2520;color:#FAF7F2;">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(28px,5vw,64px);">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">Common questions</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);font-weight:600;line-height:1.1;margin:0;">Before you order</h2>
+        <a sc-camel-on-click="{{ goFaq }}" style="font-size:18px;font-weight:500;color:#C9A96E;cursor:pointer;margin-top:8px;">All questions →</a>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{ faqTop }}" as="f" hint-placeholder-count="3">
+          <div style="padding:18px 0;border-bottom:1px solid #4A423A;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;">{{ f.q }}</span>
+            <span style="font-size:17px;color:#D9D0C4;text-wrap:pretty;">{{ f.a }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Shop" style="max-width:1240px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:24px;">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:680px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">The collection</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;line-height:1.05;margin:0;">Shop</h1>
+      <p style="font-size:19px;color:#4A423A;margin:0;text-wrap:pretty;">Each piece is made to order in your chosen leather and thread combination. Lead time is 1–3 weeks from confirmation, depending on the piece.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+        <button sc-camel-on-click="{{ c.pick }}" style="padding:9px 16px;font-size:17px;font-weight:500;cursor:pointer;border:1px solid #2A2520;background:{{ c.bg }};color:{{ c.fg }};border-radius:999px;">{{ c.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:20px;">
+      <sc-for list="{{ filtered }}" as="p" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;background:#F5F0E8;border:1px solid #D9D0C4;border-radius:14px;overflow:hidden;">
+          <a sc-camel-on-click="{{ p.open }}" style="aspect-ratio:1/1;overflow:hidden;background:#E6DED2;cursor:pointer;display:block;border-radius:0;"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;display:block;"></a>
+          <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+              <a sc-camel-on-click="{{ p.open }}" style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#2A2520;text-decoration:none;cursor:pointer;">{{ p.name }}</a>
+              <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:17px;color:#5C3D21;">{{ p.priceLabel }}</span>
+            </div>
+            <span style="font-size:17px;color:#4A423A;">{{ p.kind }}</span>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
+              <sc-for list="{{ dots }}" as="d" hint-placeholder-count="6">
+                <img src="{{ d.img }}" alt="{{ d.name }}" title="{{ d.name }}" style="width:18px;height:18px;border-radius:50%;object-fit:cover;display:block;border:1px solid #D9D0C4;">
+              </sc-for>
+              <span style="font-size:15px;color:#4A423A;margin-left:4px;">{{ dotsLabel }}</span>
+            </div>
+            <p style="font-size:17px;color:#4A423A;line-height:1.6;margin:6px 0 0;flex:1;text-wrap:pretty;">{{ p.desc }}</p>
+            <div style="display:flex;gap:8px;margin-top:14px;">
+              <button sc-camel-on-click="{{ p.commission }}" style="flex:1;background:#2A2520;color:#FAF7F2;border:none;padding:11px 12px;font-size:16px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">Commission</button>
+              <button sc-camel-on-click="{{ p.open }}" style="flex:1;background:transparent;color:#2A2520;border:1px solid #D9D0C4;padding:11px 12px;font-size:16px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="border-color:#2A2520">Details</button>
+            </div>
+          </div>
         </div>
-        <div class="piece-option" data-name="The Standard" data-price="99" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Standard</div>
-          <div class="piece-option-price">$99</div>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:20px;max-width:680px;border-top:1px solid #D9D0C4;padding-top:28px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">In development</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,40px);font-weight:600;line-height:1.1;margin:0;">Coming soon</h2>
+      <p style="font-size:18px;color:#4A423A;margin:0;text-wrap:pretty;">Three more pieces are on the way. Want one early? Ask and I'll tell you where it stands.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:20px;">
+      <sc-for list="{{ soon }}" as="q" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;background:#F5F0E8;border:1px dashed #BFB3A3;border-radius:14px;overflow:hidden;">
+          <div style="aspect-ratio:16/9;background:#E6DED2;display:flex;align-items:center;justify-content:center;font-style:italic;font-size:16px;color:#6B6058;">Photo coming soon</div>
+          <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#2A2520;">{{ q.name }}</span>
+              <span style="font-size:15px;color:#5C3D21;font-style:italic;">Coming soon</span>
+            </div>
+            <span style="font-size:17px;color:#4A423A;">{{ q.kind }}</span>
+            <p style="font-size:17px;color:#4A423A;line-height:1.6;margin:6px 0 0;flex:1;text-wrap:pretty;">{{ q.desc }}</p>
+            <div style="display:flex;margin-top:14px;">
+              <button sc-camel-on-click="{{ q.ask }}" style="flex:1;background:transparent;color:#2A2520;border:1px solid #D9D0C4;padding:11px 12px;font-size:16px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="border-color:#2A2520">Ask about this piece</button>
+            </div>
+          </div>
         </div>
-        <div class="piece-option" data-name="The Familiar" data-price="129" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Familiar</div>
-          <div class="piece-option-price">$129</div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Product" style="max-width:1240px;margin:0 auto;padding:24px clamp(16px,4vw,40px) clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:24px;">
+    <div style="display:flex;gap:8px;font-size:16px;color:#4A423A;">
+      <a sc-camel-on-click="{{ goShop }}" style="cursor:pointer;">Shop</a><span>/</span><span>{{ cur.name }}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,5vw,64px);align-items:start;">
+      <div style="aspect-ratio:1/1;overflow:hidden;background:#E6DED2;border-radius:12px;"><img src="{{ cur.img }}" alt="{{ cur.name }}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">{{ cur.kind }}</span>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;line-height:1.02;margin:0;">{{ cur.name }}</h1>
+        <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:22px;color:#2A2520;">{{ cur.priceLabel }}</span>
+        <p style="font-size:20px;color:#4A423A;margin:0;text-wrap:pretty;">{{ cur.desc }}</p>
+        <div style="display:flex;flex-direction:column;border-top:1px solid #D9D0C4;">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #D9D0C4;font-size:17px;"><span style="color:#4A423A;">Lead time</span><span style="text-align:right;">Made to order · {{ cur.lead }}</span></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #D9D0C4;font-size:17px;"><span style="color:#4A423A;">Leather</span><span style="text-align:right;">Full-grain, vegetable-tanned Italian</span></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #D9D0C4;font-size:17px;"><span style="color:#4A423A;">Edges</span><span style="text-align:right;">Hand-burnished, no dyes</span></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #D9D0C4;font-size:17px;"><span style="color:#4A423A;">Delivery</span><span style="text-align:right;">Free Arlington pickup · ships at cost</span></div>
         </div>
-        <div class="piece-option" data-name="The Flapper" data-price="169" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Flapper</div>
-          <div class="piece-option-price">$169</div>
+        <sc-if value="{{ cur.hasDesigner }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px;padding:20px;background:#F5F0E8;border:1px solid #D9D0C4;border-radius:14px;">
+            <span style="font-size:18px;font-weight:500;">Design it yourself</span>
+            <p style="font-size:17px;color:#4A423A;margin:0;text-wrap:pretty;">Choose the leather for each part and your thread, with a live preview.</p>
+            <div style="display:flex;gap:8px;">
+              <sc-for list="{{ leatherList }}" as="l" hint-placeholder-count="6"><img src="{{ l.img }}" alt="{{ l.name }}" title="{{ l.name }}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;display:block;border:1px solid #BFB4A6;"></sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ cur.noDesigner }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+            <span style="font-size:16px;font-weight:500;">Leather color</span>
+            <span style="font-size:16px;color:#5C3D21;">{{ leatherName }}</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <sc-for list="{{ swatches }}" as="w" hint-placeholder-count="1">
+              <button sc-camel-on-click="{{ w.pick }}" aria-label="{{ w.name }}" title="{{ w.name }}" style="width:52px;height:52px;padding:3px;border-radius:50%;background:#F5F0E8;border:2px solid {{ w.ring }};cursor:pointer;">
+                <img src="{{ w.img }}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">
+              </button>
+            </sc-for>
+          </div>
+          <span style="font-size:15px;color:#4A423A;">Italian veg-tan (Conceria Walpier, Badalassi Carlo) · via Rocky Mountain Leather Supply</span>
         </div>
-        <div class="piece-option" data-name="The Extender" data-price="199" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Extender</div>
-          <div class="piece-option-price">$199</div>
+        <p style="font-size:17px;color:#4A423A;margin:0;">You choose the leather color and thread. I'll confirm options by email before I start cutting.</p>
+        <sc-if value="{{ cur.note }}" hint-placeholder-val="{{ false }}"><p style="font-size:17px;color:#5C3D21;background:#F5F0E8;border-left:3px solid #C9A96E;padding:10px 14px;margin:0;text-wrap:pretty;">{{ cur.note }}</p></sc-if>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <sc-if value="{{ cur.hasDesigner }}" hint-placeholder-val="{{ false }}"><button sc-camel-on-click="{{ cur.designGo }}" style="flex:1 1 220px;background:#2A2520;color:#FAF7F2;border:none;padding:16px 24px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">{{ cur.designLabel }}</button></sc-if>
+          <sc-if value="{{ cur.noDesigner }}" hint-placeholder-val="{{ true }}"><button sc-camel-on-click="{{ cur.commission }}" style="flex:1 1 220px;background:#2A2520;color:#FAF7F2;border:none;padding:16px 24px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">Commission this piece</button></sc-if>
+          <button sc-camel-on-click="{{ goContact }}" style="flex:1 1 160px;background:transparent;color:#2A2520;border:1px solid #2A2520;padding:16px 24px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#FFFFFF">Ask a question</button>
         </div>
-        <div class="piece-option" data-name="The Traveller" data-price="249" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Traveller</div>
-          <div class="piece-option-price">$249</div>
-        </div>
+        <p style="font-size:16px;color:#4A423A;margin:0;">{{ cur.depositNote }}</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;margin-top:clamp(24px,5vw,56px);">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin:0;">Other pieces</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:16px;">
+        <sc-for list="{{ others }}" as="p" hint-placeholder-count="5">
+          <a sc-camel-on-click="{{ p.open }}" style="display:flex;flex-direction:column;gap:10px;text-decoration:none;color:#2A2520;cursor:pointer;">
+            <div style="aspect-ratio:4/3;overflow:hidden;background:#E6DED2;border-radius:12px;"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div style="display:flex;justify-content:space-between;gap:8px;"><span style="font-family:'Newsreader',Georgia,serif;font-size:21px;font-weight:500;">{{ p.name }}</span><span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:16px;color:#5C3D21;">{{ p.priceLabel }}</span></div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isBuilder }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Builder" style="max-width:1240px;margin:0 auto;padding:clamp(28px,5vw,52px) clamp(16px,4vw,40px) clamp(56px,7vw,88px);display:flex;flex-direction:column;gap:28px;">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:720px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Make it yours</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,62px);font-weight:600;line-height:1.04;margin:0;">{{ bTitle }}</h1>
+      <p style="font-size:19px;color:#4A423A;margin:0;text-wrap:pretty;">{{ bIntro }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;">
+        <sc-for list="{{ bTabs }}" as="t" hint-placeholder-count="2">
+          <button sc-camel-on-click="{{ t.pick }}" style="padding:11px 20px;font-size:18px;font-weight:500;cursor:pointer;border-radius:999px;border:1px solid #2A2520;background:{{ t.bg }};color:{{ t.fg }};">{{ t.label }}</button>
+        </sc-for>
       </div>
     </div>
 
-    <!-- STEP 2: Contact details -->
-    <div class="comm-step">
-      <div class="comm-step-label">
-        <div class="comm-step-num">2</div>
-        <div class="comm-step-title">Your details</div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="custName">Full Name</label>
-          <input type="text" id="custName" placeholder="Jane Smith">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(20px,3.5vw,44px);align-items:start;">
+
+      <div style="position:sticky;top:96px;display:flex;flex-direction:column;gap:14px;">
+        <div style="background:#E9E3D8;border:1px solid #D9D0C4;border-radius:18px;padding:clamp(16px,3vw,32px);overflow:hidden;">
+          <sc-if value="{{ isBSlider }}" hint-placeholder-val="{{ true }}">
+          <svg sc-camel-view-box="0 0 1984 1990" style="width:100%;height:auto;display:block;max-height:78vh" role="img" aria-label="The Slider in your chosen leathers">
+            <defs>
+              <pattern id="tx-tobacco" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/tobacco.jpg" width="640" height="640"></image></pattern>
+              <pattern id="tx-cognac" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/cognac.jpg" width="640" height="640"></image></pattern>
+              <pattern id="tx-burgundy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/burgundy.jpg" width="640" height="640"></image></pattern>
+              <pattern id="tx-green" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/green.jpg" width="640" height="640"></image></pattern>
+              <pattern id="tx-navy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/navy.jpg" width="640" height="640"></image></pattern>
+              <pattern id="tx-white" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/white.jpg" width="640" height="640"></image></pattern>
+              <path id="x-panel" d="M928,1727.1 C928,1749.2 910.1,1767.1 888,1767.1 C640,1759.1 720,1679.1 520,1679.1 L456,1679.1 C256,1679.1 336,1759.1 88,1767.1 C65.9,1767.1 48,1749.2 48,1727.1 L48,566.2 C48,547.9 60.4,531.9 78.1,527.4 L83.1,526.2 L118.5,121 C122.1,79.7 156.7,48 198.2,48 L777.8,48 C819.3,48 853.9,79.7 857.5,121 L892.9,526.2 L897.8,527.4 C915.6,531.9 928,547.9 928,566.2 L928,1727.1 Z"></path>
+              <path id="x-strip" d="M1936,833.3 L1936,982 C1646.7,1050.8 1345.3,1050.8 1056,982 L1056,833.3 C1345.3,764.5 1646.7,764.5 1936,833.3 Z"></path>
+              <filter id="xz-grain" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" sc-camel-base-frequency="0.42" sc-camel-num-octaves="3" seed="7" result="n"></feTurbulence>
+                <feDiffuseLighting in="n" sc-camel-surface-scale="1.6" sc-camel-diffuse-constant="1" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="55"></feDistantLight></feDiffuseLighting>
+                <feComposite in="l" in2="SourceAlpha" operator="in"></feComposite>
+              </filter>
+              <filter id="xz-lift" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="6" sc-camel-std-deviation="9" flood-color="#000" flood-opacity=".38"></feDropShadow>
+              </filter>
+            </defs>
+            <g sc-camel-on-click="{{ pickA }}" style="cursor:pointer">
+              <g filter="url(#xz-lift)"><use href="#x-panel" fill="{{ fillA }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#x-panel" fill="#000" filter="url(#xz-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickB }}" style="cursor:pointer">
+              <g filter="url(#xz-lift)"><use href="#x-strip" fill="{{ fillB }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#x-strip" fill="#000" filter="url(#xz-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g fill="none" stroke-linecap="round" pointer-events="none">
+              <path transform="translate(0.8,1.2)" d="M1080,858.9 V956.4 M1912,858.9 V956.4" stroke="rgba(0,0,0,.35)" stroke-width="8" stroke-dasharray="20 12"></path>
+              <path d="M1080,858.9 V956.4 M1912,858.9 V956.4" stroke="{{ threadHex }}" stroke-width="7" stroke-dasharray="20 12"></path>
+            </g>
+            <g fill="none" pointer-events="none" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-dasharray="16 10">
+              <g opacity="{{ outA }}"><use href="#x-panel"></use></g>
+              <g opacity="{{ outB }}"><use href="#x-strip"></use></g>
+              <path d="M1080,858.9 V956.4 M1912,858.9 V956.4" stroke-dasharray="none" stroke-width="12" stroke-opacity=".6" opacity="{{ outT }}"></path>
+            </g>
+            <g font-family="Newsreader, Georgia, serif" font-size="40" font-weight="500" letter-spacing="3" fill="#5C554C" text-anchor="middle" pointer-events="none"><text x="488" y="1880">MAIN PANEL</text><text x="1496" y="1160">STRIP (FRONT)</text></g>
+            <text x="1496" y="1218" font-family="Newsreader, Georgia, serif" font-style="italic" font-size="34" fill="#6B6058" text-anchor="middle" pointer-events="none">The flap slides under the strip to close.</text>
+          </svg>
+          </sc-if>
+          <sc-if value="{{ isBStandard }}" hint-placeholder-val="{{ false }}">
+          <svg sc-camel-view-box="0 0 1424 960" style="width:100%;height:auto;display:block;max-height:78vh" role="img" aria-label="The Standard in your chosen leathers">
+            <defs>
+              <pattern id="tx-tobacco" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/tobacco.jpg" width="640" height="640"></image></pattern><pattern id="tx-cognac" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/cognac.jpg" width="640" height="640"></image></pattern><pattern id="tx-burgundy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/burgundy.jpg" width="640" height="640"></image></pattern><pattern id="tx-green" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/green.jpg" width="640" height="640"></image></pattern><pattern id="tx-navy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/navy.jpg" width="640" height="640"></image></pattern><pattern id="tx-white" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/white.jpg" width="640" height="640"></image></pattern>
+              <path id="l-body" d="M648,785.7 C648,821 619.3,849.7 584,849.7 L112,849.7 C76.7,849.7 48,821 48,785.7 L48,48 L120.3,48 C135.6,48 150.4,53.5 162,63.4 L210,104.6 C221.6,114.5 236.4,120 251.7,120 L444.3,120 C459.6,120 474.4,114.5 486,104.6 L534,63.4 C545.6,53.5 560.4,48 575.7,48 L648,48 L648,785.7 Z"></path>
+              <path id="l-back" d="M1376,785.7 C1376,821 1347.3,849.7 1312,849.7 L840,849.7 C804.7,849.7 776,821 776,785.7 L776,48 L848.3,48 C863.6,48 878.4,53.5 890,63.4 L938,104.6 C949.6,114.5 964.4,120 979.7,120 L1172.3,120 C1187.6,120 1202.4,114.5 1214,104.6 L1262,63.4 C1273.6,53.5 1288.4,48 1303.7,48 L1376,48 L1376,785.7 Z"></path>
+              <path id="l-lip" d="M648,785.7 C648,821 619.3,849.7 584,849.7 L112,849.7 C76.7,849.7 48,821 48,785.7 L48,321.7 L156,275.6 C163.9,272.2 172.5,270.5 181.1,270.5 L514.9,270.5 C523.5,270.5 532.1,272.2 540,275.6 L648,321.7 L648,785.7 Z"></path>
+              <path id="l-front" d="M648,785.7 C648,821 619.3,849.7 584,849.7 L112,849.7 C76.7,849.7 48,821 48,785.7 L48,209.7 L120.3,209.7 C135.6,209.7 150.4,215.2 162,225.1 L210,266.3 C221.6,276.2 236.4,281.7 251.7,281.7 L444.3,281.7 C459.6,281.7 474.4,276.2 486,266.3 L534,225.1 C545.6,215.2 560.4,209.7 575.7,209.7 L648,209.7 L648,785.7 Z"></path>
+              <filter id="sp-grain" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" sc-camel-base-frequency="0.42" sc-camel-num-octaves="3" seed="7" result="n"></feTurbulence>
+                <feDiffuseLighting in="n" sc-camel-surface-scale="1.6" sc-camel-diffuse-constant="1" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="55"></feDistantLight></feDiffuseLighting>
+                <feComposite in="l" in2="SourceAlpha" operator="in"></feComposite>
+              </filter>
+              <filter id="sp-lift" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="6" sc-camel-std-deviation="9" flood-color="#000" flood-opacity=".38"></feDropShadow>
+              </filter>
+            </defs>
+            <g sc-camel-on-click="{{ pickPA }}" style="cursor:pointer">
+              <g filter="url(#sp-lift)"><use href="#l-body" fill="{{ fillPA }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use><use href="#l-back" fill="{{ fillPA }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#l-body" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use><use href="#l-back" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickPC }}" style="cursor:pointer">
+              <g filter="url(#sp-lift)"><use transform="translate(728,0)" href="#l-lip" fill="{{ fillPC }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use transform="translate(728,0)" href="#l-lip" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickPB }}" style="cursor:pointer">
+              <g filter="url(#sp-lift)"><use href="#l-front" fill="{{ fillPB }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#l-front" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g fill="none" stroke-linecap="round" pointer-events="none">
+              <path transform="translate(0.8,1.2)" d="M72,72 V785.7 Q72,825.7 112,825.7 H584 Q624,825.7 624,785.7 V72 M800,72 V785.7 Q800,825.7 840,825.7 H1312 Q1352,825.7 1352,785.7 V72" stroke="rgba(0,0,0,.35)" stroke-width="8" stroke-dasharray="20 12"></path>
+              <path d="M72,72 V785.7 Q72,825.7 112,825.7 H584 Q624,825.7 624,785.7 V72 M800,72 V785.7 Q800,825.7 840,825.7 H1312 Q1352,825.7 1352,785.7 V72" stroke="{{ threadHex }}" stroke-width="7" stroke-dasharray="20 12"></path>
+            </g>
+            <g fill="none" pointer-events="none" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-dasharray="16 10">
+              <g opacity="{{ outPA }}"><use href="#l-body"></use><use href="#l-back"></use></g>
+              <g opacity="{{ outPC }}"><use transform="translate(728,0)" href="#l-lip"></use></g>
+              <g opacity="{{ outPB }}"><use href="#l-front"></use></g>
+              <path d="M72,72 V785.7 Q72,825.7 112,825.7 H584 Q624,825.7 624,785.7 V72 M800,72 V785.7 Q800,825.7 840,825.7 H1312 Q1352,825.7 1352,785.7 V72" stroke-dasharray="none" stroke-width="12" stroke-opacity=".6" opacity="{{ outT }}"></path>
+            </g>
+            <g font-family="Newsreader, Georgia, serif" font-size="40" font-weight="500" letter-spacing="3" fill="#5C554C" text-anchor="middle" pointer-events="none"><text x="348" y="935">FRONT</text><text x="1076" y="935">BACK</text></g>
+          </svg>
+          </sc-if>
+          <sc-if value="{{ isBTray }}" hint-placeholder-val="{{ false }}">
+          <svg sc-camel-view-box="0 0 1328.4 1328.4" style="width:100%;height:auto;display:block;max-height:78vh" role="img" aria-label="The Tray in your chosen leather">
+            <defs>
+              <pattern id="tx-tobacco" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/tobacco.jpg" width="640" height="640"></image></pattern><pattern id="tx-cognac" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/cognac.jpg" width="640" height="640"></image></pattern><pattern id="tx-burgundy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/burgundy.jpg" width="640" height="640"></image></pattern><pattern id="tx-green" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/green.jpg" width="640" height="640"></image></pattern><pattern id="tx-navy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/navy.jpg" width="640" height="640"></image></pattern><pattern id="tx-white" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/white.jpg" width="640" height="640"></image></pattern>
+              <path id="t-tray" d="M207.7,1280.4 L266.5,1061.9 L48,1120.7 L48,207.7 L266.5,266.5 L207.7,48 L1120.7,48 L1061.9,266.5 L1280.4,207.7 L1280.4,1120.7 L1061.9,1061.9 L1120.7,1280.4 L207.7,1280.4 Z"></path>
+              <filter id="st-grain" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" sc-camel-base-frequency="0.42" sc-camel-num-octaves="3" seed="7" result="n"></feTurbulence>
+                <feDiffuseLighting in="n" sc-camel-surface-scale="1.6" sc-camel-diffuse-constant="1" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="55"></feDistantLight></feDiffuseLighting>
+                <feComposite in="l" in2="SourceAlpha" operator="in"></feComposite>
+              </filter>
+              <filter id="st-lift" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="6" sc-camel-std-deviation="9" flood-color="#000" flood-opacity=".38"></feDropShadow>
+              </filter>
+            </defs>
+            <g sc-camel-on-click="{{ pickTA }}" style="cursor:pointer">
+              <g filter="url(#st-lift)"><use href="#t-tray" fill="{{ fillTA }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#t-tray" fill="#000" filter="url(#st-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g fill="none" stroke-linecap="round" pointer-events="none">
+              <path transform="translate(0.8,1.2)" d="M237.1,1263.5 L283.5,1091.3 M237.1,1044.9 L64.9,1091.3 M64.9,237.1 L237.1,283.5 M283.5,237.1 L237.1,64.9 M1091.3,64.9 L1044.9,237.1 M1091.3,283.5 L1263.4,237.1 M1263.4,1091.3 L1091.3,1044.9 M1044.9,1091.3 L1091.3,1263.5" stroke="rgba(0,0,0,.35)" stroke-width="8" stroke-dasharray="20 12"></path>
+              <path d="M237.1,1263.5 L283.5,1091.3 M237.1,1044.9 L64.9,1091.3 M64.9,237.1 L237.1,283.5 M283.5,237.1 L237.1,64.9 M1091.3,64.9 L1044.9,237.1 M1091.3,283.5 L1263.4,237.1 M1263.4,1091.3 L1091.3,1044.9 M1044.9,1091.3 L1091.3,1263.5" stroke="{{ threadHex }}" stroke-width="7" stroke-dasharray="20 12"></path>
+            </g>
+            <g fill="none" pointer-events="none" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-dasharray="16 10">
+              <use href="#t-tray" opacity="{{ outTA }}"></use>
+              <path d="M237.1,1263.5 L283.5,1091.3 M237.1,1044.9 L64.9,1091.3 M64.9,237.1 L237.1,283.5 M283.5,237.1 L237.1,64.9 M1091.3,64.9 L1044.9,237.1 M1091.3,283.5 L1263.4,237.1 M1263.4,1091.3 L1091.3,1044.9 M1044.9,1091.3 L1091.3,1263.5" stroke-dasharray="none" stroke-width="12" stroke-opacity=".6" opacity="{{ outT }}"></path>
+            </g>
+          </svg>
+          </sc-if>
+          <sc-if value="{{ isBFlapper }}" hint-placeholder-val="{{ false }}">
+          <svg sc-camel-view-box="0 0 1984 1420" style="width:100%;height:auto;display:block;max-height:78vh" role="img" aria-label="The Flapper in your chosen leathers">
+            <defs>
+              <pattern id="tx-tobacco" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/tobacco.jpg" width="640" height="640"></image></pattern><pattern id="tx-cognac" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/cognac.jpg" width="640" height="640"></image></pattern><pattern id="tx-burgundy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/burgundy.jpg" width="640" height="640"></image></pattern><pattern id="tx-green" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/green.jpg" width="640" height="640"></image></pattern><pattern id="tx-navy" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/navy.jpg" width="640" height="640"></image></pattern><pattern id="tx-white" sc-camel-pattern-units="userSpaceOnUse" width="640" height="640"><image href="swatches/white.jpg" width="640" height="640"></image></pattern>
+              <path id="s-inner" d="M928,1216 C928,1251.3 899.3,1280 864,1280 L112,1280 C76.7,1280 48,1251.3 48,1216 L48,413.9 C48,404.7 50,395.7 53.7,387.4 L190.9,85.5 C201.3,62.7 224.1,48 249.2,48 L726.8,48 C751.9,48 774.7,62.7 785.1,85.5 L922.3,387.4 C926,395.7 928,404.7 928,413.9 L928,1216 Z"></path>
+              <path id="s-liner" d="M821.7,383.5 C843.5,383.5 863.7,372.5 875.5,354.2 M875.5,354.2 C887.3,335.9 889,312.9 880,293 L785.4,85 C775,62.2 752.2,47.5 727.1,47.5 L249.5,47.5 C224.4,47.5 201.7,62.2 191.3,85 L96.7,293 C87.7,312.9 89.4,335.9 101.2,354.2 C113,372.5 133.2,383.5 155,383.5 L821.7,383.5 Z"></path>
+              <path id="s-p82" d="M928,1216 C928,1251.3 899.3,1280 864,1280 L112,1280 C76.7,1280 48,1251.3 48,1216 L48,624 L263.4,624 C279.2,624 294.5,629.9 306.2,640.4 L349.7,679.6 C361.5,690.1 376.7,696 392.6,696 L583.4,696 C599.2,696 614.5,690.2 626.2,679.6 L669.8,640.4 C681.5,629.9 696.8,624 712.6,624 L864,624 C899.3,624 928,652.7 928,688 L928,1216 Z"></path>
+              <path id="s-p62" d="M928,1213.9 C928,1249.2 899.3,1277.9 864,1277.9 L112,1277.9 C76.7,1277.9 48,1249.2 48,1213.9 L48,781.9 L263.4,781.9 C279.3,781.9 294.5,787.7 306.2,798.3 L349.7,837.4 C361.5,848 376.7,853.9 392.6,853.9 L583.4,853.9 C599.2,853.9 614.5,848 626.3,837.4 L669.8,798.3 C681.5,787.7 696.8,781.9 712.6,781.9 L928,781.9 L928,1213.9 Z"></path>
+              <path id="s-p52" d="M928,1213.9 C928,1249.2 899.3,1277.9 864,1277.9 L112,1277.9 C76.7,1277.9 48,1249.2 48,1213.9 L48,861.9 L263.4,861.9 C279.2,861.9 294.5,867.7 306.2,878.3 L349.7,917.4 C361.5,928 376.7,933.9 392.6,933.9 L583.4,933.9 C599.2,933.9 614.5,928 626.3,917.4 L669.8,878.3 C681.5,867.7 696.8,861.9 712.6,861.9 L928,861.9 L928,1213.9 Z"></path>
+              <path id="s-outer" d="M1936,1216 C1936,1251.3 1907.3,1280 1872,1280 L1120,1280 C1084.7,1280 1056,1251.3 1056,1216 L1056,413.9 C1056,404.7 1058,395.7 1061.7,387.4 L1198.9,85.5 C1209.3,62.7 1232.1,48 1257.2,48 L1734.8,48 C1759.9,48 1782.7,62.7 1793.1,85.5 L1930.3,387.4 C1934,395.7 1936,404.7 1936,413.9 L1936,1216 Z"></path>
+              <filter id="sf-grain" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" sc-camel-base-frequency="0.42" sc-camel-num-octaves="3" seed="7" result="n"></feTurbulence>
+                <feDiffuseLighting in="n" sc-camel-surface-scale="1.6" sc-camel-diffuse-constant="1" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="55"></feDistantLight></feDiffuseLighting>
+                <feComposite in="l" in2="SourceAlpha" operator="in"></feComposite>
+              </filter>
+              <filter id="sf-lift" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="6" sc-camel-std-deviation="9" flood-color="#000" flood-opacity=".38"></feDropShadow>
+              </filter>
+            </defs>
+            <g sc-camel-on-click="{{ pickSB }}" style="cursor:pointer">
+              <g filter="url(#sf-lift)"><use href="#s-inner" fill="{{ fillSB }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#s-inner" fill="#000" filter="url(#sf-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickSD }}" style="cursor:pointer">
+              <g filter="url(#sf-lift)"><use href="#s-p82" fill="{{ fillSD }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#s-p82" fill="#000" filter="url(#sf-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickSE }}" style="cursor:pointer">
+              <g filter="url(#sf-lift)"><use href="#s-p62" fill="{{ fillSE }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#s-p62" fill="#000" filter="url(#sf-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickSD }}" style="cursor:pointer">
+              <g filter="url(#sf-lift)"><use href="#s-p52" fill="{{ fillSD }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#s-p52" fill="#000" filter="url(#sf-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickSA }}" style="cursor:pointer">
+              <g filter="url(#sf-lift)"><use href="#s-outer" fill="{{ fillSA }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use href="#s-outer" fill="#000" filter="url(#sf-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g sc-camel-on-click="{{ pickSC }}" style="cursor:pointer">
+              <g filter="url(#sf-lift)"><use transform="translate(1008,0)" href="#s-liner" fill="{{ fillSC }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use transform="translate(1008,0)" href="#s-liner" fill="#000" filter="url(#sf-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+            </g>
+            <g fill="none" stroke-linecap="round" pointer-events="none">
+              <path transform="translate(0.8,1.2)" d="M223.5,72 L752.5,72 L904,405.2 L904,1216 Q904,1256 864,1256 L112,1256 Q72,1256 72,1216 L72,405.2 Z M1231.5,72 L1760.5,72 L1912,405.2 L1912,1216 Q1912,1256 1872,1256 L1120,1256 Q1080,1256 1080,1216 L1080,405.2 Z" stroke="rgba(0,0,0,.35)" stroke-width="8" stroke-dasharray="20 12"></path>
+              <path d="M223.5,72 L752.5,72 L904,405.2 L904,1216 Q904,1256 864,1256 L112,1256 Q72,1256 72,1216 L72,405.2 Z M1231.5,72 L1760.5,72 L1912,405.2 L1912,1216 Q1912,1256 1872,1256 L1120,1256 Q1080,1256 1080,1216 L1080,405.2 Z" stroke="{{ threadHex }}" stroke-width="7" stroke-dasharray="20 12"></path>
+            </g>
+            <g sc-camel-on-click="{{ pickH }}" style="cursor:pointer">
+              <circle cx="488" cy="151.8" r="44" fill="{{ fillH }}" stroke="rgba(0,0,0,.45)" stroke-width="2"></circle><circle cx="488" cy="151.8" r="27.3" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2"></circle><circle cx="474.8" cy="138.6" r="9.7" fill="rgba(255,255,255,.45)"></circle>
+              <circle cx="488" cy="983.6" r="48" fill="{{ fillH }}" stroke="rgba(0,0,0,.45)" stroke-width="2"></circle><circle cx="488" cy="983.6" r="29.8" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2"></circle><circle cx="473.6" cy="969.2" r="10.6" fill="rgba(255,255,255,.45)"></circle>
+            </g>
+            <g fill="none" pointer-events="none" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-dasharray="16 10">
+              <use href="#s-outer" opacity="{{ outSA }}"></use>
+              <use href="#s-inner" opacity="{{ outSB }}"></use>
+              <use transform="translate(1008,0)" href="#s-liner" opacity="{{ outSC }}"></use>
+              <g opacity="{{ outSD }}"><use href="#s-p82"></use><use href="#s-p52"></use></g>
+              <use href="#s-p62" opacity="{{ outSE }}"></use>
+              <g opacity="{{ outH }}"><circle cx="488" cy="151.8" r="58"></circle><circle cx="488" cy="983.6" r="62"></circle></g>
+              <path d="M223.5,72 L752.5,72 L904,405.2 L904,1216 Q904,1256 864,1256 L112,1256 Q72,1256 72,1216 L72,405.2 Z M1231.5,72 L1760.5,72 L1912,405.2 L1912,1216 Q1912,1256 1872,1256 L1120,1256 Q1080,1256 1080,1216 L1080,405.2 Z" stroke-dasharray="none" stroke-width="12" stroke-opacity=".6" opacity="{{ outT }}"></path>
+            </g>
+            <g font-family="Newsreader, Georgia, serif" font-size="40" font-weight="500" letter-spacing="3" fill="#5C554C" text-anchor="middle" pointer-events="none"><text x="488" y="1385">INSIDE</text><text x="1496" y="1385">OUTSIDE</text></g>
+          </svg>
+          </sc-if>
         </div>
-        <div class="form-field">
-          <label for="custPhone">Phone Number</label>
-          <input type="tel" id="custPhone" placeholder="(555) 123-4567">
-        </div>
+        <p style="margin:0;font-size:18px;color:#2A2520;text-align:center;">{{ specLine }}</p>
+        <p style="margin:0;font-size:15px;color:#6B6058;text-align:center;">Preview is approximate. Leather varies slightly from hide to hide.</p>
       </div>
-      <div class="form-row">
-        <div class="form-field full">
-          <label for="custEmail">Email Address</label>
-          <input type="email" id="custEmail" placeholder="jane@email.com">
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">1 · Pick a part</span>
+          <sc-for list="{{ parts }}" as="p" hint-placeholder-count="3">
+            <button sc-camel-on-click="{{ p.pick }}" style="display:flex;align-items:center;gap:16px;text-align:left;padding:14px 16px;background:{{ p.bg }};border:2px solid {{ p.border }};cursor:pointer;color:#2A2520;border-radius:14px;">
+              <span style="width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#2A2520;color:#FAF7F2;font-family:'Newsreader',Georgia,serif;font-size:17px;border-radius:8px;">{{ p.ref }}</span>
+              <span style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;"><span style="font-family:'Newsreader',Georgia,serif;font-size:21px;font-weight:500;line-height:1.15;">{{ p.name }}</span><span style="font-size:16px;color:#4A423A;">{{ p.current }}</span></span>
+              <span style="width:44px;height:44px;flex-shrink:0;border-radius:50%;border:1px solid rgba(0,0,0,0.25);background:{{ p.dot }};background-size:cover;background-position:center;"></span>
+            </button>
+          </sc-for>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field full">
-          <label for="custNotes">Leather Color / Notes <span style="text-transform:none;">(optional)</span></label>
-          <textarea id="custNotes" placeholder="Color preference, personalization, or anything else I should know..."></textarea>
+
+        <div style="display:flex;flex-direction:column;gap:14px;background:#F5F0E8;border:1px solid #D9D0C4;border-radius:18px;padding:clamp(16px,3vw,26px);">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">2 · Choose</span>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.1;margin:0;">{{ activeTitle }}</h2>
+          </div>
+          <sc-if value="{{ showLeather }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px;">
+              <sc-for list="{{ leatherOpts }}" as="o" hint-placeholder-count="6">
+                <button sc-camel-on-click="{{ o.pick }}" aria-label="{{ o.name }}" style="display:flex;flex-direction:column;gap:8px;align-items:center;padding:8px;background:{{ o.bg }};border:2px solid {{ o.ring }};cursor:pointer;color:#2A2520;border-radius:14px;">
+                  <img src="{{ o.img }}" alt="" style="width:100%;aspect-ratio:1/1;border-radius:9px;object-fit:cover;display:block;">
+                  <span style="font-size:17px;font-weight:500;">{{ o.name }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showThread }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px;">
+              <sc-for list="{{ threadOpts }}" as="o" hint-placeholder-count="4">
+                <button sc-camel-on-click="{{ o.pick }}" aria-label="{{ o.name }}" style="display:flex;flex-direction:column;gap:8px;align-items:center;padding:12px 8px;background:{{ o.bg }};border:2px solid {{ o.ring }};cursor:pointer;color:#2A2520;border-radius:14px;">
+                  <span style="width:56px;height:56px;border-radius:50%;background:{{ o.hex }};border:1px solid rgba(0,0,0,0.25);display:block;"></span>
+                  <span style="font-size:17px;font-weight:500;">{{ o.name }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px;padding:clamp(16px,3vw,24px);background:#FFFFFF;border:1px solid #D9D0C4;border-radius:18px;">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;">{{ bPriceLine }}</span>
+            <span style="font-size:17px;color:#4A423A;">{{ bDeposit }}</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button sc-camel-on-click="{{ requestDesign }}" style="flex:1 1 240px;background:#2A2520;color:#FAF7F2;border:none;padding:17px 24px;font-size:19px;font-weight:500;cursor:pointer;border-radius:12px;" style-hover="background:#5C3D21">Request this design</button>
+            <button sc-camel-on-click="{{ resetDesign }}" style="background:transparent;color:#2A2520;border:1px solid #2A2520;padding:17px 22px;font-size:18px;font-weight:500;cursor:pointer;border-radius:12px;">Reset</button>
+          </div>
+          <p style="margin:0;font-size:16px;color:#4A423A;text-wrap:pretty;">Next you'll add your details. I confirm leather and thread by email before I start cutting.</p>
         </div>
       </div>
     </div>
+  </section>
+</sc-if>
 
-    <!-- STEP 3: Deposit + Submit -->
-    <div class="comm-step">
-      <div class="comm-step-label">
-        <div class="comm-step-num">3</div>
-        <div class="comm-step-title">Reserve with a deposit</div>
-      </div>
+<sc-if value="{{ isCommission }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Commission" style="max-width:880px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:28px;">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Commission a piece</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;line-height:1.05;margin:0;">Request a quote</h1>
+      <p style="font-size:19px;color:#4A423A;margin:0;text-wrap:pretty;">Pick your piece and share your details. I'll reply within 24 hours to confirm leather and thread options before I start cutting.</p>
+    </div>
 
-      <div class="deposit-summary">
-        <div>
-          <div class="deposit-summary-label">Selected Piece</div>
-          <div class="deposit-summary-value" id="summaryPiece">—</div>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+        <sc-for list="{{ stepper }}" as="s" hint-placeholder-count="3">
+          <li style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:3px solid {{ s.line }};">
+            <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:15px;color:#4A423A;">Step {{ s.n }}</span>
+            <span style="font-size:17px;font-weight:500;color:{{ s.fg }};">{{ s.label }}</span>
+          </li>
+        </sc-for>
+      </ol>
+
+      <div style="background:#F5F0E8;border:1px solid #D9D0C4;padding:clamp(20px,4vw,36px);display:flex;flex-direction:column;gap:20px;border-radius:14px;overflow:hidden;">
+        <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin:0;">Which piece?</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:10px;">
+            <sc-for list="{{ pieces }}" as="o" hint-placeholder-count="7">
+              <button sc-camel-on-click="{{ o.pick }}" style="display:flex;gap:12px;align-items:center;text-align:left;padding:10px;background:{{ o.bg }};border:2px solid {{ o.border }};cursor:pointer;color:#2A2520;border-radius:10px;">
+                <sc-if value="{{ o.img }}" hint-placeholder-val="{{ true }}"><img src="{{ o.img }}" alt="" style="width:56px;height:56px;object-fit:cover;display:block;flex-shrink:0;border-radius:8px;"></sc-if>
+                <sc-if value="{{ o.custom }}" hint-placeholder-val="{{ false }}"><span style="width:56px;height:56px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px dashed #6B6058;font-size:22px;color:#4A423A;">+</span></sc-if>
+                <span style="display:flex;flex-direction:column;gap:2px;">
+                  <span style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;line-height:1.1;">{{ o.name }}</span>
+                  <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:15px;color:#5C3D21;">{{ o.priceLabel }}</span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin:0;">Your details</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">Full name *
+              <input value="{{ form.name }}" sc-camel-on-change="{{ on.name }}" placeholder="Jane Smith" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;border-radius:8px;">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">Email *
+              <input type="email" value="{{ form.email }}" sc-camel-on-change="{{ on.email }}" placeholder="jane@email.com" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;border-radius:8px;">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">Phone (optional)
+              <input type="tel" value="{{ form.phone }}" sc-camel-on-change="{{ on.phone }}" placeholder="(555) 123-4567" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;border-radius:8px;">
+            </label>
+          </div>
+          <sc-if value="{{ hasDesignerPiece }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px;padding:18px;background:#FFFFFF;border:1px solid #D9D0C4;border-radius:12px;">
+              <span style="font-size:16px;font-weight:500;">Your {{ designerName }} design</span>
+              <span style="font-size:19px;color:#2A2520;">{{ designSummaryLine }}</span>
+              <div><button sc-camel-on-click="{{ openDesigner }}" style="background:transparent;color:#2A2520;border:1px solid #2A2520;padding:11px 18px;font-size:17px;font-weight:500;cursor:pointer;border-radius:10px;">{{ designButtonLabel }}</button></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showSwatches }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-if value="{{ isFlapperPiece }}" hint-placeholder-val="{{ false }}"><p style="font-size:17px;color:#5C3D21;background:#FFFFFF;border-left:3px solid #C9A96E;padding:10px 14px;margin:0;text-wrap:pretty;">The Flapper has contrasting elements, so a combination of two colors looks great. Choose a main color and an accent.</p></sc-if>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:16px;font-weight:500;">{{ leatherLabel1 }}</span><span style="font-size:16px;color:#5C3D21;">{{ form.leather || 'Tap a leather' }}</span></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;">
+              <sc-for list="{{ swatches }}" as="w" hint-placeholder-count="6">
+                <button sc-camel-on-click="{{ w.pick }}" aria-label="{{ w.name }}" style="display:flex;flex-direction:column;gap:8px;align-items:center;padding:8px;background:{{ w.bg }};border:2px solid {{ w.ring }};cursor:pointer;color:#2A2520;border-radius:12px;">
+                  <img src="{{ w.img }}" alt="" style="width:100%;aspect-ratio:1/1;border-radius:8px;object-fit:cover;display:block;">
+                  <span style="font-size:16px;font-weight:500;">{{ w.name }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <sc-if value="{{ isFlapperPiece }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:16px;font-weight:500;">Accent color</span><span style="font-size:16px;color:#5C3D21;">{{ form.leather2 || 'Tap a leather' }}</span></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;">
+              <sc-for list="{{ swatches2 }}" as="w" hint-placeholder-count="6">
+                <button sc-camel-on-click="{{ w.pick }}" aria-label="{{ w.name }}" style="display:flex;flex-direction:column;gap:8px;align-items:center;padding:8px;background:{{ w.bg }};border:2px solid {{ w.ring }};cursor:pointer;color:#2A2520;border-radius:12px;">
+                  <img src="{{ w.img }}" alt="" style="width:100%;aspect-ratio:1/1;border-radius:8px;object-fit:cover;display:block;">
+                  <span style="font-size:16px;font-weight:500;">{{ w.name }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+          </sc-if>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">{{ notesLabel }}
+            <textarea value="{{ form.notes }}" sc-camel-on-change="{{ on.notes }}" rows="4" placeholder="{{ notesPlaceholder }}" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;resize:vertical;border-radius:8px;"></textarea>
+          </label>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <span style="font-size:16px;font-weight:500;">Pickup or shipping?</span>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;">
+              <sc-for list="{{ deliveryOpts }}" as="d" hint-placeholder-count="2">
+                <button sc-camel-on-click="{{ d.pick }}" style="text-align:left;padding:14px 16px;background:{{ d.bg }};border:2px solid {{ d.border }};cursor:pointer;color:#2A2520;display:flex;flex-direction:column;gap:2px;border-radius:10px;">
+                  <span style="font-size:18px;font-weight:500;">{{ d.label }}</span>
+                  <span style="font-size:16px;color:#4A423A;">{{ d.sub }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin:0;">Review your request</h2>
+          <div style="display:flex;flex-direction:column;border-top:1px solid #D9D0C4;">
+            <sc-for list="{{ review }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #D9D0C4;font-size:17px;"><span style="color:#4A423A;">{{ r.k }}</span><span style="text-align:right;overflow-wrap:anywhere;">{{ r.v }}</span></div>
+            </sc-for>
+          </div>
+          <p style="font-size:17px;color:#4A423A;margin:0;text-wrap:pretty;">Sending opens your email app with everything pre-filled. Just hit send.</p>
+        </sc-if>
+
+        <sc-if value="{{ msg }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:17px;color:#9A3412;">{{ msg }}</p>
+        </sc-if>
+
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:4px;">
+          <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+            <button sc-camel-on-click="{{ back }}" style="background:transparent;color:#2A2520;border:1px solid #2A2520;padding:14px 22px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;">← Back</button>
+          </sc-if>
+          <button sc-camel-on-click="{{ next }}" style="margin-left:auto;background:#2A2520;color:#FAF7F2;border:none;padding:14px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">{{ nextLabel }}</button>
         </div>
-        <div>
-          <div class="deposit-summary-label">50% Deposit Due Now</div>
-          <div class="deposit-summary-value" id="summaryDeposit">$0</div>
+      </div>
+      <p style="font-size:17px;color:#4A423A;margin:0;">Prefer to talk it through first? Email <a href="mailto:contact.agleatherworks@gmail.com">contact.agleatherworks@gmail.com</a> or call <a href="tel:+15716454445">(571) 645-4445</a>.</p>
+    </sc-if>
+
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#F5F0E8;border:1px solid #D9D0C4;padding:clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:20px;border-radius:14px;overflow:hidden;">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;margin:0;">Your email is ready to send</h2>
+        <p style="font-size:18px;color:#4A423A;margin:0;text-wrap:pretty;">If your email app didn't open, send your request to <a href="mailto:contact.agleatherworks@gmail.com">contact.agleatherworks@gmail.com</a>.</p>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:18px;">
+          <li>I reply within 24 hours to confirm leather, thread and timing.</li>
+          <li>A 50% deposit reserves your spot. The balance is due at pickup or delivery.</li>
+          <li>Your piece is handmade in {{ leadNote }}.</li>
+        </ol>
+        <sc-if value="{{ hasDeposit }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:18px;background:#FFFFFF;border:1px solid #D9D0C4;border-radius:14px;overflow:hidden;">
+            <div style="display:flex;flex-direction:column;">
+              <span style="font-size:16px;color:#4A423A;">Want to hold your spot now? 50% deposit</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#5C3D21;">{{ depositLabel }}</span>
+            </div>
+            <a href="{{ paypalHref }}" target="_blank" rel="noopener" style="background:#FFC439;color:#003087;padding:14px 22px;font-size:17px;font-weight:500;text-decoration:none;border-radius:10px;">Pay deposit via PayPal</a>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <button sc-camel-on-click="{{ goShop }}" style="background:#2A2520;color:#FAF7F2;border:none;padding:14px 22px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;">Back to the shop</button>
+          <button sc-camel-on-click="{{ restart }}" style="background:transparent;color:#2A2520;border:1px solid #2A2520;padding:14px 22px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;">Start another request</button>
         </div>
-        <div class="deposit-summary-note">Balance due at pickup or delivery. Remainder payable via Venmo, PayPal, or Zelle.</div>
       </div>
+    </sc-if>
+  </section>
+</sc-if>
 
-      <div class="comm-actions">
-        <button class="btn-dark" id="sendDetailsBtn" onclick="sendDetails()" disabled>1. Send Me Your Details</button>
-        <a class="btn-paypal" id="payDepositBtn" href="#" target="_blank" onclick="return checkReady(event)">2. Pay Deposit via PayPal</a>
-      </div>
-      <p class="payment-note">Step 1 opens your email app with your details pre-filled — just hit send. Step 2 opens PayPal with your deposit amount already entered.</p>
-      <p class="comm-status" id="commStatus"></p>
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="About" style="max-width:1240px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,5vw,64px);align-items:start;">
+    <div style="aspect-ratio:4/5;overflow:hidden;background:#E6DED2;border-radius:12px;"><img src="Slider.jpg" alt="Leather tools and a finished cardholder on the cutting mat" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;"></div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">The hand behind the stitch</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;line-height:1.05;margin:0;">Ashwani Gupta</h1>
+      <p style="font-size:19px;color:#3A332C;margin:0;text-wrap:pretty;">I have always had the drive to make things. For a long time, the right circumstances were out of reach. Five years ago, those doors opened, and I haven't put my tools down since.</p>
+      <p style="font-size:19px;color:#3A332C;margin:0;text-wrap:pretty;">What started as a personal quest to build a better, slimmer wallet has evolved into a deep respect for traditional craft. Every piece I make is an honest object — built to outlast trends, improve with age, and mean something to the person who carries it.</p>
+      <p style="font-size:19px;color:#3A332C;margin:0;">Based in Arlington, VA. Happy to meet local customers in person.</p>
     </div>
-
-  </div>
-</section>
-
-<!-- ETHOS + PROCESS (merged) -->
-<section id="about" style="padding:0;">
-  <div class="ethos-left">
-    <div class="section-eyebrow">The Ethos</div>
-    <h2 class="section-title">Built for the pocket,<br>not the logo.</h2>
-    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;margin-bottom:1.75rem;">Full-grain, vegetable-tanned Italian leather. No unnecessary bulk, no loud branding — just honest materials, allowed to speak for themselves. Every edge burnished by hand.</p>
-    <div class="ethos-pillars" style="flex-direction:row; flex-wrap:wrap; gap:1.5rem;">
-      <div class="ethos-pillar" style="flex:1; min-width:150px;">
-        <h4>Heritage materials</h4>
-        <p>Italian tannery leather that patinas over years, not months.</p>
-      </div>
-      <div class="ethos-pillar" style="flex:1; min-width:150px;">
-        <h4>Made to order</h4>
-        <p>Reserve above, confirm details, 1–2 week lead time.</p>
-      </div>
-      <div class="ethos-pillar" style="flex:1; min-width:150px;">
-        <h4>Local pickup free</h4>
-        <p>Arlington locals skip shipping. Balance due at delivery.</p>
-      </div>
+  </section>
+  <section style="background:#5C3D21;color:#FAF7F2;">
+    <div style="max-width:900px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:16px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(26px,3vw,36px);line-height:1.45;margin:0;text-wrap:pretty;">“I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.”</p>
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">Ashwani Gupta · Arlington, VA</span>
     </div>
-  </div>
-  <div class="ethos-right">
-    <p class="ethos-quote">I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
-    <p class="ethos-quote-attr">— Ashwani Gupta · Arlington, VA</p>
-  </div>
-</section>
-
-<!-- THE MAKER -->
-<section id="maker" style="padding:0;">
-  <div class="maker-img-wrap">
-    <img src="standard.jpg" alt="AG Leatherworks — handcrafted in Arlington VA">
-    <div class="maker-img-overlay"></div>
-    <div class="maker-img-location">Arlington, VA · USA</div>
-  </div>
-  <div class="maker-text">
-    <div class="section-eyebrow">The Hand Behind the Stitch</div>
-    <h2 class="section-title">Ashwani Gupta</h2>
-    <p class="maker-body">I have always had the drive to make things. For a long time, the right circumstances were out of reach. Five years ago, those doors opened, and I haven't put my tools down since.</p>
-    <p class="maker-body">What started as a personal quest to build a better, slimmer wallet has evolved into a deep respect for traditional craft. Every piece I make is an honest object — built to outlast trends, improve with age, and mean something to the person who carries it.</p>
-    <p class="maker-body">Based in Arlington, VA. Happy to meet local customers in person.</p>
-    <a href="#commission" class="btn-dark" style="margin-top:2rem;display:inline-block;text-align:center;max-width:240px;">Start a Commission</a>
-  </div>
-</section>
-
-<!-- LOCAL -->
-<section id="local">
-  <div class="section-inner">
-    <div class="section-eyebrow">Arlington, VA</div>
-    <h2 class="section-title">Your neighbor makes these.</h2>
-    <p class="local-body">Every piece is made right here in Arlington. If you're local, skip the shipping, meet the maker, and see the leather options in person before you commit. This is as close to farm-to-table as leather goods get.</p>
-    <div class="local-perks">
-      <div class="local-perk">
-        <h4>Free local pickup</h4>
-        <p>No shipping fees for Arlington and nearby Northern Virginia customers. Meet in person at your convenience.</p>
+  </section>
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:680px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">The ethos</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);font-weight:600;line-height:1.1;margin:0;">Built for the pocket, not the logo.</h2>
+      <p style="font-size:19px;color:#4A423A;margin:0;text-wrap:pretty;">AG Leatherworks was born from a simple frustration: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel. Every piece I make is a rejection of that.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px;">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:2px solid #2A2520;">
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-size:24px;font-weight:500;margin:0;">{{ p.t }}</h3>
+          <p style="font-size:17px;color:#4A423A;margin:0;text-wrap:pretty;">{{ p.b }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <section style="background:#F5F0E8;border-top:1px solid #D9D0C4;">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:680px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Arlington, VA</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);font-weight:600;line-height:1.1;margin:0;">Your neighbor makes these.</h2>
+        <p style="font-size:19px;color:#4A423A;margin:0;text-wrap:pretty;">Every piece is made right here in Arlington. If you're local, skip the shipping, meet the maker, and see the leather options in person before you commit.</p>
       </div>
-      <div class="local-perk">
-        <h4>See before you buy</h4>
-        <p>Come see leather swatches and finished samples in person. Touch matters when you're buying leather.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;">
+        <sc-for list="{{ perks }}" as="p" hint-placeholder-count="4">
+          <div style="background:#FCFAF6;border:1px solid #D9D0C4;padding:22px;display:flex;flex-direction:column;gap:6px;border-radius:14px;overflow:hidden;">
+            <h3 style="font-size:18px;font-weight:500;margin:0;">{{ p.t }}</h3>
+            <p style="font-size:17px;color:#4A423A;margin:0;text-wrap:pretty;">{{ p.b }}</p>
+          </div>
+        </sc-for>
       </div>
-      <div class="local-perk">
-        <h4>Perfect for gifting</h4>
-        <p>A thoughtful gift for someone in the area. Father's Day, graduations, or just because.</p>
-      </div>
-      <div class="local-perk">
-        <h4>Corporate orders</h4>
-        <p>Branded leather gifts for your team, client events, or executive recognition. Bulk pricing available.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <button sc-camel-on-click="{{ goQuote }}" style="background:#2A2520;color:#FAF7F2;border:none;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">Start a commission</button>
+        <button sc-camel-on-click="{{ goContact }}" style="background:transparent;color:#2A2520;border:1px solid #2A2520;padding:15px 26px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;">Get in touch</button>
       </div>
     </div>
-    <a href="#commission" class="btn-primary" style="background:#fff;">Get in Touch</a>
-  </div>
-</section>
+  </section>
+</sc-if>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-eyebrow" style="text-align:center;">Questions First?</div>
-  <h2 class="section-title" style="text-align:center; max-width:600px; margin:0 auto 1.5rem;">Reach out directly</h2>
-  <div class="contact-grid">
-    <div class="contact-info">
-      <h3>Prefer to talk it through first?</h3>
-      <p>Reach out via email or phone before committing. I respond within 24 hours and I'm always happy to talk through leather options, custom requests, or timelines.</p>
-      <a href="mailto:contact.agleatherworks@gmail.com" class="contact-link">✉ contact.agleatherworks@gmail.com</a>
-      <a href="tel:+15716454445" class="contact-link">☏ (571) 645-4445</a>
-      <p style="margin-top:1.5rem;font-size:0.8rem;font-style:italic;">Arlington, VA · Local pickup available · Shipping at cost</p>
+<sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="FAQ" style="max-width:840px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) clamp(48px,7vw,80px);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(40px,6vw,80px);align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Questions</span>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;line-height:1.05;margin:0;">FAQ</h1>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #D9D0C4;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid #D9D0C4;">
+            <button sc-camel-on-click="{{ f.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;background:transparent;border:none;cursor:pointer;text-align:left;color:#2A2520;border-radius:10px;">
+              <span style="font-family:'Newsreader',Georgia,serif;font-size:23px;font-weight:500;line-height:1.25;">{{ f.q }}</span>
+              <span style="font-family:'Newsreader',Georgia,serif;font-variant-numeric:tabular-nums;font-size:20px;color:#5C3D21;flex-shrink:0;">{{ f.sign }}</span>
+            </button>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 20px;font-size:18px;color:#3A332C;max-width:60ch;text-wrap:pretty;">{{ f.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
     </div>
-    <div class="payment-methods">
-      <h3>Payment accepted</h3>
-      <p>50% deposit to start, balance due at pickup or delivery.</p>
-      <p style="font-family:'DM Mono', monospace; font-size:0.8rem; color:var(--leather-dark); letter-spacing:0.05em;">PayPal &nbsp;·&nbsp; Venmo &nbsp;·&nbsp; Zelle</p>
-    </div>
-  </div>
-</section>
+      </section>
+</sc-if>
 
-<footer>
-  <div class="f-logo">
-    <img src="logo.jpeg" alt="AG Leatherworks">
-    <span class="f-logo-text">AG Leatherworks</span>
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Contact" style="max-width:1240px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) clamp(48px,7vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,5vw,72px);align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Contact</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;line-height:1.05;margin:0;">Prefer to talk it through first?</h1>
+      <p style="font-size:19px;color:#4A423A;margin:0;text-wrap:pretty;">Reach out via email or phone before committing. I respond within 24 hours and I'm always happy to talk through leather options, custom requests, or timelines.</p>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #D9D0C4;">
+        <a href="mailto:contact.agleatherworks@gmail.com" style="display:flex;flex-direction:column;padding:16px 0;border-bottom:1px solid #D9D0C4;text-decoration:none;"><span style="font-size:16px;color:#4A423A;">Email</span><span style="font-size:20px;font-weight:500;overflow-wrap:anywhere;">contact.agleatherworks@gmail.com</span></a>
+        <a href="tel:+15716454445" style="display:flex;flex-direction:column;padding:16px 0;border-bottom:1px solid #D9D0C4;text-decoration:none;"><span style="font-size:16px;color:#4A423A;">Phone</span><span style="font-size:20px;font-weight:500;">(571) 645-4445</span></a>
+        <div style="display:flex;flex-direction:column;padding:16px 0;border-bottom:1px solid #D9D0C4;"><span style="font-size:16px;color:#4A423A;">Location</span><span style="font-size:20px;">Arlington, VA · Local pickup available · Shipping at cost</span></div>
+        <div style="display:flex;flex-direction:column;padding:16px 0;border-bottom:1px solid #D9D0C4;"><span style="font-size:16px;color:#4A423A;">Payment accepted</span><span style="font-size:20px;">PayPal · Venmo · Zelle</span></div>
+      </div>
+    </div>
+    <div style="background:#F5F0E8;border:1px solid #D9D0C4;padding:clamp(20px,4vw,36px);display:flex;flex-direction:column;gap:16px;border-radius:14px;overflow:hidden;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin:0;">Send a message</h2>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">What's it about?
+        <sc-raw-select value="{{ contact.topic }}" sc-camel-on-change="{{ onC.topic }}" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;border-radius:8px;">
+          <option>A question</option>
+          <option>A custom request</option>
+          <option>Corporate or bulk order</option>
+          <option>Seeing leather in person</option>
+        </sc-raw-select>
+      </label>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">Name *
+          <input value="{{ contact.name }}" sc-camel-on-change="{{ onC.name }}" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;border-radius:8px;">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">Email *
+          <input type="email" value="{{ contact.email }}" sc-camel-on-change="{{ onC.email }}" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;border-radius:8px;">
+        </label>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:16px;font-weight:500;">Message
+        <textarea value="{{ contact.message }}" sc-camel-on-change="{{ onC.message }}" rows="5" style="padding:13px 14px;font-size:18px;border:1px solid #BFB4A6;background:#FFFFFF;color:#2A2520;font-weight:400;resize:vertical;border-radius:8px;"></textarea>
+      </label>
+      <sc-if value="{{ contactMsg }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;font-size:17px;color:#5C3D21;">{{ contactMsg }}</p>
+      </sc-if>
+      <button sc-camel-on-click="{{ sendContact }}" style="background:#2A2520;color:#FAF7F2;border:none;padding:15px 24px;font-size:18px;font-weight:500;cursor:pointer;border-radius:10px;" style-hover="background:#5C3D21">Send message</button>
+    </div>
+  </section>
+</sc-if>
+
+</main>
+
+<footer style="background:#2A2520;color:#D9D0C4;">
+  <div style="max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,64px) clamp(16px,4vw,40px) 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:32px;">
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-size:24px;font-weight:500;color:#FAF7F2;letter-spacing:0.04em;">AG Leatherworks</span>
+      <span style="font-size:17px;">Honest craft. Nothing more.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">Shop</span>
+      <sc-for list="{{ footShop }}" as="l" hint-placeholder-count="3">
+        <a sc-camel-on-click="{{ l.go }}" style="font-size:17px;color:#D9D0C4;text-decoration:none;cursor:pointer;" style-hover="color:#FAF7F2">{{ l.label }}</a>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">Help</span>
+      <sc-for list="{{ footHelp }}" as="l" hint-placeholder-count="4">
+        <a sc-camel-on-click="{{ l.go }}" style="font-size:17px;color:#D9D0C4;text-decoration:none;cursor:pointer;" style-hover="color:#FAF7F2">{{ l.label }}</a>
+      </sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#C9A96E;">Contact</span>
+      <a href="mailto:contact.agleatherworks@gmail.com" style="font-size:17px;color:#D9D0C4;text-decoration:none;overflow-wrap:anywhere;">contact.agleatherworks@gmail.com</a>
+      <a href="tel:+15716454445" style="font-size:17px;color:#D9D0C4;text-decoration:none;">(571) 645-4445</a>
+      <span style="font-size:17px;">Arlington, VA</span>
+    </div>
   </div>
-  <div class="f-links">
-    <a href="#work">Collection</a>
-    <a href="#commission">Commission</a>
-    <a href="#maker">The Maker</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div class="f-copy">© 2026 · Arlington, VA · Handmade to Order</div>
+  <div style="max-width:1240px;margin:0 auto;padding:18px clamp(16px,4vw,40px) 28px;border-top:1px solid #4A423A;font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#A89C8E;">© 2026 · Arlington, VA · Handmade to order</div>
 </footer>
 
-<script>
-  // Nav background on scroll
-  const nav = document.getElementById('mainNav');
-  const hero = document.getElementById('hero');
-  function updateNav() {
-    const heroHeight = hero.offsetHeight;
-    if (window.scrollY > heroHeight - 100) {
-      nav.classList.add('scrolled');
-      document.body.classList.remove('hero-active');
-    } else {
-      nav.classList.remove('scrolled');
-      document.body.classList.add('hero-active');
-    }
-  }
-  window.addEventListener('scroll', updateNav);
-  document.body.classList.add('hero-active');
-  updateNav();
 
-  // Commission flow
-  const PAYPAL_ME = "https://www.paypal.com/paypalme/ashwaniguptabusiness/";
-  let selectedPiece = null;
-  let selectedPrice = 0;
 
-  function selectPiece(el) {
-    document.querySelectorAll('.piece-option').forEach(p => p.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedPiece = el.dataset.name;
-    selectedPrice = parseFloat(el.dataset.price);
-    updateSummary();
-  }
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{}">
+const PRODUCTS = [
+  { id: 'slider', name: 'The Slider', lead: '1–2 weeks', price: 59, type: 'Cardholders', kind: 'Pull-tab cardholder', img: ((window.__resources||{}).pSlider || 'Slider.jpg'), desc: 'A pull-tab cardholder that fans your most-used cards with a single gesture.' },
+  { id: 'standard', name: 'The Standard', lead: '1–2 weeks', price: 99, type: 'Cardholders', kind: 'Slim cardholder', img: ((window.__resources||{}).pStandard || 'standard.jpg'), desc: 'A slim, structured cardholder with a front pocket and a back pocket. Choose the leather for the body and for each pocket.' },
+  { id: 'flapper', name: 'The Flapper', lead: '2 weeks', price: 169, type: 'Wallets', kind: 'Flap wallet', img: ((window.__resources||{}).pFlapper || 'flapper.jpg'), desc: 'A flap-closure wallet with card slots and a bill pocket. The perfect balance of slim and substantial.' },
+  { id: 'tray', name: 'The Tray', lead: '1–2 weeks', price: 49, type: 'Accessories', kind: 'Valet tray', img: 'data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20800%27%3E%3Crect%20width%3D%27800%27%20height%3D%27800%27%20fill%3D%27%23E6DED2%27/%3E%3Crect%20x%3D%2724%27%20y%3D%2724%27%20width%3D%27752%27%20height%3D%27752%27%20fill%3D%27none%27%20stroke%3D%27%23BFB3A3%27%20stroke-width%3D%273%27%20stroke-dasharray%3D%2714%2010%27/%3E%3Ctext%20x%3D%27400%27%20y%3D%27410%27%20font-family%3D%27Georgia%2Cserif%27%20font-style%3D%27italic%27%20font-size%3D%2738%27%20fill%3D%27%236B6058%27%20text-anchor%3D%27middle%27%3EPhoto%20coming%20soon%3C/text%3E%3C/svg%3E', desc: 'A stitched leather tray for keys, coins and the contents of your pockets.' }
+];
+const SOON = [
+  { name: 'The Traveller', kind: 'Passport wallet · $199', desc: 'A passport wallet and travel organizer. Full-grain construction built to cross every border. Photos coming soon.' },
+  { name: 'Vertical Cardholder', kind: 'Cardholder with ID window', desc: 'An upright cardholder with outer pockets and an open window for your ID.' },
+  { name: 'I Still Use Dollar Bills', kind: 'Cardholder with bill pocket', desc: 'For those who still carry cash: a front pocket for cards and a diagonal back pocket for folded bills.' }
+];
+const STEPS = [
+  { num: '01', title: 'Pick your design', body: 'Choose from the collection — each template refined through multiple builds for fit, feel, and function.' },
+  { num: '02', title: 'Reserve it', body: 'Share your details and pay a 50% deposit to begin.' },
+  { num: '03', title: "It's handmade", body: 'I confirm materials and get to work. Lead time is 1–3 weeks, depending on the piece.' },
+  { num: '04', title: 'Pick up or ship', body: 'Arlington locals pick up free. Shipping available nationwide. Balance due at delivery.' }
+];
+const FAQS = [
+  { q: 'How long does an order take?', a: 'Each piece is made to order in your chosen leather and thread combination. Lead time is 1–3 weeks from confirmation, depending on the piece (cardholders are quickest).' },
+  { q: 'How does payment work?', a: '50% deposit to start, balance due at pickup or delivery. I accept PayPal, Venmo, and Zelle.' },
+  { q: 'Can I choose the leather color and thread?', a: "Yes. Pick from six Italian veg-tan colors on any product page or in the quote form. I'll confirm thread options by email before I start cutting. Locals can see swatches in person." },
+  { q: 'Do you ship?', a: 'Arlington and nearby Northern Virginia customers pick up free. Shipping is available nationwide at cost.' },
+  { q: 'Can you make something not in the collection?', a: "I'm happy to talk through custom requests. Choose “Something custom” when you request a quote and describe what you have in mind." },
+  { q: 'Do you take corporate or bulk orders?', a: 'Yes. Leather gifts for your team, client events, or executive recognition. Bulk pricing available.' }
+];
+const PILLARS = [
+  { t: 'Heritage materials', b: 'Full-grain, vegetable-tanned leather from Conceria Walpier and Badalassi Carlo in Tuscany, supplied by Rocky Mountain Leather Supply — the kind that develops a patina over years, not months.' },
+  { t: 'The natural edge', b: 'Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers as they were cut.' },
+  { t: 'Intentional design', b: 'No unnecessary bulk. No loud branding. Just the highest quality materials, allowed to speak entirely for themselves.' }
+];
+const PERKS = [
+  { t: 'Free local pickup', b: 'No shipping fees for Arlington and nearby Northern Virginia customers. Meet in person at your convenience.' },
+  { t: 'See before you buy', b: "Come see leather swatches and finished samples in person. Touch matters when you're buying leather." },
+  { t: 'Perfect for gifting', b: "A thoughtful gift for someone in the area. Father's Day, graduations, or just because." },
+  { t: 'Corporate orders', b: 'Leather gifts for your team, client events, or executive recognition. Bulk pricing available.' }
+];
+const LEATHERS = [
+  { id: 'tobacco', name: 'Tobacco', hex: '#4a3020', img: 'swatches/tobacco.jpg' },
+  { id: 'cognac', name: 'Cognac', hex: '#a14f1b', img: 'swatches/cognac.jpg' },
+  { id: 'burgundy', name: 'Burgundy', hex: '#3d2229', img: 'swatches/burgundy.jpg' },
+  { id: 'green', name: 'Green', hex: '#15453a', img: 'swatches/green.jpg' },
+  { id: 'navy', name: 'Navy', hex: '#1f2c45', img: 'swatches/navy.jpg' },
+  { id: 'white', name: 'Bright White', hex: '#f1efea', img: 'swatches/white.jpg' }
+];
+const THREADS = [
+  { id: 'white', name: 'White', hex: '#f4f2ee' },
+  { id: 'red', name: 'Red', hex: '#c8392b' },
+  { id: 'orange', name: 'Orange', hex: '#e8792b' },
+  { id: 'lime', name: 'Light green', hex: '#9fcf6a' }
+];
+const HARDWARE = [
+  { id: 'brass', name: 'Brass', hex: '#b8954a' },
+  { id: 'nickel', name: 'Nickel', hex: '#b9bcbf' },
+  { id: 'black', name: 'Matte black', hex: '#2b2b2c' }
+];
+const DESIGN0 = { piece: 'slider', tA: 'tobacco', pA: 'tobacco', pB: 'navy', pC: 'cognac', xA: 'cognac', xB: 'green', sA: 'tobacco', sB: 'cognac', sC: 'burgundy', sD: 'cognac', sE: 'navy', H: 'brass', T: 'white', active: 'xA', touched: false };
+const BPIECES = {
+  slider: { name: 'The Slider', short: 'Slider', pid: 'slider', first: 'xA', title: 'Design your Slider',
+    intro: 'Tap a part, then choose its leather. The Slider is a pull-tab cardholder, handmade to order in 1–2 weeks.',
+    parts: [{ key: 'xA', ref: 'A', name: 'Main panel', short: 'main panel' }, { key: 'xB', ref: 'B', name: 'Strip (front)', short: 'strip' }, { key: 'T', ref: 'T', name: 'Thread' }] },
+  standard: { name: 'The Standard', short: 'Standard', pid: 'standard', first: 'pA', title: 'Design your Standard',
+    intro: 'Tap a part, then choose its leather. The Standard is a slim cardholder with a front and a back pocket, handmade to order in 1–2 weeks.',
+    parts: [{ key: 'pA', ref: 'A', name: 'Body (front + back)', short: 'body' }, { key: 'pB', ref: 'B', name: 'Front pocket', short: 'front pocket' }, { key: 'pC', ref: 'C', name: 'Back pocket', short: 'back pocket' }, { key: 'T', ref: 'T', name: 'Thread' }] },
+  tray: { name: 'The Tray', short: 'Tray', pid: 'tray', first: 'tA', title: 'Design your Tray',
+    intro: 'Tap the leather or the thread to choose. The Tray is a stitched valet tray for keys, coins and pocket contents.',
+    parts: [{ key: 'tA', ref: 'A', name: 'Tray leather', short: 'tray' }, { key: 'T', ref: 'T', name: 'Thread' }] },
+  flapper: { name: 'The Flapper', short: 'Flapper', pid: 'flapper', first: 'sA', title: 'Design your Flapper',
+    intro: 'Tap a part, then choose its leather. The Flapper is a flap wallet with a magnetic snap and three card pockets, handmade to order in 2 weeks.',
+    parts: [{ key: 'sA', ref: 'A', name: 'Outside', short: 'outside' }, { key: 'sB', ref: 'B', name: 'Inside body', short: 'inside body' }, { key: 'sC', ref: 'C', name: 'Flap accent (outside)', short: 'flap accent' }, { key: 'sD', ref: 'D', name: 'Front + back pockets', short: 'front and back pockets' }, { key: 'sE', ref: 'E', name: 'Middle pocket (contrast)', short: 'middle pocket' }, { key: 'H', ref: 'H', name: 'Magnetic snap', short: 'snap' }, { key: 'T', ref: 'T', name: 'Thread' }] }
+};
+const EMAIL = 'contact.agleatherworks@gmail.com';
+const PAYPAL = 'https://www.paypal.com/paypalme/ashwaniguptabusiness/';
 
-  function selectPieceAndScroll(shortName) {
-    const map = {
-      'Slider': 'The Slider', 'Standard': 'The Standard', 'Familiar': 'The Familiar',
-      'Flapper': 'The Flapper', 'Extender': 'The Extender', 'Traveller': 'The Traveller'
+class Component extends DCLogic {
+  state = (() => {
+    let s = {};
+    try { s = JSON.parse(localStorage.getItem('agl-nav') || '{}'); } catch (e) {}
+    return {
+      page: s.page || 'home', pid: s.pid || 'slider', variant: s.variant || null,
+      filter: 'All', menuOpen: false, w: window.innerWidth,
+      step: 1, sent: false, msg: '', faq: 0,
+      form: { piece: '', leather: '', leather2: '', design: false, name: '', email: '', phone: '', notes: '', delivery: 'pickup' },
+      design: { ...DESIGN0 },
+      contact: { topic: 'A question', name: '', email: '', message: '' }, contactMsg: ''
     };
-    const fullName = map[shortName];
-    const opt = document.querySelector(`.piece-option[data-name="${fullName}"]`);
-    if (opt) selectPiece(opt);
-    document.getElementById('commission').scrollIntoView({ behavior: 'smooth' });
+  })();
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+
+  save(patch) {
+    const s = { ...this.state, ...patch };
+    try { localStorage.setItem('agl-nav', JSON.stringify({ page: s.page, pid: s.pid, variant: s.variant })); } catch (e) {}
+  }
+  go(page, extra = {}) {
+    const patch = { page, menuOpen: false, ...extra };
+    this.setState(patch);
+    this.save(patch);
+    window.scrollTo(0, 0);
+  }
+  startCommission(pieceName) {
+    this.setState(s => { const ch = pieceName && pieceName !== s.form.piece; return { form: { ...s.form, piece: pieceName ?? s.form.piece, ...(ch ? { leather: '', leather2: '', design: false } : {}) }, step: pieceName ? 2 : 1, sent: false, msg: '' }; });
+    this.go('commission');
+  }
+  setField(k) { return e => { const v = e.target.value; this.setState(s => ({ form: { ...s.form, [k]: v }, msg: '' })); }; }
+  setContact(k) { return e => { const v = e.target.value; this.setState(s => ({ contact: { ...s.contact, [k]: v }, contactMsg: '' })); }; }
+
+  designSummary() {
+    const d = this.state.design, L = id => LEATHERS.find(x => x.id === id).name, T = id => THREADS.find(x => x.id === id).name, H = id => HARDWARE.find(x => x.id === id).name;
+    if (d.piece === 'standard') return `${L(d.pA)} body, ${L(d.pB)} front pocket, ${L(d.pC)} back pocket, ${T(d.T)} thread`;
+    if (d.piece === 'tray') return `${L(d.tA)} tray, ${T(d.T)} thread`;
+    if (d.piece === 'flapper') return `${L(d.sA)} outside, ${L(d.sB)} inside, ${L(d.sC)} flap accent, ${L(d.sD)} pockets with ${L(d.sE)} middle pocket, ${H(d.H)} snap, ${T(d.T)} thread`;
+    return `${L(d.xA)} main panel, ${L(d.xB)} strip, ${T(d.T)} thread`;
+  }
+  setDesign(patch) { this.setState(st => ({ design: { ...st.design, ...patch } })); }
+  resetDesign() { this.setState(st => ({ design: { ...DESIGN0, piece: st.design.piece, active: BPIECES[st.design.piece].first } })); }
+  openBuilder(piece) { this.setState(st => ({ design: { ...st.design, piece, active: BPIECES[piece].first } })); this.go('builder'); }
+  requestDesign() {
+    const summary = this.designSummary();
+    const name = BPIECES[this.state.design.piece].name;
+    this.setState(s => ({ design: { ...s.design, touched: true }, form: { ...s.form, piece: name, leather: summary, leather2: '', design: true }, step: 2, sent: false, msg: '' }));
+    this.go('commission');
   }
 
-  function updateSummary() {
-    const deposit = (selectedPrice / 2).toFixed(2);
-    document.getElementById('summaryPiece').textContent = selectedPiece || '—';
-    document.getElementById('summaryDeposit').textContent = selectedPiece ? ('$' + deposit) : '$0';
-    document.getElementById('sendDetailsBtn').disabled = !selectedPiece;
-
-    const payBtn = document.getElementById('payDepositBtn');
-    if (selectedPiece) {
-      payBtn.href = PAYPAL_ME + deposit + 'usd';
-      payBtn.textContent = `2. Pay $${deposit} Deposit via PayPal`;
-    } else {
-      payBtn.textContent = '2. Pay Deposit via PayPal';
-      payBtn.href = '#';
+  next() {
+    const { step, form } = this.state;
+    if (step === 1) {
+      if (!form.piece) return this.setState({ msg: 'Choose a piece to continue.' });
+      return this.setState({ step: 2, msg: '' });
     }
-  }
-
-  function sendDetails() {
-    const name = document.getElementById('custName').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-    const email = document.getElementById('custEmail').value.trim();
-    const notes = document.getElementById('custNotes').value.trim();
-
-    if (!name || !email) {
-      showStatus('Please fill in at least your name and email before sending.');
-      return;
+    if (step === 2) {
+      if (!form.name.trim() || !form.email.trim()) return this.setState({ msg: 'Please add at least your name and email.' });
+      return this.setState({ step: 3, msg: '' });
     }
-
-    const deposit = (selectedPrice / 2).toFixed(2);
-    const subject = encodeURIComponent(`Commission Request — ${selectedPiece}`);
-    const body = encodeURIComponent(
-`Hi Ashwani,
-
-I'd like to commission the following:
-
-Piece: ${selectedPiece}
-Price: $${selectedPrice} (50% deposit: $${deposit})
-
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
-
-Notes: ${notes || 'None'}
-
-I'll send the deposit via PayPal separately.`
-    );
-
-    window.location.href = `mailto:contact.agleatherworks@gmail.com?subject=${subject}&body=${body}`;
-    showStatus('Opening your email app — just hit send! Then use the PayPal button to pay your deposit.');
+    const p = PRODUCTS.find(x => x.name === form.piece);
+    const priceLine = p ? `Price: $${p.price} (50% deposit: $${(p.price / 2).toFixed(2)})` : 'Price: to be quoted';
+    const subject = encodeURIComponent(`Commission Request — ${form.piece}`);
+    const body = encodeURIComponent(`Hi Ashwani,\n\nI'd like to commission the following:\n\nPiece: ${form.piece}\n${priceLine}\nLeather: ${(form.leather ? form.leather + (form.leather2 ? ' (main), ' + form.leather2 + ' (accent)' : '') : 'To discuss')}\nDelivery: ${form.delivery === 'pickup' ? 'Local pickup (Arlington)' : 'Ship to me'}\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nNotes: ${form.notes || 'None'}`);
+    try { window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`; } catch (e) {}
+    this.setState({ sent: true });
+    window.scrollTo(0, 0);
   }
 
-  function checkReady(e) {
-    if (!selectedPiece) {
-      e.preventDefault();
-      showStatus('Please select a piece first.');
-      return false;
-    }
-    return true;
+  sendContact() {
+    const c = this.state.contact;
+    if (!c.name.trim() || !c.email.trim()) return this.setState({ contactMsg: 'Please add your name and email.' });
+    const subject = encodeURIComponent(`${c.topic} — ${c.name}`);
+    const body = encodeURIComponent(`${c.message}\n\n${c.name}\n${c.email}`);
+    try { window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`; } catch (e) {}
+    this.setState({ contactMsg: "Opening your email app — just hit send. I'll reply within 24 hours." });
   }
 
-  function showStatus(msg) {
-    const el = document.getElementById('commStatus');
-    el.textContent = msg;
-    el.classList.add('show');
+  renderVals() {
+    const s = this.state;
+    const narrow = s.w < 1060;
+    const variant = 'A';
+    const card = p => ({ ...p, priceLabel: `$${p.price}`, open: () => this.go('product', { pid: p.id }), commission: () => this.startCommission(p.name) });
+    const products = PRODUCTS.map(card);
+    const filtered = products.filter(p => s.filter === 'All' || p.type === s.filter);
+    const cur = products.find(p => p.id === s.pid) || products[0];
+    const navDef = [['Shop', 'shop'], ['Design yours', 'builder'], ['Commissions', 'commission'], ['About', 'about'], ['FAQ', 'faq'], ['Contact', 'contact']];
+    const activeKey = s.page === 'product' ? 'shop' : s.page;
+    const nav = navDef.map(([label, key]) => ({
+      label, color: activeKey === key ? '#2A2520' : '#4A423A', line: activeKey === key ? '#8B5E3C' : 'transparent',
+      go: key === 'commission' ? () => this.startCommission() : () => this.go(key)
+    }));
+    const sel = PRODUCTS.find(p => p.name === s.form.piece);
+    const deposit = sel ? (sel.price / 2).toFixed(2) : null;
+    const pieces = [...PRODUCTS.map(p => ({ name: p.name, priceLabel: `$${p.price}`, img: p.img, custom: false })), { name: 'Something custom', priceLabel: 'Quoted', img: '', custom: true }]
+      .map(o => ({ ...o, bg: s.form.piece === o.name ? '#FFFFFF' : '#F5F0E8', border: s.form.piece === o.name ? '#2A2520' : '#D9D0C4', pick: () => this.setState(st => ({ form: { ...st.form, piece: o.name, ...(st.form.piece !== o.name ? { leather: '', leather2: '', design: false } : {}) }, msg: '' })) }));
+    const isCustom = s.form.piece === 'Something custom';
+    const stepLabels = ['Choose a piece', 'Your details', 'Review & send'];
+    return {
+      ...(() => {
+        const d = s.design, cfg = BPIECES[d.piece] || BPIECES.slider, byL = id => LEATHERS.find(x => x.id === id), byT = id => THREADS.find(x => x.id === id), byH = id => HARDWARE.find(x => x.id === id);
+        const kindOf = k => k === 'T' ? 'T' : k === 'H' ? 'H' : 'L';
+        const curOf = k => kindOf(k) === 'T' ? byT(d.T) : kindOf(k) === 'H' ? byH(d.H) : byL(d[k]);
+        const act = cfg.parts.some(p => p.key === d.active) ? d.active : cfg.first;
+        const ap = cfg.parts.find(p => p.key === act), ak = kindOf(act);
+        const mk = p => { const c = curOf(p.key), on = act === p.key; return { ref: p.ref, name: p.name, current: c.name, bg: on ? '#FFFFFF' : '#F5F0E8', border: on ? '#2A2520' : '#D9D0C4', dot: kindOf(p.key) === 'L' ? `url(${c.img})` : c.hex, pick: () => this.setDesign({ active: p.key }) }; };
+        const setPart = id => this.setDesign({ [act]: id, touched: true });
+        const fill = k => `url(#tx-${d[k]})`, out = k => act === k ? 1 : 0, pk = k => () => this.setDesign({ active: k });
+        const price = PRODUCTS.find(p => p.id === cfg.pid).price;
+        const chipList = ak === 'H' ? HARDWARE : THREADS;
+        const chipCur = ak === 'H' ? d.H : d.T;
+        return {
+          isBSlider: d.piece === 'slider', isBTray: d.piece === 'tray', isBStandard: d.piece === 'standard', isBFlapper: d.piece === 'flapper',
+          bTitle: cfg.title, bIntro: cfg.intro,
+          bTabs: Object.keys(BPIECES).map(k => { const on = d.piece === k; return { label: `${BPIECES[k].name} · $${PRODUCTS.find(p => p.id === k).price}`, bg: on ? '#2A2520' : 'transparent', fg: on ? '#FAF7F2' : '#2A2520', pick: () => this.setDesign({ piece: k, active: BPIECES[k].first }) }; }),
+          bPriceLine: `${cfg.name} · $${price}`, bDeposit: `50% deposit $${(price / 2).toFixed(2)} to start`,
+          fillPA: fill('pA'), fillPB: fill('pB'), fillPC: fill('pC'), outPA: out('pA'), outPB: out('pB'), outPC: out('pC'), pickPA: pk('pA'), pickPB: pk('pB'), pickPC: pk('pC'),
+          fillTA: fill('tA'), outTA: out('tA'), pickTA: pk('tA'),
+          fillA: fill('xA'), fillB: fill('xB'), fillSA: fill('sA'), fillSB: fill('sB'), fillSC: fill('sC'), fillSD: fill('sD'), fillSE: fill('sE'), fillH: byH(d.H).hex, threadHex: byT(d.T).hex,
+          outA: out('xA'), outB: out('xB'), outT: out('T'), outSA: out('sA'), outSB: out('sB'), outSC: out('sC'), outSD: out('sD'), outSE: out('sE'), outH: out('H'),
+          pickA: pk('xA'), pickB: pk('xB'), pickSA: pk('sA'), pickSB: pk('sB'), pickSC: pk('sC'), pickSD: pk('sD'), pickSE: pk('sE'), pickH: pk('H'),
+          parts: cfg.parts.map(mk),
+          activeTitle: ak === 'T' ? 'Choose your thread' : ak === 'H' ? 'Choose your snap finish' : `Choose leather for the ${ap.short}`,
+          showLeather: ak === 'L', showThread: ak !== 'L',
+          leatherOpts: LEATHERS.map(l => { const on = d[act] === l.id; return { ...l, ring: on ? '#2A2520' : '#D9D0C4', bg: on ? '#FFFFFF' : '#FCFAF6', pick: () => setPart(l.id) }; }),
+          threadOpts: chipList.map(t => { const on = chipCur === t.id; return { ...t, ring: on ? '#2A2520' : '#D9D0C4', bg: on ? '#FFFFFF' : '#FCFAF6', pick: () => setPart(t.id) }; }),
+          specLine: this.designSummary(),
+          requestDesign: () => this.requestDesign(), resetDesign: () => this.resetDesign()
+        };
+      })(),
+      wide: !narrow, narrow, menuOpen: narrow && s.menuOpen, menuLabel: s.menuOpen ? 'Close' : 'Menu',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      nav,
+      goHome: () => this.go('home'), goShop: () => this.go('shop'), goAbout: () => this.go('about'),
+      goFaq: () => this.go('faq'), goContact: () => this.go('contact'),
+      goQuote: () => this.startCommission(), goCustom: () => this.startCommission('Something custom'),
+      isHome: s.page === 'home', isHomeA: s.page === 'home' && variant === 'A', 
+      isShop: s.page === 'shop', isProduct: s.page === 'product', isCommission: s.page === 'commission',
+      isAbout: s.page === 'about', isFaq: s.page === 'faq', isContact: s.page === 'contact',
+      soon: SOON.map(q => ({ ...q, ask: () => { location.href = 'mailto:contact.agleatherworks@gmail.com?subject=' + encodeURIComponent('Question about ' + q.name); } })),
+      products, filtered, others: products.filter(p => p.id !== cur.id),
+      cur: { ...cur, hasDesigner: !!BPIECES[cur.id], noDesigner: !BPIECES[cur.id], designLabel: BPIECES[cur.id] ? `Design your ${BPIECES[cur.id].short}` : '', designGo: () => this.openBuilder(cur.id), note: '', depositNote: `50% deposit ($${(cur.price / 2).toFixed(2)}) to start. Balance due at pickup or delivery.` },
+      chips: ['All', 'Wallets', 'Cardholders', 'Accessories'].map(label => ({ label, bg: s.filter === label ? '#2A2520' : 'transparent', fg: s.filter === label ? '#FAF7F2' : '#2A2520', pick: () => this.setState({ filter: label }) })),
+      swatches: LEATHERS.map(l => {
+        const on = s.form.leather === l.name;
+        return { ...l, ring: on ? '#2A2520' : '#D9D0C4', bg: on ? '#FFFFFF' : '#F5F0E8',
+          pick: () => this.setState(st => ({ form: { ...st.form, leather: st.form.leather === l.name ? '' : l.name } })) };
+      }),
+      swatches2: LEATHERS.map(l => {
+        const on = s.form.leather2 === l.name;
+        return { ...l, ring: on ? '#2A2520' : '#D9D0C4', bg: on ? '#FFFFFF' : '#F5F0E8',
+          pick: () => this.setState(st => ({ form: { ...st.form, leather2: st.form.leather2 === l.name ? '' : l.name } })) };
+      }),
+      leatherList: LEATHERS,
+      hasDesignerPiece: ['The Slider', 'The Standard', 'The Flapper', 'The Tray'].includes(s.form.piece), designerName: (s.form.piece || '').replace('The ', ''), openDesigner: () => this.openBuilder({ 'The Flapper': 'flapper', 'The Standard': 'standard', 'The Tray': 'tray' }[s.form.piece] || 'slider'),
+      isFlapperPiece: s.form.piece === 'The Flapper',
+      showSwatches: !['The Slider', 'The Standard', 'The Flapper', 'The Tray'].includes(s.form.piece),
+      leatherLabel1: s.form.piece === 'The Flapper' ? 'Main color' : 'Leather color',
+      designSummaryLine: s.form.design ? s.form.leather : 'Not designed yet. Open the designer to choose your leathers and thread.',
+      designButtonLabel: s.form.design ? 'Edit design' : 'Open the designer',
+      leadNote: (PRODUCTS.find(x => x.name === s.form.piece) || {}).lead || '1–3 weeks',
+      goBuilder: () => this.go('builder'), goBuilderSlider: () => this.openBuilder('slider'), goBuilderFlapper: () => this.openBuilder('flapper'), goBuilderStandard: () => this.openBuilder('standard'),
+      isBuilder: s.page === 'builder',
+      leatherName: s.form.leather || 'Tap a swatch',
+      dots: LEATHERS, dotsLabel: `${LEATHERS.length} colors`,
+      steps: STEPS, faqTop: FAQS.slice(0, 3), pillars: PILLARS, perks: PERKS,
+      faqs: FAQS.map((f, i) => ({ ...f, open: s.faq === i, sign: s.faq === i ? '−' : '+', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) })),
+      notSent: !s.sent, sent: s.sent,
+      stepper: stepLabels.map((label, i) => ({ n: i + 1, label, line: i + 1 <= s.step ? '#2A2520' : '#D9D0C4', fg: i + 1 <= s.step ? '#2A2520' : '#6B6058' })),
+      step1: s.step === 1, step2: s.step === 2, step3: s.step === 3,
+      pieces, form: s.form,
+      on: { name: this.setField('name'), email: this.setField('email'), phone: this.setField('phone'), notes: this.setField('notes') },
+      notesLabel: isCustom ? 'Describe what you have in mind *' : 'Notes (optional)',
+      notesPlaceholder: isCustom ? 'What it is, rough size, what you carry in it, colors…' : 'Anything else I should know: a gift, a deadline, a question…',
+      deliveryOpts: [['pickup', 'Local pickup', 'Arlington, VA · free'], ['ship', 'Ship to me', 'Nationwide · at cost']].map(([k, label, sub]) => ({ label, sub, bg: s.form.delivery === k ? '#FFFFFF' : '#F5F0E8', border: s.form.delivery === k ? '#2A2520' : '#D9D0C4', pick: () => this.setState(st => ({ form: { ...st.form, delivery: k } })) })),
+      review: [
+        { k: 'Piece', v: s.form.piece || '—' },
+        { k: 'Price', v: sel ? `$${sel.price}` : 'To be quoted' },
+        { k: 'Leather', v: s.form.leather ? (s.form.leather + (s.form.leather2 ? ' (main), ' + s.form.leather2 + ' (accent)' : '')) : 'To discuss' },
+        { k: 'Deposit to start', v: deposit ? `$${deposit} (50%)` : 'After quote' },
+        { k: 'Delivery', v: s.form.delivery === 'pickup' ? 'Local pickup, Arlington' : 'Ship to me' },
+        { k: 'Name', v: s.form.name || '—' },
+        { k: 'Email', v: s.form.email || '—' },
+        { k: 'Phone', v: s.form.phone || '—' },
+        { k: 'Notes', v: s.form.notes || '—' }
+      ],
+      msg: s.msg, canBack: s.step > 1,
+      back: () => this.setState({ step: Math.max(1, s.step - 1), msg: '' }),
+      next: () => this.next(), nextLabel: s.step === 3 ? 'Send request' : 'Continue →',
+      hasDeposit: !!deposit, depositLabel: deposit ? `$${deposit}` : '', paypalHref: deposit ? `${PAYPAL}${deposit}usd` : PAYPAL,
+      restart: () => this.setState({ step: 1, sent: false, form: { piece: '', leather: '', leather2: '', design: false, name: s.form.name, email: s.form.email, phone: s.form.phone, notes: '', delivery: s.form.delivery } }),
+      contact: s.contact, contactMsg: s.contactMsg,
+      onC: { topic: this.setContact('topic'), name: this.setContact('name'), email: this.setContact('email'), message: this.setContact('message') },
+      sendContact: () => this.sendContact(),
+      footShop: [{ label: 'Design yours', go: () => this.go('builder') }, { label: 'All pieces', go: () => this.go('shop', { filter: 'All' }) }, { label: 'Wallets', go: () => this.go('shop', { filter: 'Wallets' }) }, { label: 'Cardholders', go: () => this.go('shop', { filter: 'Cardholders' }) }],
+      footHelp: [{ label: 'Request a quote', go: () => this.startCommission() }, { label: 'FAQ', go: () => this.go('faq') }, { label: 'About the maker', go: () => this.go('about') }, { label: 'Contact', go: () => this.go('contact') }]
+    };
   }
+}
 </script>
 
-</body>
-</html>
+
+</body></html>
