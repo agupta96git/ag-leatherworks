@@ -605,6 +605,16 @@ input,textarea,select,button{font:inherit}
           <button sc-camel-on-click="{{ t.pick }}" style="padding:11px 20px;font-size:18px;font-weight:500;cursor:pointer;border-radius:999px;border:1px solid #2A2520;background:{{ t.bg }};color:{{ t.fg }};">{{ t.label }}</button>
         </sc-for>
       </div>
+      <sc-if value="{{ isBStandard }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+          <span style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#5C3D21;">Pocket style</span>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <sc-for list="{{ styleTabs }}" as="t" hint-placeholder-count="2">
+              <button sc-camel-on-click="{{ t.pick }}" style="padding:10px 18px;font-size:17px;font-weight:500;cursor:pointer;border-radius:12px;border:1px solid #2A2520;background:{{ t.bg }};color:{{ t.fg }};text-align:left;">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(20px,3.5vw,44px);align-items:start;">
@@ -674,8 +684,8 @@ input,textarea,select,button{font:inherit}
               <use href="#l-body" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use><use href="#l-back" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
             </g>
             <g sc-camel-on-click="{{ pickPC }}" style="cursor:pointer">
-              <g filter="url(#sp-lift)"><use transform="translate(728,0)" href="#l-lip" fill="{{ fillPC }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
-              <use transform="translate(728,0)" href="#l-lip" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
+              <g filter="url(#sp-lift)"><use transform="translate(728,0)" href="{{ backHref }}" fill="{{ fillPC }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
+              <use transform="translate(728,0)" href="{{ backHref }}" fill="#000" filter="url(#sp-grain)" opacity="0.35" style="mix-blend-mode:soft-light"></use>
             </g>
             <g sc-camel-on-click="{{ pickPB }}" style="cursor:pointer">
               <g filter="url(#sp-lift)"><use href="#l-front" fill="{{ fillPB }}" stroke="rgba(22,16,10,.78)" stroke-width="3.5" stroke-linejoin="round"></use></g>
@@ -687,7 +697,7 @@ input,textarea,select,button{font:inherit}
             </g>
             <g fill="none" pointer-events="none" stroke="#fff" stroke-width="6" stroke-linejoin="round" stroke-dasharray="16 10">
               <g opacity="{{ outPA }}"><use href="#l-body"></use><use href="#l-back"></use></g>
-              <g opacity="{{ outPC }}"><use transform="translate(728,0)" href="#l-lip"></use></g>
+              <g opacity="{{ outPC }}"><use transform="translate(728,0)" href="{{ backHref }}"></use></g>
               <g opacity="{{ outPB }}"><use href="#l-front"></use></g>
               <path d="M72,72 V785.7 Q72,825.7 112,825.7 H584 Q624,825.7 624,785.7 V72 M800,72 V785.7 Q800,825.7 840,825.7 H1312 Q1352,825.7 1352,785.7 V72" stroke-dasharray="none" stroke-width="12" stroke-opacity=".6" opacity="{{ outT }}"></path>
             </g>
@@ -1152,7 +1162,7 @@ input,textarea,select,button{font:inherit}
 <script type="text/x-dc" data-dc-script="" data-props="{}">
 const PRODUCTS = [
   { id: 'slider', name: 'The Slider', lead: '1–2 weeks', price: 59, type: 'Cardholders', kind: 'Pull-tab cardholder', img: ((window.__resources||{}).pSlider || 'Slider.jpg'), desc: 'A pull-tab cardholder that fans your most-used cards with a single gesture.' },
-  { id: 'standard', name: 'The Standard', lead: '1–2 weeks', price: 99, type: 'Cardholders', kind: 'Slim cardholder', img: ((window.__resources||{}).pStandard || 'standard.jpg'), desc: 'A slim, structured cardholder with a front pocket and a back pocket. Choose the leather for the body and for each pocket.' },
+  { id: 'standard', name: 'The Standard', lead: '1–2 weeks', price: 99, type: 'Cardholders', kind: 'Slim cardholder', img: ((window.__resources||{}).pStandard || 'standard.jpg'), desc: 'A slim, structured cardholder. Choose matching front and back pockets (Standard-1) or two different pockets (Standard-2), then the leather for the body and each pocket.' },
   { id: 'flapper', name: 'The Flapper', lead: '2 weeks', price: 169, type: 'Wallets', kind: 'Flap wallet', img: ((window.__resources||{}).pFlapper || 'flapper.jpg'), desc: 'A flap-closure wallet with card slots and a bill pocket. The perfect balance of slim and substantial.' },
   { id: 'tray', name: 'The Tray', lead: '1–2 weeks', price: 49, type: 'Accessories', kind: 'Valet tray', img: 'data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20800%27%3E%3Crect%20width%3D%27800%27%20height%3D%27800%27%20fill%3D%27%23E6DED2%27/%3E%3Crect%20x%3D%2724%27%20y%3D%2724%27%20width%3D%27752%27%20height%3D%27752%27%20fill%3D%27none%27%20stroke%3D%27%23BFB3A3%27%20stroke-width%3D%273%27%20stroke-dasharray%3D%2714%2010%27/%3E%3Ctext%20x%3D%27400%27%20y%3D%27410%27%20font-family%3D%27Georgia%2Cserif%27%20font-style%3D%27italic%27%20font-size%3D%2738%27%20fill%3D%27%236B6058%27%20text-anchor%3D%27middle%27%3EPhoto%20coming%20soon%3C/text%3E%3C/svg%3E', desc: 'A stitched leather tray for keys, coins and the contents of your pockets.' }
 ];
@@ -1205,13 +1215,13 @@ const HARDWARE = [
   { id: 'nickel', name: 'Nickel', hex: '#b9bcbf' },
   { id: 'black', name: 'Matte black', hex: '#2b2b2c' }
 ];
-const DESIGN0 = { piece: 'slider', tA: 'tobacco', pA: 'tobacco', pB: 'navy', pC: 'cognac', xA: 'cognac', xB: 'green', sA: 'tobacco', sB: 'cognac', sC: 'burgundy', sD: 'cognac', sE: 'navy', H: 'brass', T: 'white', active: 'xA', touched: false };
+const DESIGN0 = { piece: 'slider', stdStyle: 's1', tA: 'tobacco', pA: 'tobacco', pB: 'navy', pC: 'cognac', xA: 'cognac', xB: 'green', sA: 'tobacco', sB: 'cognac', sC: 'burgundy', sD: 'cognac', sE: 'navy', H: 'brass', T: 'white', active: 'xA', touched: false };
 const BPIECES = {
   slider: { name: 'The Slider', short: 'Slider', pid: 'slider', first: 'xA', title: 'Design your Slider',
     intro: 'Tap a part, then choose its leather. The Slider is a pull-tab cardholder, handmade to order in 1–2 weeks.',
     parts: [{ key: 'xA', ref: 'A', name: 'Main panel', short: 'main panel' }, { key: 'xB', ref: 'B', name: 'Strip (front)', short: 'strip' }, { key: 'T', ref: 'T', name: 'Thread' }] },
   standard: { name: 'The Standard', short: 'Standard', pid: 'standard', first: 'pA', title: 'Design your Standard',
-    intro: 'Tap a part, then choose its leather. The Standard is a slim cardholder with a front and a back pocket, handmade to order in 1–2 weeks.',
+    intro: 'Tap a part, then choose its leather. The Standard is a slim cardholder with a front and a back pocket, handmade to order in 1–2 weeks. Choose matching pockets (Standard-1) or two different pockets (Standard-2).',
     parts: [{ key: 'pA', ref: 'A', name: 'Body (front + back)', short: 'body' }, { key: 'pB', ref: 'B', name: 'Front pocket', short: 'front pocket' }, { key: 'pC', ref: 'C', name: 'Back pocket', short: 'back pocket' }, { key: 'T', ref: 'T', name: 'Thread' }] },
   tray: { name: 'The Tray', short: 'Tray', pid: 'tray', first: 'tA', title: 'Design your Tray',
     intro: 'Tap the leather or the thread to choose. The Tray is a stitched valet tray for keys, coins and pocket contents.',
@@ -1262,7 +1272,7 @@ class Component extends DCLogic {
 
   designSummary() {
     const d = this.state.design, L = id => LEATHERS.find(x => x.id === id).name, T = id => THREADS.find(x => x.id === id).name, H = id => HARDWARE.find(x => x.id === id).name;
-    if (d.piece === 'standard') return `${L(d.pA)} body, ${L(d.pB)} front pocket, ${L(d.pC)} back pocket, ${T(d.T)} thread`;
+    if (d.piece === 'standard') return `${d.stdStyle === 's2' ? 'Standard-2 (different pockets)' : 'Standard-1 (matching pockets)'}: ${L(d.pA)} body, ${L(d.pB)} front pocket, ${L(d.pC)} back pocket, ${T(d.T)} thread`;
     if (d.piece === 'tray') return `${L(d.tA)} tray, ${T(d.T)} thread`;
     if (d.piece === 'flapper') return `${L(d.sA)} outside, ${L(d.sB)} inside, ${L(d.sC)} flap accent, ${L(d.sD)} pockets with ${L(d.sE)} middle pocket, ${H(d.H)} snap, ${T(d.T)} thread`;
     return `${L(d.xA)} main panel, ${L(d.xB)} strip, ${T(d.T)} thread`;
@@ -1339,6 +1349,8 @@ class Component extends DCLogic {
         const chipList = ak === 'H' ? HARDWARE : THREADS;
         const chipCur = ak === 'H' ? d.H : d.T;
         return {
+          backHref: d.stdStyle === 's2' ? '#l-lip' : '#l-front',
+          styleTabs: [['s1', 'Standard-1 · matching pockets'], ['s2', 'Standard-2 · different pockets']].map(([k, label]) => { const on = (d.stdStyle || 's1') === k; return { label, bg: on ? '#2A2520' : 'transparent', fg: on ? '#FAF7F2' : '#2A2520', pick: () => this.setDesign({ stdStyle: k }) }; }),
           isBSlider: d.piece === 'slider', isBTray: d.piece === 'tray', isBStandard: d.piece === 'standard', isBFlapper: d.piece === 'flapper',
           bTitle: cfg.title, bIntro: cfg.intro,
           bTabs: Object.keys(BPIECES).map(k => { const on = d.piece === k; return { label: `${BPIECES[k].name} · $${PRODUCTS.find(p => p.id === k).price}`, bg: on ? '#2A2520' : 'transparent', fg: on ? '#FAF7F2' : '#2A2520', pick: () => this.setDesign({ piece: k, active: BPIECES[k].first }) }; }),
