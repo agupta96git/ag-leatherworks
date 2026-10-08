@@ -1239,7 +1239,7 @@ class Component extends DCLogic {
     let s = {};
     try { s = JSON.parse(localStorage.getItem('agl-nav') || '{}'); } catch (e) {}
     return {
-      page: s.page || 'home', pid: s.pid || 'slider', variant: s.variant || null,
+      page: 'home', pid: s.pid || 'slider', variant: s.variant || null,
       filter: 'All', menuOpen: false, w: window.innerWidth,
       step: 1, sent: false, msg: '', faq: 0,
       form: { piece: '', leather: '', leather2: '', design: false, name: '', email: '', phone: '', notes: '', delivery: 'pickup' },
