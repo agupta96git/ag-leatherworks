@@ -3,796 +3,480 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AG Leatherworks · Arlington, VA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>AG Leatherworks · Handmade leather goods, made to order · Arlington, VA</title>
+<meta name="description" content="Handmade leather cardholders and wallets, made to order in Arlington, Virginia. Pueblo vegetable-tanned Italian leather, patterns designed by the maker. Commission a piece.">
+<meta name="theme-color" content="#f2eee5">
+<link rel="canonical" href="https://ag-leatherworks.com/">
+<link rel="icon" type="image/png" href="assets/img/favicon-64.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AG Leatherworks · Made to order in Arlington, VA">
+<meta property="og:description" content="Handmade leather goods in Pueblo vegetable-tanned Italian leather. Commission a piece.">
+<meta property="og:url" content="https://ag-leatherworks.com/">
+<meta property="og:image" content="https://ag-leatherworks.com/assets/img/standard-16.jpg">
+<link rel="preload" href="assets/fonts/libre-caslon-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"AG Leatherworks","url":"https://ag-leatherworks.com/","image":"https://ag-leatherworks.com/assets/img/standard-16.jpg","email":"contact.agleatherworks@gmail.com","telephone":"+1-571-645-4445","description":"Handmade leather cardholders and wallets, made to order in Arlington, Virginia.","areaServed":{"@type":"City","name":"Arlington, VA"},"address":{"@type":"PostalAddress","addressLocality":"Arlington","addressRegion":"VA","addressCountry":"US"}}
+</script>
 <style>
-  :root {
-    --cream: #F5F0E8;
-    --warm-white: #FAF7F2;
-    --leather: #8B5E3C;
-    --leather-dark: #5C3D21;
-    --leather-light: #C4956A;
-    --charcoal: #2A2520;
-    --mid: #6B6058;
-    --border: #D9D0C4;
-    --gold: #C9A96E;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--charcoal); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+@font-face{font-family:'Libre Caslon Text';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/libre-caslon-text-latin-400-normal.woff2') format('woff2'),url('assets/fonts/libre-caslon-text-latin-400-normal.woff') format('woff')}
+:root{
+  --bg:#f2eee5; --tile:#eee9de; --sand:#e8e1d2; --rose:#ecdcd1;
+  --ink:#2b2a26; --text:#5b564b; --hair:rgba(110,100,80,.35); --hair-soft:rgba(110,100,80,.2);
+  --raise:-2px -2px 4px rgba(196,186,166,.55), 3px 3px 5px rgba(255,253,248,.95);
+  --press:inset 2px 2px 4px rgba(196,186,166,.6), inset -2px -2px 4px rgba(255,253,248,.9);
+  --pad:clamp(20px,4vw,56px); --gap-section:clamp(64px,8vw,92px); --radius:10px;
+  --serif:'Libre Caslon Text','Iowan Old Style','Palatino Linotype',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:var(--radius);z-index:200}
+.skip:focus{left:8px}
 
-  /* NAV — floats over hero */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 3rem;
-    transition: background 0.3s, padding 0.3s, border-color 0.3s;
-  }
-  nav.scrolled {
-    background: rgba(245,240,232,0.94);
-    backdrop-filter: blur(8px);
-    padding: 1rem 3rem;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-  .nav-logo img { height: 38px; width: auto; transition: filter 0.3s; }
-  .hero-active .nav-logo img { filter: brightness(0) invert(1); }
-  .nav-logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; font-weight: 500;
-    letter-spacing: 0.1em; color: var(--charcoal); transition: color 0.3s;
-  }
-  .hero-active .nav-logo-text { color: #fff; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: 'DM Mono', monospace; font-size: 0.68rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--mid); text-decoration: none; transition: color 0.3s;
-  }
-  .hero-active .nav-links a { color: rgba(255,255,255,0.85); }
-  .nav-links a:hover { color: var(--leather); }
-  .hero-active .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--leather-dark); text-decoration: none;
-    border: 0.5px solid var(--leather); padding: 0.55rem 1.2rem;
-    transition: all 0.3s;
-  }
-  .hero-active .nav-cta { color: #fff; border-color: rgba(255,255,255,0.6); }
-  .nav-cta:hover { background: var(--leather); color: var(--cream); }
-  .hero-active .nav-cta:hover { background: #fff; color: var(--charcoal); }
+.label{font-size:11px;line-height:1.4;letter-spacing:.16em;text-transform:uppercase;color:var(--text)}
+.title{font-weight:400;letter-spacing:-.01em;color:var(--ink)}
 
-  /* FULL BLEED HERO — photography-site style */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-  }
-  .hero img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
-    animation: heroZoom 20s ease-out forwards;
-  }
-  @keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
-  .hero-scrim {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(42,37,32,0.25) 0%, rgba(42,37,32,0.15) 40%, rgba(42,37,32,0.75) 100%);
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    width: 100%;
-    padding: 0 3rem 4.5rem;
-    display: flex; justify-content: space-between; align-items: flex-end;
-    gap: 2rem;
-  }
-  .hero-tagline {
-    max-width: 480px;
-    animation: fadeUp 1s 0.3s ease both;
-  }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1rem;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.6rem, 5vw, 4.2rem);
-    font-weight: 300; line-height: 1.05;
-    color: #fff; margin-bottom: 1rem;
-  }
-  .hero-title em { font-style: italic; color: var(--gold); }
-  .hero-sub {
-    font-size: 0.95rem; color: rgba(255,255,255,0.75);
-    line-height: 1.8; max-width: 380px;
-  }
-  .hero-actions {
-    display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;
-    animation: fadeUp 1s 0.5s ease both;
-  }
-  .btn-primary {
-    background: #fff; color: var(--charcoal);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-    text-decoration: none; padding: 0.9rem 2rem;
-    transition: all 0.2s; border: none; cursor: pointer;
-    display: inline-block; text-align: center; white-space: nowrap;
-  }
-  .btn-primary:hover { background: var(--gold); }
-  .btn-ghost-light {
-    color: rgba(255,255,255,0.85);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-    text-decoration: none; padding: 0.6rem 0;
-    border-bottom: 0.5px solid rgba(255,255,255,0.4);
-    transition: all 0.2s;
-  }
-  .btn-ghost-light:hover { color: var(--gold); border-color: var(--gold); }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+/* buttons */
+.btn{display:inline-block;text-align:center;font-family:var(--serif);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;padding:21px 30px;border-radius:var(--radius);border:1px solid var(--ink);cursor:pointer;transition:opacity .15s cubic-bezier(.4,0,.2,1),background-color .15s linear,color .15s linear}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark:hover{opacity:.82}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--bg)}
+.btn-sm{font-size:11px;padding:16px 26px}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.38;cursor:not-allowed}
+.btn[disabled]:hover{opacity:.38}
 
-  /* STRIP */
-  .strip { background: var(--charcoal); padding: 0.9rem 3rem; display: flex; gap: 2.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
-  .strip-item { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
-  .strip-dot { color: var(--leather); opacity: 0.5; }
+/* header */
+.top{padding:18px var(--pad);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 20px}
+.brand{display:flex;align-items:center;gap:14px;flex:1 1 260px}
+.brand img{width:34px;height:34px;border-radius:9px}
+.brand span{font-size:17px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.nav{display:inline-flex;gap:34px}
+.nav a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:8px 0;border-bottom:1px solid transparent;transition:color .15s linear,border-color .15s linear}
+.nav a:hover{color:var(--ink);border-color:var(--ink)}
+.top-cta{display:flex;justify-content:flex-end;flex:1 1 260px}
 
-  /* SECTIONS */
-  section { padding: 6rem 3rem; }
-  .section-inner { max-width: 1180px; margin: 0 auto; }
-  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--leather-light); margin-bottom: 1rem; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+/* hero */
+.hero{padding:clamp(32px,4vw,56px) var(--pad) 0;display:flex;flex-wrap:wrap;align-items:center;gap:48px 64px}
+.hero-copy{flex:6 1 560px;min-width:0}
+.hero h1{font-size:clamp(42px,4.6vw,66px);line-height:1.04;text-wrap:balance;margin-top:22px}
+.hero p.lede{margin-top:28px;font-size:18px;line-height:1.65;max-width:40ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+.hero-actions .btn{padding:21px 30px}
+.car{flex:4 1 400px;min-width:0}
+.car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-radius:var(--radius)}
+.car-track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;display:block}
+.slide .ph{position:relative;height:680px;overflow:hidden;border-radius:var(--radius);background:#2e2a24}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.slide .cap{display:flex;justify-content:space-between;gap:16px;margin-top:14px;padding-right:6px}
+.dots{display:flex;gap:8px;margin-top:16px}
+.dot{width:28px;height:18px;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.dot::after{content:"";position:absolute;left:0;right:0;top:7px;height:3px;border-radius:2px;background:var(--hair);transition:background-color .2s}
+.dot[aria-current="true"]::after{background:var(--ink)}
 
-  /* COLLECTION */
-  #work { background: var(--warm-white); }
-  .products-header { max-width: 560px; margin: 0 auto 3.5rem; text-align: center; }
-  .products-header .section-eyebrow, .products-header .section-title { text-align: center; }
-  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); max-width: 1180px; margin: 0 auto; }
-  .product-card { background: var(--warm-white); transition: background 0.2s; overflow: hidden; cursor: pointer; }
-  .product-card:hover { background: var(--cream); }
-  .product-img-wrap { overflow: hidden; }
-  .product-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.4s ease; }
-  .product-card:hover .product-img { transform: scale(1.03); }
-  .product-body { padding: 1.75rem 1.75rem 2rem; }
-  .product-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--leather-light); margin-bottom: 0.75rem; }
-  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--charcoal); }
-  .product-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; margin-bottom: 1.25rem; }
-  .product-price { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--leather-dark); display: flex; align-items: center; justify-content: space-between; }
-  .product-badge { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; background: var(--leather-dark); color: var(--cream); }
+/* sections */
+.sec{padding:var(--gap-section) var(--pad) 0}
+.sec .label{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px 24px;margin-top:24px}
+.card{display:block}
+.card .ph{border-radius:var(--radius);overflow:hidden;background:var(--sand);aspect-ratio:3/4;line-height:0}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.card:hover .ph img{transform:scale(1.035)}
+.card .ph.empty{display:flex;align-items:center;justify-content:center;box-shadow:var(--press)}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 8px 0}
+.card-head .name{font-size:28px;line-height:1.05;color:var(--ink);letter-spacing:-.01em}
+.card-head .price{font-size:11px;letter-spacing:.16em;color:var(--ink)}
+.card .kind{margin:8px 8px 0}
+.card p{margin:10px 8px 0;font-size:15.5px;line-height:1.6}
+.card .go{display:inline-block;margin:12px 8px 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px}
 
-  /* ETHOS */
-  #about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
-  .ethos-left { padding: 6rem 3rem; max-width: 560px; margin-left: auto; }
-  .ethos-pillars { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .ethos-pillar { padding-left: 1.5rem; border-left: 1.5px solid var(--leather-light); }
-  .ethos-pillar h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; margin-bottom: 0.25rem; }
-  .ethos-pillar p { font-size: 0.875rem; color: var(--mid); }
-  .ethos-right { background: var(--leather-dark); padding: 4rem 3.5rem; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
-  .ethos-right::before { content: '"'; position: absolute; top: -2rem; left: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 14rem; color: rgba(255,255,255,0.04); line-height: 1; }
-  .ethos-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1.7; position: relative; z-index: 1; max-width: 420px; }
-  .ethos-quote-attr { margin-top: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.bench{margin-top:24px;border-bottom:1px solid var(--hair)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;padding:18px 0;border-top:1px solid var(--hair)}
+.row .thumb{flex:0 0 auto;width:72px;height:96px;object-fit:cover;border-radius:8px}
+.row .spacer{flex:0 0 72px}
+.row .rname{font-size:28px;line-height:1.1;color:var(--ink);flex:1 1 240px;letter-spacing:-.01em}
+.row .rdesc{font-size:15.5px;line-height:1.6;flex:2 1 300px}
+.row .rprice{flex:0 0 56px;font-size:11px;letter-spacing:.16em;color:var(--ink)}
+.row .rstat{flex:0 0 150px;text-align:right}
+.chip{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:999px;background:var(--sand);box-shadow:var(--press);white-space:nowrap}
+.chip.rose{background:var(--rose)}
 
-  /* PROCESS */
-  #process { background: var(--charcoal); }
-  #process .section-eyebrow { color: var(--gold); text-align: center; }
-  #process .section-title { color: rgba(255,255,255,0.9); text-align: center; margin: 0 auto 1.5rem; }
-  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 3rem; border: 0.5px solid rgba(255,255,255,0.08); max-width: 1180px; margin-left: auto; margin-right: auto; }
-  .process-step { padding: 2.5rem 2rem; border-right: 0.5px solid rgba(255,255,255,0.08); }
-  .process-step:last-child { border-right: none; }
-  .process-step-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.5rem; }
-  .process-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 0.75rem; }
-  .process-step p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.steps{display:flex;flex-wrap:wrap;gap:32px 28px;margin-top:26px}
+.step{flex:1 1 230px;display:flex;gap:18px;align-items:flex-start}
+.badge{flex:0 0 auto;width:54px;border-radius:14px;background:var(--rose);box-shadow:var(--raise);padding:8px 0 10px;text-align:center}
+.badge small{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase}
+.badge b{display:block;font-weight:400;font-size:22px;line-height:1.1;color:var(--ink)}
+.step h3{font-weight:400;font-size:25px;line-height:1.15;color:var(--ink);letter-spacing:-.01em}
+.step p{margin-top:8px;font-size:15.5px;line-height:1.6;max-width:28ch}
 
-  /* ============ COMMISSION FLOW ============ */
-  #commission { background: var(--warm-white); }
-  .commission-header { max-width: 620px; margin: 0 auto 3rem; text-align: center; }
-  .commission-header .section-eyebrow, .commission-header .section-title { text-align: center; }
-  .commission-header p { color: var(--mid); font-size: 0.9rem; }
-  .commission-box {
-    max-width: 780px; margin: 0 auto;
-    background: var(--cream); border: 0.5px solid var(--border);
-  }
-  .comm-step { padding: 2.5rem; border-bottom: 0.5px solid var(--border); }
-  .comm-step:last-child { border-bottom: none; }
-  .comm-step-label {
-    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;
-  }
-  .comm-step-num {
-    font-family: 'DM Mono', monospace; font-size: 0.7rem;
-    width: 26px; height: 26px; border-radius: 50%;
-    border: 1px solid var(--leather); color: var(--leather-dark);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .comm-step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--charcoal); }
+/* commission */
+.comm{max-width:900px;margin:26px 0 0}
+.comm-intro{max-width:56ch;margin-top:16px;font-size:17px}
+.cstep{margin-top:44px}
+.cstep-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.cstep-head .num{width:34px;height:34px;border-radius:50%;background:var(--rose);box-shadow:var(--raise);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:15px}
+.cstep-head h3{font-weight:400;font-size:25px;color:var(--ink);letter-spacing:-.01em}
+.pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.opt{font-family:var(--serif);text-align:left;background:transparent;border:1px solid var(--hair);border-radius:var(--radius);padding:18px 20px;cursor:pointer;color:var(--ink);transition:background-color .15s linear,color .15s linear,border-color .15s linear}
+.opt:hover{border-color:var(--ink)}
+.opt .on{display:block;font-size:20px;line-height:1.2}
+.opt .op{display:block;margin-top:4px;font-size:11px;letter-spacing:.16em;color:var(--text)}
+.opt[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.opt[aria-pressed="true"] .op{color:var(--bg)}
+.styles{margin-top:28px;display:none}
+.styles.show{display:block}
+.styles .label{margin-bottom:10px}
+.styles .pieces{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.styles .opt .on{font-size:17px}
+.frow{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.field{flex:1 1 260px;display:flex;flex-direction:column;gap:8px}
+.field.full{flex-basis:100%}
+.field label{font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.field input,.field textarea{font-family:var(--serif);font-size:16px;color:var(--ink);background:#f8f5ee;border:1px solid var(--hair);border-radius:var(--radius);padding:15px 16px;width:100%}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink)}
+.summary{display:flex;flex-wrap:wrap;gap:20px 56px;padding:22px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.summary .v{font-size:26px;color:var(--ink);margin-top:4px;letter-spacing:-.01em}
+.summary .note{flex-basis:100%;font-size:14.5px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.fine{margin-top:16px;font-size:14.5px;max-width:64ch}
+.status{margin-top:14px;font-size:15px;color:var(--ink);display:none}
+.status.show{display:block}
 
-  .piece-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
-  .piece-option {
-    border: 1px solid var(--border); background: var(--warm-white);
-    padding: 0.9rem; cursor: pointer; transition: all 0.15s;
-    text-align: left;
-  }
-  .piece-option:hover { border-color: var(--leather-light); }
-  .piece-option.selected { border-color: var(--leather); background: #fff; box-shadow: 0 0 0 1px var(--leather); }
-  .piece-option-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--charcoal); margin-bottom: 0.2rem; }
-  .piece-option-price { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--leather-dark); }
+.maker{margin:clamp(72px,9vw,110px) auto 0;max-width:760px;text-align:center;padding:0 24px}
+.maker .big{font-size:clamp(26px,3vw,34px);line-height:1.3;margin-top:18px;color:var(--ink);letter-spacing:-.01em}
+.maker p.sub{margin-top:22px;font-size:17px;line-height:1.7}
+.etsy{margin:clamp(64px,8vw,96px) var(--pad) 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding:30px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.etsy .t{font-size:clamp(26px,3vw,36px);color:var(--ink);letter-spacing:-.01em;line-height:1.15}
+.etsy .s{display:block;margin-top:6px;font-size:15.5px}
+.close{text-align:center;padding:clamp(72px,9vw,110px) 24px 0}
+.close h2{font-weight:400;font-size:clamp(40px,6vw,76px);line-height:1;color:var(--ink);margin:18px auto 0;letter-spacing:-.01em}
+.close .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:38px}
+.close .contact{margin-top:22px;font-size:15.5px}
+.close .contact a{border-bottom:1px solid var(--hair)}
 
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-field.full { grid-column: 1 / -1; }
-  .form-field label {
-    font-family: 'DM Mono', monospace; font-size: 0.62rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
-  }
-  .form-field input, .form-field textarea, .form-field select {
-    font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--charcoal);
-    background: #fff; border: 0.5px solid var(--border);
-    padding: 0.7rem 0.8rem; outline: none; transition: border-color 0.2s;
-  }
-  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--leather-light); }
-  .form-field textarea { resize: vertical; min-height: 70px; font-family: 'Jost', sans-serif; }
+footer{margin:clamp(72px,9vw,110px) var(--pad) 0;padding:40px 0 24px;border-top:1px solid var(--hair)}
+.fgrid{display:flex;flex-wrap:wrap;gap:36px}
+.fgrid>div{flex:1 1 180px}
+.fgrid>div:first-child{flex:2 1 280px}
+.fgrid a{display:block;font-size:15.5px;line-height:2}
+.fgrid a:hover{color:var(--ink)}
+.fbase{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:36px;padding-top:18px;border-top:1px solid var(--hair-soft)}
+.fpad{height:36px}
 
-  .deposit-summary {
-    background: #fff; border: 0.5px solid var(--border);
-    padding: 1.25rem 1.5rem; margin-top: 1.5rem;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
-  }
-  .deposit-summary-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
-  .deposit-summary-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--leather-dark); }
-  .deposit-summary-note { font-size: 0.72rem; color: var(--mid); width: 100%; margin-top: 0.25rem; }
-
-  .comm-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .btn-dark {
-    background: var(--charcoal); color: var(--cream);
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    padding: 0.9rem 1.75rem; border: none; cursor: pointer; transition: background 0.2s;
-    flex: 1; min-width: 200px; text-align: center; text-decoration: none;
-  }
-  .btn-dark:hover { background: var(--leather-dark); }
-  .btn-dark:disabled { background: var(--border); color: var(--mid); cursor: not-allowed; }
-  .btn-paypal {
-    background: #ffc439; color: #003087;
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.9rem 1.75rem; border: none; cursor: pointer; transition: filter 0.2s;
-    flex: 1; min-width: 200px; text-align: center; text-decoration: none;
-    font-weight: 500;
-  }
-  .btn-paypal:hover { filter: brightness(0.95); }
-  .btn-paypal:disabled { background: var(--border); color: var(--mid); cursor: not-allowed; filter: none; }
-  .comm-status {
-    margin-top: 1rem; font-size: 0.8rem; color: var(--leather-dark);
-    font-style: italic; display: none;
-  }
-  .comm-status.show { display: block; }
-  .payment-note { font-size: 0.72rem; color: var(--mid); margin-top: 0.75rem; }
-
-  /* MAKER */
-  #maker { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; background: var(--cream); }
-  .maker-img-wrap { position: relative; overflow: hidden; min-height: 500px; }
-  .maker-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .maker-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(42,37,32,0.6) 0%, transparent 50%); }
-  .maker-img-location { position: absolute; bottom: 2rem; left: 2rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
-  .maker-text { padding: 6rem 3rem; display: flex; flex-direction: column; justify-content: center; max-width: 520px; }
-  .maker-body { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-top: 1rem; }
-
-  /* LOCAL */
-  #local { background: var(--charcoal); padding: 5rem 3rem; }
-  #local .section-inner { max-width: 1180px; margin: 0 auto; }
-  #local .section-eyebrow { color: var(--gold); }
-  #local .section-title { color: rgba(255,255,255,0.9); max-width: 560px; margin-bottom: 1rem; }
-  .local-body { color: rgba(255,255,255,0.55); font-size: 0.9rem; max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; }
-  .local-perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); margin-bottom: 2.5rem; }
-  .local-perk { background: var(--charcoal); padding: 1.5rem; }
-  .local-perk h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-  .local-perk p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
-
-  /* CONTACT / FOOTER INFO */
-  #contact { background: var(--warm-white); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.5rem; max-width: 1180px; margin-left: auto; margin-right: auto; }
-  .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem; }
-  .contact-info p { color: var(--mid); font-size: 0.875rem; line-height: 1.8; margin-bottom: 1.5rem; }
-  .contact-link { display: block; margin-bottom: 0.75rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--leather-dark); text-decoration: none; transition: color 0.2s; }
-  .contact-link:hover { color: var(--leather); }
-  .payment-methods h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 0.5rem; }
-  .payment-methods p { color: var(--mid); font-size: 0.875rem; margin-bottom: 1rem; }
-
-  /* FOOTER */
-  footer { background: var(--charcoal); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 0.5px solid rgba(255,255,255,0.08); }
-  footer .f-logo { display: flex; align-items: center; gap: 0.6rem; }
-  footer .f-logo img { height: 26px; width: auto; filter: invert(1) brightness(0.7); }
-  footer .f-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); }
-  footer .f-copy { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-  footer .f-links { display: flex; gap: 2rem; }
-  footer .f-links a { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
-  footer .f-links a:hover { color: var(--gold); }
-
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 3rem; gap: 1.5rem; }
-    .hero-actions { align-items: flex-start; width: 100%; }
-    .btn-primary { width: 100%; }
-    section { padding: 4rem 1.5rem; }
-    #about { grid-template-columns: 1fr; }
-    .ethos-left { padding: 4rem 1.5rem; margin: 0; max-width: none; }
-    #maker { grid-template-columns: 1fr; }
-    .maker-img-wrap { min-height: 300px; }
-    .maker-text { padding: 4rem 1.5rem; max-width: none; }
-    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    footer { padding: 2rem 1.5rem; }
-    #local { padding: 4rem 1.5rem; }
-    .form-row { grid-template-columns: 1fr; }
-    .comm-step { padding: 1.75rem; }
-    .comm-actions { flex-direction: column; }
-  }
+@media (max-width:900px){
+  .nav{display:none}
+  .top-cta{flex:0 0 auto}
+  .brand{flex:1 1 auto}
+  .slide .ph{height:520px}
+}
+@media (max-width:560px){
+  .hide-sm{display:none}
+  .brand span{font-size:12px;letter-spacing:.18em}
+  .brand img{width:30px;height:30px}
+  .top{gap:10px 12px}
+  .top-cta .btn-sm{font-size:10px;padding:14px 16px;letter-spacing:.14em}
+  .etsy .chip{white-space:normal;max-width:100%}
+  body{font-size:16px}
+  .btn{padding:19px 24px}
+  .hero-actions .btn{flex:1 1 100%}
+  .slide .ph{height:460px}
+  .row .rstat{flex:1 1 100%;text-align:left}
+  .row .rprice{flex:0 0 auto}
+  .row .spacer{display:none}
+  .actions .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#commission">Skip to commissions</a>
 
-<nav id="mainNav">
-  <a href="#hero" class="nav-logo">
-    <img src="logo.jpeg" alt="AG Leatherworks logo">
-    <span class="nav-logo-text">AG Leatherworks</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#work">Collection</a></li>
-    <li><a href="#about">Ethos</a></li>
-    <li><a href="#maker">The Maker</a></li>
-    <li><a href="#local">Local</a></li>
-  </ul>
-  <a href="#commission" class="nav-cta">Commission a Piece</a>
-</nav>
+<header class="top">
+  <a class="brand" href="#top" aria-label="AG Leatherworks, home"><img src="assets/img/logo-192.png" alt="" width="34" height="34"><span>AG Leatherworks</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#pieces">Pieces</a>
+    <a href="#maker">The maker</a>
+    <a href="https://www.etsy.com/shop/TimelessMakerHouse" target="_blank" rel="noopener">Etsy ↗</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="top-cta"><a class="btn btn-dark btn-sm" href="#commission">Commission a piece</a></div>
+</header>
 
-<!-- FULL BLEED HERO -->
-<section id="hero" class="hero" style="padding:0;">
-  <img src="flapper.jpg" alt="AG Leatherworks — handcrafted leather goods, Arlington VA">
-  <div class="hero-scrim"></div>
-  <div class="hero-content">
-    <div class="hero-tagline">
-      <div class="hero-eyebrow">Arlington, VA &nbsp;·&nbsp; Handmade to Order</div>
-      <h1 class="hero-title">Honest craft.<br><em>Nothing more.</em></h1>
-      <p class="hero-sub">Full-grain leather goods made by hand in Arlington, VA. Vegetable-tanned, edge-burnished, built to last a lifetime and improve with every year of use.</p>
-    </div>
+<main id="top">
+<section class="hero" aria-label="Introduction">
+  <div class="hero-copy">
+    <span class="label">Commission only · Arlington, Virginia</span>
+    <h1 class="title">Leather goods made to order, one piece at a time.</h1>
+    <p class="lede">Pueblo vegetable-tanned Italian leather, in patterns I design myself. You choose the leather and thread; I make it for you.</p>
     <div class="hero-actions">
-      <a href="#commission" class="btn-primary">Commission a Piece</a>
-      <a href="#work" class="btn-ghost-light">View the Collection ↓</a>
+      <a class="btn btn-dark" href="#commission">Commission a piece</a>
+      <a class="btn btn-line" href="#pieces">See the pieces</a>
+    </div>
+  </div>
+  <div class="car" id="car" role="region" aria-roledescription="carousel" aria-label="Featured pieces">
+    <div class="car-track" id="carTrack">
+      <a class="slide" href="#commission" data-piece="The Slider" aria-label="The Slider, cardholder, $59">
+        <div class="ph"><img src="assets/img/slider-19.jpg" width="1200" height="1600" alt="The Slider cardholder in dark leather with a tan band, on tan leather"></div>
+        <div class="cap label"><span>The Slider · Cardholder</span><span>$59<span class="hide-sm"> · Commission →</span></span></div>
+      </a>
+      <a class="slide" href="#commission" data-piece="The Standard" aria-label="The Standard, cardholder, $99">
+        <div class="ph"><img src="assets/img/standard-16.jpg" width="1200" height="1600" alt="The Standard cardholder in slate leather with a tan lip" loading="lazy"></div>
+        <div class="cap label"><span>The Standard · Cardholder</span><span>$99<span class="hide-sm"> · Commission →</span></span></div>
+      </a>
+      <a class="slide" href="#commission" data-piece="The Flapper" aria-label="The Flapper, snap wallet, $169">
+        <div class="ph"><img src="assets/img/flapper-21.jpg" width="1200" height="1600" alt="The Flapper snap wallet in green leather with a stitched burgundy flap" loading="lazy"></div>
+        <div class="cap label"><span>The Flapper · Snap wallet</span><span>$169<span class="hide-sm"> · Commission →</span></span></div>
+      </a>
+    </div>
+    <div class="dots" id="dots">
+      <button class="dot" aria-label="Show The Slider" aria-current="true"></button>
+      <button class="dot" aria-label="Show The Standard"></button>
+      <button class="dot" aria-label="Show The Flapper"></button>
     </div>
   </div>
 </section>
 
-<div class="strip">
-  <span class="strip-item">Full-grain Italian leather</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">Vegetable-tanned only</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">Hand-burnished edges</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">Made to order · Arlington, VA</span>
-  <span class="strip-dot">·</span>
-  <span class="strip-item">5+ years of craft</span>
-</div>
-
-<!-- COLLECTION -->
-<section id="work">
-  <div class="products-header">
-    <div class="section-eyebrow">The Collection</div>
-    <h2 class="section-title">Current Work</h2>
-    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;">Each piece is made to order in your chosen leather and thread combination. Lead time is typically 1–2 weeks from confirmation. Click a piece to commission it below.</p>
-  </div>
-  <div class="products-grid">
-
-    <div class="product-card" onclick="selectPieceAndScroll('Standard')">
-      <div class="product-img-wrap"><img src="standard.jpg" alt="The Standard bifold wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">01 · Commission</div>
-        <div class="product-name">The Standard</div>
-        <p class="product-desc">The essential bifold, stripped to its core. Two card slots, a bill compartment, and nothing else.</p>
-        <div class="product-price"><span>$99</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Slider')">
-      <div class="product-img-wrap"><img src="Slider.jpg" alt="The Slider cardholder" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">02 · Commission</div>
-        <div class="product-name">The Slider</div>
-        <p class="product-desc">A pull-tab cardholder that fans your most-used cards with a single gesture.</p>
-        <div class="product-price"><span>$59</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Extender')">
-      <div class="product-img-wrap"><img src="extender.jpg" alt="The Extender long wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">03 · Commission</div>
-        <div class="product-name">The Extender</div>
-        <p class="product-desc">A long wallet designed for those who carry more — receipts, folded documents, a little extra life on the road.</p>
-        <div class="product-price"><span>$199</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Familiar')">
-      <div class="product-img-wrap"><img src="familiar.jpg" alt="The Familiar cardholder" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">04 · Commission</div>
-        <div class="product-name">The Familiar</div>
-        <p class="product-desc">A compact cardholder with magnetic snap closures. Structured, satisfying in the hand.</p>
-        <div class="product-price"><span>$129</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Flapper')">
-      <div class="product-img-wrap"><img src="flapper.jpg" alt="The Flapper flap wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">05 · Commission</div>
-        <div class="product-name">The Flapper</div>
-        <p class="product-desc">A flap-closure wallet with card slots and a bill pocket. The perfect balance of slim and substantial.</p>
-        <div class="product-price"><span>$169</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
-    <div class="product-card" onclick="selectPieceAndScroll('Traveller')">
-      <div class="product-img-wrap"><img src="Traveller_2.jpg" alt="The Traveller passport wallet" class="product-img"></div>
-      <div class="product-body">
-        <div class="product-num">06 · Commission</div>
-        <div class="product-name">The Traveller</div>
-        <p class="product-desc">A passport wallet and travel organizer. Full-grain construction built to cross every border.</p>
-        <div class="product-price"><span>$249</span><span class="product-badge">Commission</span></div>
-      </div>
-    </div>
-
+<section class="sec" id="pieces" aria-labelledby="pieces-l">
+  <span class="label" id="pieces-l">The pieces</span>
+  <div class="cards">
+    <a class="card" href="#commission" data-piece="The Slider">
+      <div class="ph"><img src="assets/img/slider-17.jpg" width="1200" height="1600" alt="The Slider in white with a tan band" loading="lazy"></div>
+      <div class="card-head"><span class="name">The Slider</span><span class="price">$59</span></div>
+      <div class="kind label">Cardholder</div>
+      <p>A pull-tab cardholder that fans your most-used cards with a single gesture.</p>
+      <span class="go">Commission this piece</span>
+    </a>
+    <a class="card" href="#commission" data-piece="The Standard">
+      <div class="ph"><img src="assets/img/standard-9.jpg" width="1200" height="1600" alt="The Standard in olive-brown leather with a tan lip" loading="lazy"></div>
+      <div class="card-head"><span class="name">The Standard</span><span class="price">$99</span></div>
+      <div class="kind label">Cardholder · two pocket styles</div>
+      <p>A slim, structured cardholder with a front pocket and a back pocket.</p>
+      <span class="go">Commission this piece</span>
+    </a>
+    <a class="card" href="#commission" data-piece="The Flapper">
+      <div class="ph"><img src="assets/img/flapper-10.jpg" width="1200" height="1600" alt="The Flapper in green leather with a tobacco accent" loading="lazy"></div>
+      <div class="card-head"><span class="name">The Flapper</span><span class="price">$169</span></div>
+      <div class="kind label">Snap wallet</div>
+      <p>A flap-closure wallet with card slots and a bill pocket.</p>
+      <span class="go">Commission this piece</span>
+    </a>
+    <a class="card" href="#commission" data-piece="The Tray">
+      <div class="ph empty"><span class="label">Photograph to come</span></div>
+      <div class="card-head"><span class="name">The Tray</span><span class="price">$49</span></div>
+      <div class="kind label">Valet tray</div>
+      <p>A stitched leather tray for keys, coins and the contents of your pockets.</p>
+      <span class="go">Commission this piece</span>
+    </a>
   </div>
 </section>
 
-<!-- ETHOS -->
-<section id="about" style="padding:0;">
-  <div class="ethos-left">
-    <div class="section-eyebrow">The Ethos</div>
-    <h2 class="section-title">Built for the pocket,<br>not the logo.</h2>
-    <p style="color:var(--mid);font-size:0.9rem;line-height:1.8;margin-bottom:2rem;">AG Leatherworks was born from a simple frustration: the world is full of bulky, over-designed wallets that prioritize logos over pocket-feel. Every piece I make is a rejection of that.</p>
-    <div class="ethos-pillars">
-      <div class="ethos-pillar">
-        <h4>Heritage materials</h4>
-        <p>Full-grain, vegetable-tanned leather sourced from Italian tanneries — the kind that develops a patina over years, not months.</p>
-      </div>
-      <div class="ethos-pillar">
-        <h4>The natural edge</h4>
-        <p>Every edge burnished by hand without dyes, preserving the beautiful, raw look of the leather layers as they were cut.</p>
-      </div>
-      <div class="ethos-pillar">
-        <h4>Intentional design</h4>
-        <p>No unnecessary bulk. No loud branding. Just the highest quality materials, allowed to speak entirely for themselves.</p>
-      </div>
+<section class="sec" aria-labelledby="bench-l">
+  <span class="label" id="bench-l">On the bench</span>
+  <div class="bench">
+    <div class="row">
+      <img class="thumb" src="assets/img/traveller-14.jpg" width="72" height="96" alt="The Traveller passport wallet in tan leather with blue stitching" loading="lazy">
+      <span class="rname">The Traveller</span>
+      <span class="rdesc">A passport wallet and travel organizer.</span>
+      <span class="rprice">$199</span>
+      <span class="rstat"><span class="chip rose">Coming soon</span></span>
     </div>
-  </div>
-  <div class="ethos-right">
-    <p class="ethos-quote">I believe your daily carry should be a silent companion — functional, slim, and crafted without the need for flaunting.</p>
-    <p class="ethos-quote-attr">— Ashwani Gupta · Arlington, VA</p>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="section-inner">
-    <div class="section-eyebrow">How it works</div>
-    <h2 class="section-title">Simple process,<br>serious craft.</h2>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="process-step-num">01</div>
-        <h3>Pick your design</h3>
-        <p>Choose from the collection — each template refined through multiple builds for fit, feel, and function.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-step-num">02</div>
-        <h3>Reserve it</h3>
-        <p>Select your piece below, share your details, and pay a 50% deposit to begin.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-step-num">03</div>
-        <h3>It's handmade</h3>
-        <p>I confirm materials and get to work. Lead time is typically 1–2 weeks.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-step-num">04</div>
-        <h3>Pick up or ship</h3>
-        <p>Arlington locals pick up free. Shipping available nationwide. Balance due at delivery.</p>
-      </div>
+    <div class="row">
+      <span class="spacer" aria-hidden="true"></span>
+      <span class="rname">I Still Use Dollar Bills</span>
+      <span class="rdesc">For those who still carry cash: a front pocket for cards and a diagonal back pocket for folded bills.</span>
+      <span class="rprice"></span>
+      <span class="rstat"><span class="chip">In development</span></span>
+    </div>
+    <div class="row">
+      <span class="spacer" aria-hidden="true"></span>
+      <span class="rname">Vertical Cardholder</span>
+      <span class="rdesc">An upright cardholder with outer pockets and an open window for your ID.</span>
+      <span class="rprice"></span>
+      <span class="rstat"><span class="chip">In development</span></span>
     </div>
   </div>
 </section>
 
-<!-- ============ COMMISSION FLOW ============ -->
-<section id="commission">
-  <div class="commission-header">
-    <div class="section-eyebrow">Commission a Piece</div>
-    <h2 class="section-title">Reserve Yours</h2>
-    <p>Pick your piece, share your details, and secure it with a 50% deposit. I'll confirm leather and thread options by email before I start cutting.</p>
-  </div>
-
-  <div class="commission-box">
-
-    <!-- STEP 1: Piece selection -->
-    <div class="comm-step">
-      <div class="comm-step-label">
-        <div class="comm-step-num">1</div>
-        <div class="comm-step-title">Choose your piece</div>
-      </div>
-      <div class="piece-grid" id="pieceGrid">
-        <div class="piece-option" data-name="The Slider" data-price="59" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Slider</div>
-          <div class="piece-option-price">$59</div>
-        </div>
-        <div class="piece-option" data-name="The Standard" data-price="99" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Standard</div>
-          <div class="piece-option-price">$99</div>
-        </div>
-        <div class="piece-option" data-name="The Familiar" data-price="129" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Familiar</div>
-          <div class="piece-option-price">$129</div>
-        </div>
-        <div class="piece-option" data-name="The Flapper" data-price="169" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Flapper</div>
-          <div class="piece-option-price">$169</div>
-        </div>
-        <div class="piece-option" data-name="The Extender" data-price="199" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Extender</div>
-          <div class="piece-option-price">$199</div>
-        </div>
-        <div class="piece-option" data-name="The Traveller" data-price="249" onclick="selectPiece(this)">
-          <div class="piece-option-name">The Traveller</div>
-          <div class="piece-option-price">$249</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2: Contact details -->
-    <div class="comm-step">
-      <div class="comm-step-label">
-        <div class="comm-step-num">2</div>
-        <div class="comm-step-title">Your details</div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="custName">Full Name</label>
-          <input type="text" id="custName" placeholder="Jane Smith">
-        </div>
-        <div class="form-field">
-          <label for="custPhone">Phone Number</label>
-          <input type="tel" id="custPhone" placeholder="(555) 123-4567">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field full">
-          <label for="custEmail">Email Address</label>
-          <input type="email" id="custEmail" placeholder="jane@email.com">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field full">
-          <label for="custNotes">Leather Color / Notes <span style="text-transform:none;">(optional)</span></label>
-          <textarea id="custNotes" placeholder="Color preference, personalization, or anything else I should know..."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3: Deposit + Submit -->
-    <div class="comm-step">
-      <div class="comm-step-label">
-        <div class="comm-step-num">3</div>
-        <div class="comm-step-title">Reserve with a deposit</div>
-      </div>
-
-      <div class="deposit-summary">
-        <div>
-          <div class="deposit-summary-label">Selected Piece</div>
-          <div class="deposit-summary-value" id="summaryPiece">—</div>
-        </div>
-        <div>
-          <div class="deposit-summary-label">50% Deposit Due Now</div>
-          <div class="deposit-summary-value" id="summaryDeposit">$0</div>
-        </div>
-        <div class="deposit-summary-note">Balance due at pickup or delivery. Remainder payable via Venmo, PayPal, or Zelle.</div>
-      </div>
-
-      <div class="comm-actions">
-        <button class="btn-dark" id="sendDetailsBtn" onclick="sendDetails()" disabled>1. Send Me Your Details</button>
-        <a class="btn-paypal" id="payDepositBtn" href="#" target="_blank" onclick="return checkReady(event)">2. Pay Deposit via PayPal</a>
-      </div>
-      <p class="payment-note">Step 1 opens your email app with your details pre-filled — just hit send. Step 2 opens PayPal with your deposit amount already entered.</p>
-      <p class="comm-status" id="commStatus"></p>
-    </div>
-
+<section class="sec" aria-labelledby="how-l">
+  <span class="label" id="how-l">How a commission works</span>
+  <div class="steps">
+    <div class="step"><div class="badge"><small>Step</small><b>1</b></div><div><h3>Pick your piece</h3><p>Choose from the collection. Each pattern has been refined through multiple builds.</p></div></div>
+    <div class="step"><div class="badge"><small>Step</small><b>2</b></div><div><h3>Reserve it</h3><p>Share your details and pay a 50% deposit. I confirm leather and thread with you before cutting.</p></div></div>
+    <div class="step"><div class="badge"><small>Step</small><b>3</b></div><div><h3>I make it</h3><p>Lead time is typically one to two weeks.</p></div></div>
+    <div class="step"><div class="badge"><small>Step</small><b>4</b></div><div><h3>Pick up or ship</h3><p>Free pickup in Arlington, or shipped nationwide. Balance due at delivery.</p></div></div>
   </div>
 </section>
 
-<!-- THE MAKER -->
-<section id="maker" style="padding:0;">
-  <div class="maker-img-wrap">
-    <img src="standard.jpg" alt="AG Leatherworks — handcrafted in Arlington VA">
-    <div class="maker-img-overlay"></div>
-    <div class="maker-img-location">Arlington, VA · USA</div>
-  </div>
-  <div class="maker-text">
-    <div class="section-eyebrow">The Hand Behind the Stitch</div>
-    <h2 class="section-title">Ashwani Gupta</h2>
-    <p class="maker-body">I have always had the drive to make things. For a long time, the right circumstances were out of reach. Five years ago, those doors opened, and I haven't put my tools down since.</p>
-    <p class="maker-body">What started as a personal quest to build a better, slimmer wallet has evolved into a deep respect for traditional craft. Every piece I make is an honest object — built to outlast trends, improve with age, and mean something to the person who carries it.</p>
-    <p class="maker-body">Based in Arlington, VA. Happy to meet local customers in person.</p>
-    <a href="#commission" class="btn-dark" style="margin-top:2rem;display:inline-block;text-align:center;max-width:240px;">Start a Commission</a>
+<section class="sec" id="commission" aria-labelledby="comm-l">
+  <span class="label" id="comm-l">Commission a piece</span>
+  <h2 class="title" style="font-size:clamp(40px,5vw,64px);line-height:1.05;margin-top:16px">Reserve yours</h2>
+  <p class="comm-intro">Pick your piece, share your details, and secure it with a 50% deposit. I will confirm leather and thread options by email before I start cutting.</p>
+
+  <div class="comm">
+    <div class="cstep">
+      <div class="cstep-head"><span class="num">1</span><h3>Choose your piece</h3></div>
+      <div class="pieces" id="pieceGrid">
+        <button type="button" class="opt" data-name="The Slider" data-price="59" aria-pressed="false"><span class="on">The Slider</span><span class="op">$59</span></button>
+        <button type="button" class="opt" data-name="The Standard" data-price="99" aria-pressed="false"><span class="on">The Standard</span><span class="op">$99</span></button>
+        <button type="button" class="opt" data-name="The Flapper" data-price="169" aria-pressed="false"><span class="on">The Flapper</span><span class="op">$169</span></button>
+        <button type="button" class="opt" data-name="The Tray" data-price="49" aria-pressed="false"><span class="on">The Tray</span><span class="op">$49</span></button>
+      </div>
+      <div class="styles" id="styleBox">
+        <span class="label" style="display:block">Pocket style for the Standard</span>
+        <div class="pieces" id="styleGrid">
+          <button type="button" class="opt" data-style="Same pocket design front and back" aria-pressed="false"><span class="on">Same front and back</span></button>
+          <button type="button" class="opt" data-style="Different pocket designs front and back" aria-pressed="false"><span class="on">Different front and back</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cstep">
+      <div class="cstep-head"><span class="num">2</span><h3>Your details</h3></div>
+      <div class="frow">
+        <div class="field"><label for="custName">Full name</label><input type="text" id="custName" autocomplete="name" placeholder="Jane Smith"></div>
+        <div class="field"><label for="custPhone">Phone number</label><input type="tel" id="custPhone" autocomplete="tel" placeholder="(555) 123-4567"></div>
+        <div class="field full"><label for="custEmail">Email address</label><input type="email" id="custEmail" autocomplete="email" placeholder="jane@email.com"></div>
+        <div class="field full"><label for="custNotes">Leather colour and notes (optional)</label><textarea id="custNotes" placeholder="Colour preference, personalization, or anything else I should know."></textarea></div>
+      </div>
+    </div>
+
+    <div class="cstep">
+      <div class="cstep-head"><span class="num">3</span><h3>Reserve with a deposit</h3></div>
+      <div class="summary">
+        <div><div class="label">Selected piece</div><div class="v" id="summaryPiece">None yet</div></div>
+        <div><div class="label">50% deposit due now</div><div class="v" id="summaryDeposit">$0</div></div>
+        <p class="note">Balance due at pickup or delivery. The remainder is payable by Venmo, PayPal or Zelle.</p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-dark" id="sendDetailsBtn" disabled>1. Send me your details</button>
+        <a class="btn btn-line" id="payDepositBtn" href="#" target="_blank" rel="noopener" aria-disabled="true">2. Pay deposit via PayPal</a>
+      </div>
+      <p class="fine">Step 1 opens your email app with your details filled in. Just press send. Step 2 opens PayPal with your deposit amount already entered.</p>
+      <p class="status" id="commStatus" role="status" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 
-<!-- LOCAL -->
-<section id="local">
-  <div class="section-inner">
-    <div class="section-eyebrow">Arlington, VA</div>
-    <h2 class="section-title">Your neighbor makes these.</h2>
-    <p class="local-body">Every piece is made right here in Arlington. If you're local, skip the shipping, meet the maker, and see the leather options in person before you commit. This is as close to farm-to-table as leather goods get.</p>
-    <div class="local-perks">
-      <div class="local-perk">
-        <h4>Free local pickup</h4>
-        <p>No shipping fees for Arlington and nearby Northern Virginia customers. Meet in person at your convenience.</p>
-      </div>
-      <div class="local-perk">
-        <h4>See before you buy</h4>
-        <p>Come see leather swatches and finished samples in person. Touch matters when you're buying leather.</p>
-      </div>
-      <div class="local-perk">
-        <h4>Perfect for gifting</h4>
-        <p>A thoughtful gift for someone in the area. Father's Day, graduations, or just because.</p>
-      </div>
-      <div class="local-perk">
-        <h4>Corporate orders</h4>
-        <p>Branded leather gifts for your team, client events, or executive recognition. Bulk pricing available.</p>
-      </div>
-    </div>
-    <a href="#commission" class="btn-primary" style="background:#fff;">Get in Touch</a>
-  </div>
+<section class="maker" id="maker" aria-labelledby="maker-l">
+  <span class="label" id="maker-l">The maker</span>
+  <p class="big">I am Ashwani Gupta. I design every pattern myself and stitch each piece by hand in Arlington, Virginia.</p>
+  <p class="sub">What started as a personal quest to build a better, slimmer wallet is now five years of practice. No loud branding, no unnecessary bulk.</p>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-eyebrow" style="text-align:center;">Questions First?</div>
-  <h2 class="section-title" style="text-align:center; max-width:600px; margin:0 auto 1.5rem;">Reach out directly</h2>
-  <div class="contact-grid">
-    <div class="contact-info">
-      <h3>Prefer to talk it through first?</h3>
-      <p>Reach out via email or phone before committing. I respond within 24 hours and I'm always happy to talk through leather options, custom requests, or timelines.</p>
-      <a href="mailto:contact.agleatherworks@gmail.com" class="contact-link">✉ contact.agleatherworks@gmail.com</a>
-      <a href="tel:+15716454445" class="contact-link">☏ (571) 645-4445</a>
-      <p style="margin-top:1.5rem;font-size:0.8rem;font-style:italic;">Arlington, VA · Local pickup available · Shipping at cost</p>
-    </div>
-    <div class="payment-methods">
-      <h3>Payment accepted</h3>
-      <p>50% deposit to start, balance due at pickup or delivery.</p>
-      <p style="font-family:'DM Mono', monospace; font-size:0.8rem; color:var(--leather-dark); letter-spacing:0.05em;">PayPal &nbsp;·&nbsp; Venmo &nbsp;·&nbsp; Zelle</p>
-    </div>
+<a class="etsy" href="https://www.etsy.com/shop/TimelessMakerHouse" target="_blank" rel="noopener">
+  <span><span class="t">Ready-made pieces on Etsy</span><span class="s">Finished pieces, ready to ship. To choose your own leather and thread, commission here.</span></span>
+  <span class="chip">TimelessMakerHouse · free US shipping ↗</span>
+</a>
+
+<section class="close" id="contact" aria-labelledby="contact-l">
+  <span class="label" id="contact-l">Questions first?</span>
+  <h2>Talk it through</h2>
+  <div class="btns">
+    <a class="btn btn-dark" href="#commission">Start a commission</a>
+    <a class="btn btn-line" href="mailto:contact.agleatherworks@gmail.com">Ask a question first</a>
   </div>
+  <p class="contact"><a href="mailto:contact.agleatherworks@gmail.com">contact.agleatherworks@gmail.com</a> · <a href="tel:+15716454445">(571) 645-4445</a></p>
+  <p class="contact">I reply within 24 hours. Arlington, VA · local pickup available · shipping at cost.</p>
 </section>
+</main>
 
 <footer>
-  <div class="f-logo">
-    <img src="logo.jpeg" alt="AG Leatherworks">
-    <span class="f-logo-text">AG Leatherworks</span>
+  <div class="fgrid">
+    <div>
+      <div class="brand" style="flex:none"><img src="assets/img/logo-192.png" alt="" width="34" height="34"><span>AG Leatherworks</span></div>
+      <p style="margin-top:14px;font-size:15.5px;max-width:34ch">Leather goods by Ashwani Gupta. Made to order in Arlington, Virginia.</p>
+    </div>
+    <div><span class="label">Pieces</span><div style="margin-top:10px"><a href="#commission" data-piece="The Slider">The Slider</a><a href="#commission" data-piece="The Standard">The Standard</a><a href="#commission" data-piece="The Flapper">The Flapper</a><a href="#commission" data-piece="The Tray">The Tray</a></div></div>
+    <div><span class="label">Info</span><div style="margin-top:10px"><a href="#commission">Commission a piece</a><a href="https://www.etsy.com/shop/TimelessMakerHouse" target="_blank" rel="noopener">Ready pieces on Etsy ↗</a><a href="mailto:contact.agleatherworks@gmail.com">contact.agleatherworks@gmail.com</a><a href="tel:+15716454445">(571) 645-4445</a></div></div>
   </div>
-  <div class="f-links">
-    <a href="#work">Collection</a>
-    <a href="#commission">Commission</a>
-    <a href="#maker">The Maker</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div class="f-copy">© 2026 · Arlington, VA · Handmade to Order</div>
+  <div class="fbase label"><span>© 2026 AG Leatherworks · Arlington, VA</span><span>Each piece made to order</span></div>
 </footer>
+<div class="fpad"></div>
 
 <script>
-  // Nav background on scroll
-  const nav = document.getElementById('mainNav');
-  const hero = document.getElementById('hero');
-  function updateNav() {
-    const heroHeight = hero.offsetHeight;
-    if (window.scrollY > heroHeight - 100) {
-      nav.classList.add('scrolled');
-      document.body.classList.remove('hero-active');
-    } else {
-      nav.classList.remove('scrolled');
-      document.body.classList.add('hero-active');
-    }
+(function(){
+  /* ---------- Hero carousel: swipe, dots, gentle auto-advance ---------- */
+  var track=document.getElementById('carTrack'), dots=[].slice.call(document.querySelectorAll('#dots .dot'));
+  var n=dots.length, idx=0, paused=false, timer=null;
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setDot(i){ idx=i; dots.forEach(function(d,k){ d.setAttribute('aria-current', k===i ? 'true':'false'); }); }
+  function go(i){ track.scrollTo({left:i*track.clientWidth, behavior: reduce?'auto':'smooth'}); setDot(i); }
+  track.addEventListener('scroll', function(){ var i=Math.round(track.scrollLeft/track.clientWidth); if(i!==idx) setDot(i); },{passive:true});
+  dots.forEach(function(d,k){ d.addEventListener('click', function(){ go(k); }); });
+  function start(){ if(reduce||timer) return; timer=setInterval(function(){ if(!paused) go((idx+1)%n); }, 6000); }
+  var car=document.getElementById('car');
+  ['mouseenter','focusin','touchstart'].forEach(function(e){ car.addEventListener(e,function(){paused=true;},{passive:true}); });
+  ['mouseleave','focusout'].forEach(function(e){ car.addEventListener(e,function(){paused=false;}); });
+  car.addEventListener('touchend', function(){ setTimeout(function(){paused=false;}, 8000); },{passive:true});
+  window.addEventListener('resize', function(){ track.scrollLeft=idx*track.clientWidth; });
+  start();
+
+  /* ---------- Commission flow (same logic as before: email details + PayPal deposit) ---------- */
+  var PAYPAL_ME="https://www.paypal.com/paypalme/ashwaniguptabusiness/";
+  var EMAIL="contact.agleatherworks@gmail.com";
+  var piece=null, price=0, style=null;
+  var opts=[].slice.call(document.querySelectorAll('#pieceGrid .opt'));
+  var styleOpts=[].slice.call(document.querySelectorAll('#styleGrid .opt'));
+  var styleBox=document.getElementById('styleBox');
+  var sendBtn=document.getElementById('sendDetailsBtn'), payBtn=document.getElementById('payDepositBtn');
+
+  function selectPiece(name){
+    var el=null; opts.forEach(function(o){ var on=o.dataset.name===name; o.setAttribute('aria-pressed', on?'true':'false'); if(on) el=o; });
+    if(!el) return;
+    piece=el.dataset.name; price=parseFloat(el.dataset.price);
+    var isStd = piece==='The Standard';
+    styleBox.classList.toggle('show', isStd);
+    if(!isStd){ style=null; styleOpts.forEach(function(o){ o.setAttribute('aria-pressed','false'); }); }
+    update();
   }
-  window.addEventListener('scroll', updateNav);
-  document.body.classList.add('hero-active');
-  updateNav();
+  opts.forEach(function(o){ o.addEventListener('click', function(){ selectPiece(o.dataset.name); }); });
+  styleOpts.forEach(function(o){ o.addEventListener('click', function(){
+    style=o.dataset.style; styleOpts.forEach(function(x){ x.setAttribute('aria-pressed', x===o?'true':'false'); });
+  }); });
 
-  // Commission flow
-  const PAYPAL_ME = "https://www.paypal.com/paypalme/ashwaniguptabusiness/";
-  let selectedPiece = null;
-  let selectedPrice = 0;
-
-  function selectPiece(el) {
-    document.querySelectorAll('.piece-option').forEach(p => p.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedPiece = el.dataset.name;
-    selectedPrice = parseFloat(el.dataset.price);
-    updateSummary();
+  function update(){
+    var dep=(price/2).toFixed(2);
+    document.getElementById('summaryPiece').textContent = piece || 'None yet';
+    document.getElementById('summaryDeposit').textContent = piece ? '$'+dep : '$0';
+    sendBtn.disabled = !piece;
+    if(piece){ payBtn.href=PAYPAL_ME+dep+'usd'; payBtn.textContent='2. Pay $'+dep+' deposit via PayPal'; payBtn.removeAttribute('aria-disabled'); }
+    else { payBtn.href='#'; payBtn.textContent='2. Pay deposit via PayPal'; payBtn.setAttribute('aria-disabled','true'); }
   }
+  function status(msg){ var el=document.getElementById('commStatus'); el.textContent=msg; el.classList.add('show'); }
 
-  function selectPieceAndScroll(shortName) {
-    const map = {
-      'Slider': 'The Slider', 'Standard': 'The Standard', 'Familiar': 'The Familiar',
-      'Flapper': 'The Flapper', 'Extender': 'The Extender', 'Traveller': 'The Traveller'
-    };
-    const fullName = map[shortName];
-    const opt = document.querySelector(`.piece-option[data-name="${fullName}"]`);
-    if (opt) selectPiece(opt);
-    document.getElementById('commission').scrollIntoView({ behavior: 'smooth' });
-  }
+  payBtn.addEventListener('click', function(e){ if(!piece){ e.preventDefault(); status('Please select a piece first.'); } });
 
-  function updateSummary() {
-    const deposit = (selectedPrice / 2).toFixed(2);
-    document.getElementById('summaryPiece').textContent = selectedPiece || '—';
-    document.getElementById('summaryDeposit').textContent = selectedPiece ? ('$' + deposit) : '$0';
-    document.getElementById('sendDetailsBtn').disabled = !selectedPiece;
+  sendBtn.addEventListener('click', function(){
+    var name=document.getElementById('custName').value.trim();
+    var phone=document.getElementById('custPhone').value.trim();
+    var email=document.getElementById('custEmail').value.trim();
+    var notes=document.getElementById('custNotes').value.trim();
+    if(!name||!email){ status('Please fill in at least your name and email before sending.'); return; }
+    if(piece==='The Standard' && !style){ status('Please choose a pocket style for the Standard.'); return; }
+    var dep=(price/2).toFixed(2);
+    var subject=encodeURIComponent('Commission Request — '+piece);
+    var body=encodeURIComponent(
+"Hi Ashwani,\n\nI'd like to commission the following:\n\nPiece: "+piece+(style?"\nPocket style: "+style:"")+
+"\nPrice: $"+price+" (50% deposit: $"+dep+")\n\nName: "+name+"\nPhone: "+phone+"\nEmail: "+email+"\n\nNotes: "+(notes||'None')+
+"\n\nI'll send the deposit via PayPal separately.");
+    window.location.href='mailto:'+EMAIL+'?subject='+subject+'&body='+body;
+    status('Opening your email app. Just press send, then use the PayPal button to pay your deposit.');
+  });
 
-    const payBtn = document.getElementById('payDepositBtn');
-    if (selectedPiece) {
-      payBtn.href = PAYPAL_ME + deposit + 'usd';
-      payBtn.textContent = `2. Pay $${deposit} Deposit via PayPal`;
-    } else {
-      payBtn.textContent = '2. Pay Deposit via PayPal';
-      payBtn.href = '#';
-    }
-  }
-
-  function sendDetails() {
-    const name = document.getElementById('custName').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-    const email = document.getElementById('custEmail').value.trim();
-    const notes = document.getElementById('custNotes').value.trim();
-
-    if (!name || !email) {
-      showStatus('Please fill in at least your name and email before sending.');
-      return;
-    }
-
-    const deposit = (selectedPrice / 2).toFixed(2);
-    const subject = encodeURIComponent(`Commission Request — ${selectedPiece}`);
-    const body = encodeURIComponent(
-`Hi Ashwani,
-
-I'd like to commission the following:
-
-Piece: ${selectedPiece}
-Price: $${selectedPrice} (50% deposit: $${deposit})
-
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
-
-Notes: ${notes || 'None'}
-
-I'll send the deposit via PayPal separately.`
-    );
-
-    window.location.href = `mailto:contact.agleatherworks@gmail.com?subject=${subject}&body=${body}`;
-    showStatus('Opening your email app — just hit send! Then use the PayPal button to pay your deposit.');
-  }
-
-  function checkReady(e) {
-    if (!selectedPiece) {
-      e.preventDefault();
-      showStatus('Please select a piece first.');
-      return false;
-    }
-    return true;
-  }
-
-  function showStatus(msg) {
-    const el = document.getElementById('commStatus');
-    el.textContent = msg;
-    el.classList.add('show');
-  }
+  /* cards, slides and footer links that name a piece: select it, then scroll to the form */
+  [].slice.call(document.querySelectorAll('[data-piece]')).forEach(function(a){
+    a.addEventListener('click', function(){ selectPiece(a.dataset.piece); });
+  });
+})();
 </script>
-
 </body>
 </html>
